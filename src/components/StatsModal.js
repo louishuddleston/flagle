@@ -4,7 +4,7 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { Share } from "./Share";
 import { List, ListItem } from '@mui/material';
-import { getStatsData } from './stats';
+import { getStatsData } from '../stats';
 import styled from 'styled-components';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
@@ -137,7 +137,8 @@ export function StatsModal({ end, score, guesses, maxAttempts, dayString }) {
           </Typography>
           <List>
             {Object.entries(guessDistribution).map(([index, count]) => (
-              <ListItem sx={{paddingBottom: 0}}>
+              <ListItem sx={{paddingBottom: 0}}
+                        key={index}>
                 <div>{index}</div>
                 <DistBar
                   count={count}

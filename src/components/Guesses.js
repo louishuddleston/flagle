@@ -1,4 +1,4 @@
-import { formatDistance, getDirectionEmoji } from './geography';
+import { formatDistance, getDirectionEmoji } from '../geography';
 import styled from 'styled-components';
 
 const GuessLine = styled.div`

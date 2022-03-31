@@ -1,12 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import { List, ListItem } from '@mui/material';
 import styled from 'styled-components';
 import { FlagGrid } from './FlagGrid';
 import { Guesses } from './Guesses';
-import countryData from './countries';
+import countryData from '../countries';
 import { getDistance, getCompassDirection } from 'geolib';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';

@@ -1,19 +1,18 @@
 import './App.css';
 import { useState, useMemo, useEffect } from "react";
 import styled from 'styled-components';
-import AnswerBox from './AnswerBox';
+import AnswerBox from './components/AnswerBox';
 import { getDistance, getCompassDirection } from "geolib";
-import { formatDistance, getDirectionEmoji } from './geography';
 import seedrandom from 'seedrandom';
 import { DateTime } from "luxon";
 import { useGuesses } from './hooks/useGuesses';
 import { ToastContainer, Flip } from "react-toastify";
-import { StatsModal } from "./StatsModal";
-import { HowToModal } from './HowToModal';
+import { StatsModal } from "./components/StatsModal";
+import { HowToModal } from './components/HowToModal';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from "react-toastify";
-import { FlagGrid } from './FlagGrid';
-import { Guesses } from './Guesses';
+import { FlagGrid } from './components/FlagGrid';
+import { Guesses } from './components/Guesses';
 
 const CentreWrapper = styled.div`
   margin: 0;
@@ -100,7 +99,7 @@ const getDayString = () => {
 };
 
 function App(props) {
-  const [countryNames, setFlagNames] = useState(() => props.DEBUG ? shuffle(Object.keys(props.countryData)) : Object.keys(props.countryData));
+  const [countryNames, setFlagNames] = useState(() => Object.keys(props.countryData));
   const [score, setScore] = useState("DNF");
   const [flippedArray, setFlippedArray] = useState([false, false, false, false, false, false]);
   const [randomOrder, setRandomOrder] = useState(() => shuffle([0,1,2,3,4,5]));

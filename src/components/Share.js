@@ -30,7 +30,7 @@ export function Share({ score, guesses, attempts, end, dayString}) {
     const diffInDays = currentDate.diff(FIRST_DAY_OF_FLAGLE, 'days').toObject().days;
     const squareString = generateShareSquares(score, guesses, attempts);
     return `#Flagle #${diffInDays} ${score === "DNF" ? "X" : guesses.length}/${attempts}\n${squareString}https://www.flagle.io`
-  }, [guesses, attempts]);
+  }, [guesses, attempts, dayString, score]);
 
   return (
     <CopyToClipboard
@@ -38,7 +38,7 @@ export function Share({ score, guesses, attempts, end, dayString}) {
       onCopy={() => toast("Copied Results to Clipboard", { autoClose: 2000 })}
       options={{ format: "text/plain" }}
     >
-      <Button variant="contained" disabled={end ? 0 : 1}><span>Share Score</span></Button>
+      <Button variant="contained" disabled={!end}><span>Share Score</span></Button>
     </CopyToClipboard>
   )
 }

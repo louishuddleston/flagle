@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import Select, { defaultTheme } from 'react-select';
+import Select from 'react-select';
 import styled from "styled-components";
 
 const normalise = value => value.toUpperCase();

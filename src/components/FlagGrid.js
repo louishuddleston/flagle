@@ -72,12 +72,12 @@ export function FlagGrid({ end, countryInfo, flippedArray}) {
   }, [countryInfo]);
 
   return (
-    <Grid end={end}>
+    <Grid end={end ? 1 : undefined}>
       {flippedArray.map((flipped, n) =>
       (
         <Tile key={n} rotate={flipped && flagLoad ? 1 : 0} height={FLAG_SCALE * flagImg.height / 2}>
           <TileFront></TileFront>
-          <TileBack end={end}><FlagImage
+          <TileBack><FlagImage
             flag={flagImg.src}
             left={`-${(n % 3) * 64}px`}
             top={`-${Math.floor(n / 3) * FLAG_SCALE * flagImg.height / 2}px`}
