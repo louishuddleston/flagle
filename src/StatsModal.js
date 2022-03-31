@@ -84,7 +84,7 @@ const LeaderboardIconStyled = styled(LeaderboardIcon)`
   }
 `;
 
-export function StatsModal({ end, score, guesses, maxAttempts }) {
+export function StatsModal({ end, score, guesses, maxAttempts, dayString }) {
   const [open, setOpen] = useState(end);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -151,6 +151,7 @@ export function StatsModal({ end, score, guesses, maxAttempts }) {
                    guesses={guesses} 
                    attempts={maxAttempts}
                    end={end}
+                   dayString={dayString}
             >
             </Share>
           </Typography>

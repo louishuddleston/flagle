@@ -1,8 +1,10 @@
 import CopyToClipboard from "react-copy-to-clipboard";
 import React, { useMemo } from "react";
 import { toast } from "react-toastify";
-import styled from "styled-components";
 import Button from '@mui/material/Button';
+import { DateTime } from "luxon";
+
+const FIRST_DAY_OF_FLAGLE = DateTime.fromFormat('February 21 2022', 'LLLL dd yyyy');
 
 const generateShareSquares = (score, guesses, attempts) => {
     if (score === "DNF") {
@@ -20,31 +22,14 @@ const generateShareSquares = (score, guesses, attempts) => {
     } 
     return squares.join("");
 }
-const ShareButton = styled.button`
-  background-color: #23b21a; 
-  border: none;
-  color: white;
-  border-radius: 3px;
-  padding: 15px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 20px;
-  font-family: Courier, monospace;
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-  cursor: pointer;
 
-  :hover {
-    background-color: #1c8116;
-  }
-`;
-
-
-export function Share({ score, guesses, attempts, end}) {
+export function Share({ score, guesses, attempts, end, dayString}) {
   const shareText = useMemo(() => {
+    const trueDayString = dayString.substr(0, dayString.length - 2);
+    const currentDate = DateTime.fromFormat(trueDayString, "yyyy-MM-dd");
+    const diffInDays = currentDate.diff(FIRST_DAY_OF_FLAGLE, 'days').toObject().days;
     const squareString = generateShareSquares(score, guesses, attempts);
-    return `#Flagle ${score === "DNF" ? "X" : guesses.length}/${attempts}\n${squareString}https://www.flagle.io`
+    return `#Flagle #${diffInDays} ${score === "DNF" ? "X" : guesses.length}/${attempts}\n${squareString}https://www.flagle.io`
   }, [guesses, attempts]);
 
   return (

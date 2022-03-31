@@ -20,7 +20,7 @@ export function getStatsData() {
     let maxStreak = 0;
     let previousDate = null;
     for (const [dayString, guesses] of allGuessesEntries) {
-      const trueDayString = dayString.substr(0, dayString.length - 2)
+      const trueDayString = dayString.substr(0, dayString.length - 2);
       const currentDate = DateTime.fromFormat(trueDayString, "yyyy-MM-dd");
       const winIndex = guesses.findIndex((guess) => guess.distance === 0);
       const won = winIndex >= 0;

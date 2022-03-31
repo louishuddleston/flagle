@@ -192,6 +192,7 @@ function App(props) {
               score={score}
               guesses={guesses}
               maxAttempts={props.attempts}
+              dayString={dayString}
             >
             </StatsModal>
           </TitleBarDiv>
