@@ -720,7 +720,7 @@ const countryData = {
         "longitude": 145.38469
     },
     "Martinique": {
-        "code": "mq",
+        "code": "fr",
         "latitude": 14.641528,
         "longitude": -61.024174
     },
