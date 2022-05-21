@@ -9,6 +9,7 @@ import styled from 'styled-components';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import LeaderboardIcon from '@mui/icons-material/Leaderboard';
+import Button from '@mui/material/Button';
 
 const StyledBox = styled(Box)`
   position: absolute;
@@ -84,7 +85,7 @@ const LeaderboardIconStyled = styled(LeaderboardIcon)`
   }
 `;
 
-export function StatsModal({ end, score, guesses, maxAttempts, dayString }) {
+export function StatsModal({ end, score, guesses, maxAttempts, dayString, countryInfo, trueCountry}) {
   const [open, setOpen] = useState(end);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -148,13 +149,22 @@ export function StatsModal({ end, score, guesses, maxAttempts, dayString }) {
             ))}
           </List>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            <Share score={score}
-                   guesses={guesses} 
-                   attempts={maxAttempts}
-                   end={end}
-                   dayString={dayString}
-            >
-            </Share>
+              <Share score={score}
+                    guesses={guesses} 
+                    attempts={maxAttempts}
+                    end={end}
+                    dayString={dayString}
+              >
+              </Share>
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+              <Button variant="contained" disabled={!end} onClick={() => window.open(countryInfo.link ?? "https://crisisrelief.un.org/t/ukraine")}>
+                {countryInfo.link ? 
+                <span>Learn more about {end ? trueCountry : "..."}</span>
+                :
+                <span>🇺🇦 Donate to Ukraine ❤️</span>
+                }
+              </Button>
           </Typography>
         </StyledBox>
       </StyledModal>

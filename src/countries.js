@@ -2,7 +2,8 @@ const countryData = {
     "Andorra": {
         "code": "ad",
         "latitude": 42.546245,
-        "longitude": 1.601554
+        "longitude": 1.601554,
+        "link": "test"
     },
     "United Arab Emirates": {
         "code": "ae",

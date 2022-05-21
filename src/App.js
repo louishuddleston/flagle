@@ -192,6 +192,8 @@ function App(props) {
               guesses={guesses}
               maxAttempts={props.attempts}
               dayString={dayString}
+              countryInfo={countryInfo}
+              trueCountry={trueCountry}
             >
             </StatsModal>
           </TitleBarDiv>
@@ -215,7 +217,7 @@ function App(props) {
           guesses={guesses}
         />
         <Footer>🇺🇦 <a href="https://crisisrelief.un.org/t/ukraine">Ukraine Humanitarian Fund</a> ️❤️
-        <p>Flagle is getting popular ❤️ </p> <a href="https://ko-fi.com/ryanbarouki">Help me keep it alive!</a>
+          <p>❤️ FLAG<span>LE</span>? <a href="https://ko-fi.com/ryanbarouki">Help me keep it alive!</a></p>
         </Footer>
       </CentreWrapper>
     </div>
