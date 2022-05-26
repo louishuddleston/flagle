@@ -216,8 +216,8 @@ function App(props) {
         <Guesses
           guesses={guesses}
         />
-        <Footer>🇺🇦 <a href="https://crisisrelief.un.org/t/ukraine">Ukraine Humanitarian Fund</a> ️❤️
-          <p>❤️ FLAG<span>LE</span>? <a href="https://ko-fi.com/ryanbarouki">Help me keep it alive!</a></p>
+        <Footer>🇺🇦 <a href="https://crisisrelief.un.org/t/ukraine">Donate to Ukraine</a> ️❤️
+          <p>❤️ FLAG<span>LE</span>? <a href="https://ko-fi.com/ryanbarouki">Help me keep it alive! ☕</a></p>
         </Footer>
       </CentreWrapper>
     </div>

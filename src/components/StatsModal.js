@@ -158,12 +158,8 @@ export function StatsModal({ end, score, guesses, maxAttempts, dayString, countr
               </Share>
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-              <Button variant="contained" disabled={!end} onClick={() => window.open(countryInfo.link ?? "https://crisisrelief.un.org/t/ukraine")}>
-                {countryInfo.link ? 
-                <span>Learn more about {end ? trueCountry : "..."}</span>
-                :
-                <span>🇺🇦 Donate to Ukraine ❤️</span>
-                }
+              <Button variant="contained" disabled={!end} onClick={() => window.open("https://www.dailychange.io")}>
+                <span>Learn more about {end ? trueCountry : "..."}!</span>
               </Button>
           </Typography>
         </StyledBox>
