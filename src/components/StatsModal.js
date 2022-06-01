@@ -9,6 +9,7 @@ import styled from 'styled-components';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import LeaderboardIcon from '@mui/icons-material/Leaderboard';
+import Divider from '@mui/material/Divider';
 import Button from '@mui/material/Button';
 
 const StyledBox = styled(Box)`
@@ -81,7 +82,20 @@ const DistBar = styled.div`
 const LeaderboardIconStyled = styled(LeaderboardIcon)`
   color: black;
   @media (prefers-color-scheme: dark) {
-    color: white;;
+    color: white;
+  }
+`;
+
+const StyledDivider = styled(Divider)`
+  padding-top: 1rem;
+`;
+
+const LinkDiv = styled.div`
+  text-align: center;
+  @media (prefers-color-scheme: dark) {
+    a:visited {
+      color: white;
+    }
   }
 `;
 
@@ -157,10 +171,11 @@ export function StatsModal({ end, score, guesses, maxAttempts, dayString, countr
               >
               </Share>
           </Typography>
+          <StyledDivider sx={{borderColor: theme => `${theme.palette.grey[500]}`}}/>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-              <Button variant="contained" disabled={!end} onClick={() => window.open("https://www.dailychange.io")}>
-                <span>Learn more about {end ? trueCountry : "..."}!</span>
-              </Button>
+            <LinkDiv>
+              <a href="https://www.dailychange.io">Learn about the Flagle country of the day and how you can take action for a better world</a>
+            </LinkDiv>
           </Typography>
         </StyledBox>
       </StyledModal>
