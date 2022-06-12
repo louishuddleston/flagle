@@ -171,11 +171,8 @@ export function StatsModal({ end, score, guesses, maxAttempts, dayString, countr
               >
               </Share>
           </Typography>
-          <StyledDivider sx={{borderColor: theme => `${theme.palette.grey[500]}`}}/>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            <LinkDiv>
-              <a href="https://www.dailychange.io">Learn about the Flagle country of the day and how you can take action for a better world</a>
-            </LinkDiv>
+            <Button variant="contained" onClick={() => {window.open("https://crisisrelief.un.org/t/ukraine")}}>🇺🇦 Donate to Ukraine ❤️</Button>
           </Typography>
         </StyledBox>
       </StyledModal>
