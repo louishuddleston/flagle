@@ -217,9 +217,6 @@ function App(props) {
         <Guesses
           guesses={guesses}
         />
-      <Footer>
-        <GoogleAd slot="6074082390"></GoogleAd>
-      </Footer>
       </CentreWrapper>
     </div>
   );
