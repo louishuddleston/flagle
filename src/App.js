@@ -13,7 +13,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import { toast } from "react-toastify";
 import { FlagGrid } from './components/FlagGrid';
 import { Guesses } from './components/Guesses';
-import GoogleAd from './components/GoogleAd';
 
 const CentreWrapper = styled.div`
   margin: 0;
