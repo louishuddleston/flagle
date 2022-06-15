@@ -70,7 +70,7 @@ const Footer = styled.div`
 
 const AdContainer = styled.div`
   width: 100%;
-  position: absolute;
+  position: fixed;
   bottom: 0px;
   display: flex;
   justify-content: center;
