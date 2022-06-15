@@ -68,6 +68,12 @@ const Footer = styled.div`
   }
 `;
 
+const AdContainer = styled.div`
+  width: 100%;
+  position: absolute;
+  bottom: 0px;
+`;
+
 const TitleBarDiv = styled.div`
   display: flex;
   align-items: center;
@@ -217,10 +223,10 @@ function App(props) {
         <Guesses
           guesses={guesses}
         />
-        <Footer>
-          <GoogleAds slot="6074082390"></GoogleAds>
-        </Footer>
       </CentreWrapper>
+        <AdContainer>
+          <GoogleAds slot="6074082390"></GoogleAds>
+        </AdContainer>
     </div>
   );
 }
