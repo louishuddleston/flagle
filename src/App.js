@@ -72,6 +72,8 @@ const AdContainer = styled.div`
   width: 100%;
   position: absolute;
   bottom: 0px;
+  display: flex;
+  justify-content: center;
 `;
 
 const TitleBarDiv = styled.div`
