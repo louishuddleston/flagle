@@ -13,6 +13,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { toast } from "react-toastify";
 import { FlagGrid } from './components/FlagGrid';
 import { Guesses } from './components/Guesses';
+import GoogleAds from './components/GoogleAd';
 
 const CentreWrapper = styled.div`
   margin: 0;
@@ -216,6 +217,9 @@ function App(props) {
         <Guesses
           guesses={guesses}
         />
+        <Footer>
+          <GoogleAds slot="6074082390"></GoogleAds>
+        </Footer>
       </CentreWrapper>
     </div>
   );
