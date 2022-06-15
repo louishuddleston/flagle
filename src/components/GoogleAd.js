@@ -2,8 +2,8 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 
 const StyledIns = styled.ins`
-    width: 320px !important;  
-    height: 100px !important;
+    width: 320px;  
+    height: 100px;
     @media (min-width:500px) { 
         width: 468px; 
         height: 60px; 
