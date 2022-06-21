@@ -70,7 +70,7 @@ const Footer = styled.div`
 
 const AdContainer = styled.div`
   width: 100%;
-  position: fixed;
+  margin-top: auto;
   bottom: 0px;
   display: flex;
   justify-content: center;
@@ -225,10 +225,10 @@ function App(props) {
         <Guesses
           guesses={guesses}
         />
-      </CentreWrapper>
         <AdContainer>
           <GoogleAds slot="6074082390"></GoogleAds>
         </AdContainer>
+      </CentreWrapper>
     </div>
   );
 }
