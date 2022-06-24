@@ -116,7 +116,10 @@ function App(props) {
   const dayString = useMemo(getDayString, []);
   const [guesses, addGuess] = useGuesses(dayString);
   const trueCountry = useMemo(() => {
-    return countryNames[Math.floor(seedrandom.alea(dayString)() * countryNames.length)];
+    const todaysCountry = countryNames[Math.floor(seedrandom.alea(dayString)() * countryNames.length)];
+    console.log(todaysCountry);
+    if (todaysCountry === "Russia") return "Ukraine";
+    return todaysCountry
   }, [dayString, countryNames]);
 
   useEffect(() => {

@@ -40,16 +40,22 @@ const StatText = styled.div`
   text-align: center;
 `;
 
+const StyledTile = styled(Box)`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+`;
 const StatsTile = ({stat, text}) => (
-  <Box sx={{ p: 1, borderRadius: '3px', m: '0rem 0.25rem', justifyContent: 'center'}}>
+  <StyledTile>
     <StatNumber>{stat}</StatNumber>
     <StatText>{text}</StatText>
-  </Box>
+  </StyledTile>
 )
 
 const Grid = styled.div`
   display: grid;
-  grid-template-columns: repeat(4,minmax(5rem, 8rem));
+  grid-template-columns: repeat(4,minmax(3.8rem, 8rem));
   grid-template-rows: auto 1fr;
 `;
 
@@ -86,17 +92,8 @@ const LeaderboardIconStyled = styled(LeaderboardIcon)`
   }
 `;
 
-const StyledDivider = styled(Divider)`
-  padding-top: 1rem;
-`;
-
-const LinkDiv = styled.div`
-  text-align: center;
-  @media (prefers-color-scheme: dark) {
-    a:visited {
-      color: white;
-    }
-  }
+const Type = styled(Typography)`
+  font-family: Courier, monospace !important;
 `;
 
 export function StatsModal({ end, score, guesses, maxAttempts, dayString, countryInfo, trueCountry}) {
@@ -138,18 +135,18 @@ export function StatsModal({ end, score, guesses, maxAttempts, dayString, countr
               <CloseIcon />
             </IconButton>
           </Box>
-          <Typography id="modal-modal-title" variant="h5" component="h2">
+          <Type id="modal-modal-title" variant="h5" component="h2">
             Statistics
-          </Typography>
+          </Type>
           <Grid>
             <StatsTile stat={Math.round(winRatio * 100)} text="Win %"/>
             <StatsTile stat={played} text="Played"/>
-            <StatsTile stat={currentStreak} text="Current Streak"/>
+            <StatsTile stat={currentStreak} text="Streak"/>
             <StatsTile stat={maxStreak} text="Max Streak"/>
           </Grid>
-          <Typography id="modal-modal-title" variant="h6" component="h3">
+          <Type id="modal-modal-title" variant="h6" component="h3">
             Guess Distribution:
-          </Typography>
+          </Type>
           <List>
             {Object.entries(guessDistribution).map(([index, count]) => (
               <ListItem sx={{paddingBottom: 0}}
@@ -162,7 +159,7 @@ export function StatsModal({ end, score, guesses, maxAttempts, dayString, countr
               </ListItem>
             ))}
           </List>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+          <Type id="modal-modal-description" sx={{ mt: 2 }}>
               <Share score={score}
                     guesses={guesses} 
                     attempts={maxAttempts}
@@ -170,10 +167,10 @@ export function StatsModal({ end, score, guesses, maxAttempts, dayString, countr
                     dayString={dayString}
               >
               </Share>
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+          </Type>
+          <Type id="modal-modal-description" sx={{ mt: 2 }}>
             <Button variant="contained" onClick={() => {window.open("https://crisisrelief.un.org/t/ukraine")}}>🇺🇦 Donate to Ukraine ❤️</Button>
-          </Typography>
+          </Type>
         </StyledBox>
       </StyledModal>
     </div>
