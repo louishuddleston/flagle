@@ -95,6 +95,7 @@ const LeaderboardIconStyled = styled(LeaderboardIcon)`
 
 const Type = styled(Typography)`
   font-family: Courier, monospace !important;
+  margin-top: 5px !important;
 `;
 
 const Icon = styled.img`
