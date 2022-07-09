@@ -78,6 +78,7 @@ const AdContainer = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column; 
+  align-items: center;
   gap: 10px;
   @media (prefers-color-scheme: dark) {
     color: #fff;
