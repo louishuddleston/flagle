@@ -14,6 +14,9 @@ import { toast } from "react-toastify";
 import { FlagGrid } from './components/FlagGrid';
 import { Guesses } from './components/Guesses';
 import GoogleAds from './components/GoogleAd';
+import Button from '@mui/material/Button';
+import angleIcon from './angle_favicon.svg';
+import cerebrleIcon from './cerebrle_favicon.svg';
 
 const CentreWrapper = styled.div`
   margin: 0;
@@ -74,6 +77,11 @@ const AdContainer = styled.div`
   bottom: 0px;
   display: flex;
   justify-content: center;
+  flex-direction: column; 
+  gap: 10px;
+  @media (prefers-color-scheme: dark) {
+    color: #fff;
+  }
 `;
 
 const TitleBarDiv = styled.div`
@@ -98,6 +106,23 @@ const Title = styled.div`
   span {
     color: #1a76d2;
   }
+`;
+
+const Icon = styled.img`
+  width: 20px;
+  margin-right: 10px;
+`;
+
+const GameButton = styled(Button)`
+  span {
+    font-weight: bold;
+  }
+`;
+
+const GamesContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 5px;
 `;
 
 const shuffle = arr => [...arr].sort(() => 0.5 - Math.random());
@@ -228,6 +253,11 @@ function App(props) {
           guesses={guesses}
         />
         <AdContainer>
+          <div style={{marginTop: "5px"}}>Other games:</div>
+          <GamesContainer>
+            <GameButton variant="outlined" onClick={() => {window.open("https://cerebrle.io")}}><Icon src={cerebrleIcon}/><span>Cerebrle</span></GameButton>
+            <GameButton variant="outlined" onClick={() => {window.open("https://angle.wtf")}}><Icon src={angleIcon}/><span>Angle</span></GameButton>
+          </GamesContainer>
           <GoogleAds slot="6074082390"></GoogleAds>
         </AdContainer>
       </CentreWrapper>
