@@ -9,9 +9,7 @@ import styled from 'styled-components';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import LeaderboardIcon from '@mui/icons-material/Leaderboard';
-import Divider from '@mui/material/Divider';
 import Button from '@mui/material/Button';
-import angleIcon from '../angle_favicon.svg';
 
 const StyledBox = styled(Box)`
   position: absolute;
@@ -98,17 +96,6 @@ const Type = styled(Typography)`
   margin-top: 5px !important;
 `;
 
-const Icon = styled.img`
-  width: 20px;
-  margin-right: 10px;
-`;
-
-const AngleButton = styled(Button)`
-  span {
-    font-weight: bold;
-  }
-`;
-
 export function StatsModal({ end, score, guesses, maxAttempts, dayString, countryInfo, trueCountry}) {
   const [open, setOpen] = useState(end);
   const handleOpen = () => setOpen(true);
@@ -183,9 +170,6 @@ export function StatsModal({ end, score, guesses, maxAttempts, dayString, countr
           </Type>
           <Type id="modal-modal-description" sx={{ mt: 2 }}>
             <Button variant="contained" onClick={() => {window.open("https://crisisrelief.un.org/t/ukraine")}}>🇺🇦 Donate to Ukraine ❤️</Button>
-          </Type>
-          <Type id="modal-modal-description" sx={{ mt: 2 }}>
-            <AngleButton variant="outlined" onClick={() => {window.open("https://angle.wtf")}}><Icon src={angleIcon}/><div>Check out <span>Angle</span></div></AngleButton>
           </Type>
         </StyledBox>
       </StyledModal>
