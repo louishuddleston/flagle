@@ -13,7 +13,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { toast } from "react-toastify";
 import { FlagGrid } from './components/FlagGrid';
 import { Guesses } from './components/Guesses';
-import GoogleAds from './components/GoogleAd';
+import AdSpace from './components/AdSpace';
 import Button from '@mui/material/Button';
 import angleIcon from './angle_favicon.svg';
 import cerebrleIcon from './cerebrle_favicon.svg';
@@ -259,7 +259,8 @@ function App(props) {
             <GameButton variant="outlined" onClick={() => {window.open("https://cerebrle.io")}}><Icon src={cerebrleIcon}/><span>Cerebrle</span></GameButton>
             <GameButton variant="outlined" onClick={() => {window.open("https://angle.wtf")}}><Icon src={angleIcon}/><span>Angle</span></GameButton>
           </GamesContainer>
-          <GoogleAds slot="6074082390"></GoogleAds>
+          <a className="nn-cmp-show" href="#">Manage Cookie Settings</a>
+          <AdSpace />
         </AdContainer>
       </CentreWrapper>
     </div>

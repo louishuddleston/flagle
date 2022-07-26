@@ -123,6 +123,7 @@ export function StatsModal({ end, score, guesses, maxAttempts, dayString, countr
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
+        sx={{zIndex: 10000}}
       >
         <StyledBox>
           <Box>

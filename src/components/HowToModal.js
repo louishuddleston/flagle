@@ -83,6 +83,7 @@ export function HowToModal(props) {
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
+        sx={{zIndex: 10000}}
       >
         <StyledBox>
           <Box>
