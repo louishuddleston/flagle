@@ -22,13 +22,25 @@ const AnswerBox = ({ answer, onCorrect, onIncorrect, disabled, countries, onGues
   const sortedCountries = useMemo(() => countries.sort().map(val => ({label: val, value: val}))
   ,[countries]);
 
+  function hideKeyboard(element) {
+    var field = document.createElement('input');
+    field.setAttribute('type', 'text');
+    document.body.appendChild(field);
+    setTimeout(function() {
+        field.focus();
+        setTimeout(function() {
+            field.setAttribute('style', 'display:none;');
+        }, 50);
+    }, 50);
+  }
+
   return (
     <StyledSelect
       options={sortedCountries} 
       onChange={handleSubmit}
       placeholder="Guess the flag!"
       isOptionDisabled={() => disabled}
-      menuShouldScrollIntoView={true}
+      onMenuClose={hideKeyboard}
     />
   );
 };
