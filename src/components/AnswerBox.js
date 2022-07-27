@@ -43,7 +43,7 @@ const AnswerBox = ({ answer, onCorrect, onIncorrect, disabled, countries, onGues
       onChange={handleSubmit}
       placeholder="Guess the flag!"
       isOptionDisabled={() => disabled}
-      onMenuClose={() => setTest(test => test)}
+      onMenuClose={() => setTest(test => test + 1)}
     />
   );
 };
