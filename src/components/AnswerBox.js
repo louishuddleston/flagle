@@ -15,8 +15,6 @@ const StyledSelect = styled(Select)`
 `;
 
 const AnswerBox = ({ answer, onCorrect, onIncorrect, disabled, countries, onGuess, ...props }) => {
-  const [test, setTest] = useState(0);
-
   const handleSubmit = guess => {
       normalise(guess.value) === normalise(answer) ? onCorrect() : onIncorrect();
       onGuess(guess.value);
@@ -25,25 +23,13 @@ const AnswerBox = ({ answer, onCorrect, onIncorrect, disabled, countries, onGues
   const sortedCountries = useMemo(() => countries.sort().map(val => ({label: val, value: val}))
   ,[countries]);
 
-  function hideKeyboard(element) {
-    var field = document.createElement('input');
-    field.setAttribute('type', 'text');
-    document.body.appendChild(field);
-    setTimeout(function() {
-        field.focus();
-        setTimeout(function() {
-            field.setAttribute('style', 'display:none;');
-        }, 50);
-    }, 50);
-  }
-
   return (
     <StyledSelect
       options={sortedCountries} 
       onChange={handleSubmit}
       placeholder="Guess the flag!"
       isOptionDisabled={() => disabled}
-      onMenuClose={() => setTest(test => test + 1)}
+      closeMenuOnSelect={false}
     />
   );
 };
