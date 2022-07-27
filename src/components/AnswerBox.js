@@ -14,6 +14,8 @@ const StyledSelect = styled(Select)`
 `;
 
 const AnswerBox = ({ answer, onCorrect, onIncorrect, disabled, countries, onGuess, ...props }) => {
+  const [test, setTest] = useState(0);
+
   const handleSubmit = guess => {
       normalise(guess.value) === normalise(answer) ? onCorrect() : onIncorrect();
       onGuess(guess.value);
@@ -40,7 +42,7 @@ const AnswerBox = ({ answer, onCorrect, onIncorrect, disabled, countries, onGues
       onChange={handleSubmit}
       placeholder="Guess the flag!"
       isOptionDisabled={() => disabled}
-      onMenuClose={hideKeyboard}
+      onMenuClose={() => setTest(test => test)}
     />
   );
 };
