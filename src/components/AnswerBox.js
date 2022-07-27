@@ -1,6 +1,7 @@
 import React, { useMemo } from "react";
 import Select from 'react-select';
 import styled from "styled-components";
+import { useState } from "react";
 
 const normalise = value => value.toUpperCase();
 const StyledSelect = styled(Select)`
