@@ -28,6 +28,7 @@ const AnswerBox = ({ answer, onCorrect, onIncorrect, disabled, countries, onGues
       onChange={handleSubmit}
       placeholder="Guess the flag!"
       isOptionDisabled={() => disabled}
+      menuShouldScrollIntoView={true}
     />
   );
 };
