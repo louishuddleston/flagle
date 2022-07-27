@@ -134,6 +134,7 @@ const getDayString = () => {
 };
 
 function App(props) {
+  const [refresh, setRefresh] = useState(0);
   const [countryNames, setFlagNames] = useState(() => Object.keys(props.countryData));
   const [score, setScore] = useState("DNF");
   const [flippedArray, setFlippedArray] = useState([false, false, false, false, false, false]);
@@ -204,6 +205,7 @@ function App(props) {
               distance: getDistance(guessGeo, answerGeo),
               direction: getCompassDirection(guessGeo, answerGeo),
               tile: tileNum});
+    setRefresh(refresh => refresh + 1);
   };
 
   const countryInfo = useMemo(() => props.countryData[trueCountry], [trueCountry]);
