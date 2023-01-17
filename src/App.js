@@ -17,6 +17,7 @@ import AdSpace from './components/AdSpace';
 import Button from '@mui/material/Button';
 import angleIcon from './angle_favicon.svg';
 import cerebrleIcon from './cerebrle_favicon.svg';
+import wikiguesserIcon from './wikiguesser_favicon.svg';
 
 const CentreWrapper = styled.div`
   margin: 0;
@@ -256,7 +257,7 @@ function App(props) {
           <div style={{marginTop: "5px"}}>Other games:</div>
           <GamesContainer>
             <GameButton variant="outlined" onClick={() => {window.open("https://wikilinks.app")}}><span>{"[ ] WikiLinks"}</span></GameButton>
-            <GameButton variant="outlined" onClick={() => {window.open("https://wikiguesser.io")}}><span>{"🔍 Wikiguesser"}</span></GameButton>
+            <GameButton variant="outlined" onClick={() => {window.open("https://wikiguesser.io")}}><Icon src={wikiguesserIcon}/><span>Wikiguesser</span></GameButton>
           </GamesContainer>
           <GamesContainer>
             <GameButton variant="outlined" onClick={() => {window.open("https://cerebrle.io")}}><Icon src={cerebrleIcon}/><span>Cerebrle</span></GameButton>
