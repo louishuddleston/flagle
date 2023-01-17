@@ -254,7 +254,7 @@ function App(props) {
           guesses={guesses}
         />
         <AdContainer>
-          <div style={{marginTop: "5px"}}>Other games:</div>
+          <div style={{marginTop: "5px"}}>Our other games:</div>
           <GamesContainer>
             <GameButton variant="outlined" onClick={() => {window.open("https://wikilinks.app")}}><span>{"[ ] WikiLinks"}</span></GameButton>
             <GameButton variant="outlined" onClick={() => {window.open("https://wikiguesser.io")}}><Icon src={wikiguesserIcon}/><span>Wikiguesser</span></GameButton>
