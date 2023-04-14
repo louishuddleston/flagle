@@ -16,6 +16,43 @@
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-V420SMFFK0"></script>
   <script>
+    /* Snigelweb ads */
+    let breakpoint = "xsmall";
+    const w = window.innerWidth;
+
+    breakpoint = w >= 768 ? "small" : breakpoint;
+    breakpoint = w >= 960 ? "medium" : breakpoint;
+    breakpoint = w >= 1280 ? "large" : breakpoint;
+    breakpoint = w >= 1400 ? "xlarge" : breakpoint;
+
+    window.activeUnits = [];
+
+    switch (breakpoint.toLowerCase()) {
+      case "xsmall": // Small Mobile
+        window.activeUnits = ["top_banner"]; // Mobile Ad Units
+        break;
+      case "small": // Portrait Tablet / Large Mobile
+        window.activeUnits = ["top_banner"]; // Mobile Ad Units
+        break;
+      default:
+      case "medium":
+      case "xlarge":
+      case "large":
+        window.activeUnits = ["sidebar_right", "video"];
+        break;
+    }
+
+    window.activeAdUnits = [];
+    window.snigelPubConf = {
+      adengine: {
+        activeAdUnits: window.activeUnits,
+      },
+    };
+  </script>
+  <script async data-cfasync="false" src="https://cdn.snigelweb.com/adengine/flagle.io/loader.js"
+    type="text/javascript"></script>
+  <script>
+    /* Google tracking */
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
