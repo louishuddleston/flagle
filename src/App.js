@@ -217,8 +217,7 @@ function App(props) {
       <CentreWrapper>
         <TitleBar>
           <TitleBarDiv justify="flex-end">
-            <HowToModal>
-            </HowToModal>
+            <HowToModal />
           </TitleBarDiv>
           <Title>FLAG<span>LE</span></Title>
           <TitleBarDiv>

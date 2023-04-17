@@ -135,6 +135,20 @@ export function HowToModal(props) {
               guesses={guesses.slice(-1)}
             />
           </CenterDiv>
+          <br />
+          <Typography id="modal-modal-title" variant="h5" component="h2">
+            Questions or Suggestions?
+          </Typography>
+          <Typography id="modal-modal-paragraph" component="p">
+            <a href="https://docs.google.com/forms/d/1rqb1jsmC_RMkX5CUY8pZQrjFrQaloC4zw9ZM5ZquAWw" target="_blank" rel="noreferrer" >Share your feedback!</a>
+          </Typography>
+          <br />
+          <Typography id="modal-modal-title" variant="h5" component="h2">
+            About
+          </Typography>
+          <Typography id="modal-modal-paragraph" component="p">
+            <a href="/about.html" target="_blank" rel="noreferrer" >About Flagle and Teuteuf Games</a>
+          </Typography>
         </StyledBox>
       </StyledModal>
     </div>
