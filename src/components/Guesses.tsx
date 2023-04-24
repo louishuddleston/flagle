@@ -1,3 +1,4 @@
+import * as geolib from 'geolib';
 import styled from 'styled-components';
 
 import { formatDistance, getDirectionEmoji } from '../utils/geography';
@@ -56,7 +57,11 @@ const ArrowBox = styled.div`
 `;
 
 export const Guesses: React.FC<{
-  guesses: { name: string; distance: number; direction: any }[];
+  guesses: {
+    name: string;
+    distance: number;
+    direction: ReturnType<(typeof geolib)['getCompassDirection']>;
+  }[];
 }> = ({ guesses }) => {
   return (
     <>

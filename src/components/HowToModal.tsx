@@ -1,15 +1,16 @@
-import { useState } from 'react';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
-import styled from 'styled-components';
-import { FlagGrid } from './FlagGrid';
-import { Guesses } from './Guesses';
-import countryData from '../data/countries';
-import { getDistance, getCompassDirection } from 'geolib';
-import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
+import Box from '@mui/material/Box';
+import IconButton from '@mui/material/IconButton';
+import Modal from '@mui/material/Modal';
+import Typography from '@mui/material/Typography';
+import { getCompassDirection,getDistance } from 'geolib';
+import { useState } from 'react';
+import styled from 'styled-components';
+
+import countryData from '../data/countries';
+import { FlagGrid } from './FlagGrid';
+import { Guesses } from './Guesses';
 
 const StyledBox = styled(Box)`
   position: absolute;

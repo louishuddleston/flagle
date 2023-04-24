@@ -1,20 +1,20 @@
-import { useState, useMemo, useEffect } from 'react';
-import { getDistance, getCompassDirection } from 'geolib';
+import { getCompassDirection, getDistance } from 'geolib';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { toast } from 'react-toastify';
 
-import { useGuesses } from '../hooks/useGuesses';
 import AnswerBox from '../components/AnswerBox';
-import { StatsModal } from '../components/StatsModal';
-import { HowToModal } from '../components/HowToModal';
+import { Attempts } from '../components/Attempts';
 import { FlagGrid } from '../components/FlagGrid';
 import { Guesses } from '../components/Guesses';
-import { Attempts } from '../components/Attempts';
-import { Title, TitleBar, TitleBarDiv } from '../components/Title';
+import { HowToModal } from '../components/HowToModal';
 import { NextRoundLink } from '../components/NextRoundLink';
+import { StatsModal } from '../components/StatsModal';
+import { Title, TitleBar, TitleBarDiv } from '../components/Title';
 import countryData from '../data/countries';
-import { getDayString } from '../utils/getDayString';
-import { useDailyCountryName } from '../hooks/useDailyCountryName';
 import { useAllCountryNames } from '../hooks/useAllCountryNames';
+import { useDailyCountryName } from '../hooks/useDailyCountryName';
+import { useGuesses } from '../hooks/useGuesses';
+import { getDayString } from '../utils/getDayString';
 
 const MAX_ATTEMPTS = 6;
 
@@ -54,7 +54,7 @@ export function MainGameRoute() {
         setScore('DNF');
       }
     }
-  }, [guesses]);
+  }, [getRemainingTiles, guesses, revealTiles, trueCountry]);
 
   const onIncorrect = () => {
     revealRandomTile();
@@ -73,7 +73,7 @@ export function MainGameRoute() {
     return tile;
   };
 
-  const getRemainingTiles = () => {
+  const getRemainingTiles = useCallback(() => {
     const remainingTiles = [];
     const usedTiles = guesses.map((guess) => guess.tile);
     for (const i of [0, 1, 2, 3, 4, 5]) {
@@ -83,15 +83,15 @@ export function MainGameRoute() {
     }
     setRandomOrder(shuffle(remainingTiles));
     return remainingTiles;
-  };
+  }, [guesses]);
 
-  const revealTiles = () => {
+  const revealTiles = useCallback(() => {
     const newFlipped = flippedArray.slice();
     for (const guess of guesses) {
       newFlipped[guess.tile] = true;
       setFlippedArray(newFlipped);
     }
-  };
+  }, [flippedArray, guesses]);
 
   const onGuess = (guess) => {
     const tileNum = revealRandomTile();
@@ -136,7 +136,7 @@ export function MainGameRoute() {
       ></FlagGrid>
       <AnswerBox
         answer={trueCountry}
-        onCorrect={() => {}}
+        onCorrect={() => void 0}
         onIncorrect={onIncorrect}
         disabled={end}
         countries={allCountryNames}

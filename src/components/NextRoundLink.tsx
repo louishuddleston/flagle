@@ -1,6 +1,5 @@
-import React, { PropsWithChildren } from 'react';
-
 import { Twemoji } from '@teuteuf/react-emoji-render';
+import React, { PropsWithChildren } from 'react';
 import { Link } from 'react-router-dom';
 
 export const NextRoundLink: React.FC<PropsWithChildren<{ to: string }>> = ({

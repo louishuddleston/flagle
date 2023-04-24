@@ -1,7 +1,8 @@
 
-import { getDayString } from './utils/getDayString';
-import countryData from './data/countries';
 import seedrandom from 'seedrandom';
+
+import countryData from './data/countries';
+import { getDayString } from './utils/getDayString';
 
 const countryNames = Object.keys(countryData);
 const distribution = countryNames.reduce((acc, name) => {

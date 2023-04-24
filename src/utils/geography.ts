@@ -19,7 +19,7 @@ const DIRECTION_ARROWS = {
 
 export function getDirectionEmoji(guess: {
   direction: keyof typeof DIRECTION_ARROWS;
-  distance: Number;
+  distance: number;
 }) {
   return guess.distance === 0 ? '🎉' : DIRECTION_ARROWS[guess.direction];
 }

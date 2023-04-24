@@ -1,15 +1,16 @@
-import { useState, useEffect } from 'react';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
-import { Share } from "./Share";
-import { List, ListItem } from '@mui/material';
-import { getStatsData } from '../utils/stats';
-import styled from 'styled-components';
-import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import LeaderboardIcon from '@mui/icons-material/Leaderboard';
+import { List, ListItem } from '@mui/material';
+import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
+import Modal from '@mui/material/Modal';
+import Typography from '@mui/material/Typography';
+import { useEffect,useState } from 'react';
+import styled from 'styled-components';
+
+import { getStatsData } from '../utils/stats';
+import { Share } from "./Share";
 
 const StyledBox = styled(Box)`
   position: absolute;
