@@ -6,11 +6,11 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import Modal from '@mui/material/Modal';
 import Typography from '@mui/material/Typography';
-import { useEffect,useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { getStatsData } from '../utils/stats';
-import { Share } from "./Share";
+import { Share } from './Share';
 
 const StyledBox = styled(Box)`
   position: absolute;
@@ -44,18 +44,17 @@ const StyledTile = styled(Box)`
   display: flex;
   flex-direction: column;
   justify-content: center;
-
 `;
-const StatsTile = ({stat, text}) => (
+const StatsTile = ({ stat, text }) => (
   <StyledTile>
     <StatNumber>{stat}</StatNumber>
     <StatText>{text}</StatText>
   </StyledTile>
-)
+);
 
 const Grid = styled.div`
   display: grid;
-  grid-template-columns: repeat(4,minmax(3.8rem, 8rem));
+  grid-template-columns: repeat(4, minmax(3.8rem, 8rem));
   grid-template-rows: auto 1fr;
 `;
 
@@ -75,7 +74,8 @@ const StyledModal = styled(Modal)`
 `;
 
 const DistBar = styled.div`
-  flex: 0 1 ${props => (Math.round((props.count / props.maxDistribution) * 100))}%;
+  flex: 0 1
+    ${(props) => Math.round((props.count / props.maxDistribution) * 100)}%;
   background-color: #ddd;
   padding: 2px 5px;
   border-radius: 3px;
@@ -97,18 +97,21 @@ const Type = styled(Typography)`
   margin-top: 5px !important;
 `;
 
-export function StatsModal({ end, score, guesses, maxAttempts, dayString, countryInfo, trueCountry}) {
+export function StatsModal({
+  end,
+  score,
+  guesses,
+  maxAttempts,
+  dayString,
+  countryInfo,
+  trueCountry,
+}) {
   const [open, setOpen] = useState(end);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const {
-    played,
-    winRatio,
-    currentStreak,
-    maxStreak,
-    guessDistribution,
-  } = getStatsData();
+  const { played, winRatio, currentStreak, maxStreak, guessDistribution } =
+    getStatsData();
 
   const maxDistribution = Math.max(...Object.values(guessDistribution));
 
@@ -117,23 +120,26 @@ export function StatsModal({ end, score, guesses, maxAttempts, dayString, countr
   return (
     <div>
       <StatsButton onClick={handleOpen}>
-        <LeaderboardIconStyled/>
-      </StatsButton> 
+        <LeaderboardIconStyled />
+      </StatsButton>
       <StyledModal
         open={open}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
-        sx={{zIndex: 10000}}
+        sx={{ zIndex: 10000 }}
       >
         <StyledBox>
           <Box>
-            <IconButton onClick={handleClose} sx={{
-            position: 'absolute',
-            right: 8,
-            top: 8,
-            color: (theme) => theme.palette.grey[500],
-          }}>
+            <IconButton
+              onClick={handleClose}
+              sx={{
+                position: 'absolute',
+                right: 8,
+                top: 8,
+                color: (theme) => theme.palette.grey[500],
+              }}
+            >
               <CloseIcon />
             </IconButton>
           </Box>
@@ -141,37 +147,42 @@ export function StatsModal({ end, score, guesses, maxAttempts, dayString, countr
             Statistics
           </Type>
           <Grid>
-            <StatsTile stat={Math.round(winRatio * 100)} text="Win %"/>
-            <StatsTile stat={played} text="Played"/>
-            <StatsTile stat={currentStreak} text="Streak"/>
-            <StatsTile stat={maxStreak} text="Max Streak"/>
+            <StatsTile stat={Math.round(winRatio * 100)} text="Win %" />
+            <StatsTile stat={played} text="Played" />
+            <StatsTile stat={currentStreak} text="Streak" />
+            <StatsTile stat={maxStreak} text="Max Streak" />
           </Grid>
           <Type id="modal-modal-title" variant="h6" component="h3">
             Guess Distribution:
           </Type>
           <List>
             {Object.entries(guessDistribution).map(([index, count]) => (
-              <ListItem sx={{paddingBottom: 0}}
-                        key={index}>
+              <ListItem sx={{ paddingBottom: 0 }} key={index}>
                 <div>{index}</div>
-                <DistBar
-                  count={count}
-                  maxDistribution={maxDistribution}
-                >{count}</DistBar>
+                <DistBar count={count} maxDistribution={maxDistribution}>
+                  {count}
+                </DistBar>
               </ListItem>
             ))}
           </List>
           <Type id="modal-modal-description" sx={{ mt: 2 }}>
-              <Share score={score}
-                    guesses={guesses} 
-                    attempts={maxAttempts}
-                    end={end}
-                    dayString={dayString}
-              >
-              </Share>
+            <Share
+              score={score}
+              guesses={guesses}
+              attempts={maxAttempts}
+              end={end}
+              dayString={dayString}
+            ></Share>
           </Type>
           <Type id="modal-modal-description" sx={{ mt: 2 }}>
-            <Button variant="contained" onClick={() => {window.open("https://crisisrelief.un.org/t/ukraine")}}>🇺🇦 Donate to Ukraine ❤️</Button>
+            <Button
+              variant="contained"
+              onClick={() => {
+                window.open('https://crisisrelief.un.org/t/ukraine');
+              }}
+            >
+              🇺🇦 Donate to Ukraine ❤️
+            </Button>
           </Type>
         </StyledBox>
       </StyledModal>

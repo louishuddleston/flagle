@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import Modal from '@mui/material/Modal';
 import Typography from '@mui/material/Typography';
-import { getCompassDirection,getDistance } from 'geolib';
+import { getCompassDirection, getDistance } from 'geolib';
 import { useState } from 'react';
 import styled from 'styled-components';
 
