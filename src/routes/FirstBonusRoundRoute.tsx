@@ -1,3 +1,4 @@
+import { Twemoji } from '@teuteuf/react-emoji-render';
 import React, { useMemo } from 'react';
 import styled from 'styled-components';
 
@@ -121,9 +122,25 @@ export const FirstBonusRoundRoute: React.FC = () => {
       )}
 
       {isRoundComplete && (
-        <NextRoundLink to="/bonus-round/2">
-          Bonus Round - 2/3 - Pick the flag of a neighbouring country
-        </NextRoundLink>
+        <>
+          <NextRoundLink to="/bonus-round/2">
+            Bonus Round - 2/3 - Pick the flag of a neighbouring country
+          </NextRoundLink>
+
+          <a
+            className="underline text-center block mt-4 whitespace-nowrap"
+            href={`https://en.wikipedia.org/wiki/${correctAnswer}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Twemoji
+              text="📚"
+              className="inline-block"
+              options={{ baseUrl: '//twemoji.maxcdn.com/' }}
+            />{' '}
+            on Wikipedia
+          </a>
+        </>
       )}
     </>
   );

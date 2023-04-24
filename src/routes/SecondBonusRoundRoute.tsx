@@ -1,3 +1,4 @@
+import { Twemoji } from '@teuteuf/react-emoji-render';
 import * as geolib from 'geolib';
 import type { GeolibInputCoordinates } from 'geolib/es/types';
 import { useMemo } from 'react';
@@ -200,9 +201,25 @@ export function SecondBonusRoundRoute() {
       )}
 
       {isRoundComplete && (
-        <NextRoundLink to="/bonus-round/2">
-          Bonus Round - 3/3 - Population and Capital
-        </NextRoundLink>
+        <>
+          <NextRoundLink to="/bonus-round/2">
+            Bonus Round - 3/3 - Population and Capital
+          </NextRoundLink>
+
+          <a
+            className="underline text-center block mt-4 whitespace-nowrap"
+            href={`https://en.wikipedia.org/wiki/${correctAnswer}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Twemoji
+              text="📚"
+              className="inline-block"
+              options={{ baseUrl: '//twemoji.maxcdn.com/' }}
+            />{' '}
+            on Wikipedia
+          </a>
+        </>
       )}
     </>
   );
