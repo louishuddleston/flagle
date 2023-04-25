@@ -1,6 +1,8 @@
 import { useCallback, useMemo } from 'react';
 import { useLocalStorage } from 'usehooks-ts';
 
+import { useConfettiThrower } from './useConfettiThrower';
+
 export enum ChoiceStatus {
   CORRECT = 'correct',
   INCORRECT = 'incorrect',
@@ -45,6 +47,7 @@ export const useRoundState = ({
 
     return false;
   }, [dailyChoices, nbAnswers, maxAttempts]);
+  const throwConfetti = useConfettiThrower();
   const onSelectCountry = useCallback(
     (e: React.MouseEvent<HTMLElement>) => {
       const countryName =
@@ -52,6 +55,10 @@ export const useRoundState = ({
 
       if (!countryName) {
         return;
+      }
+
+      if (countryName === correctAnswer) {
+        throwConfetti();
       }
 
       setDailyChoices((propositions) => {
@@ -66,7 +73,7 @@ export const useRoundState = ({
         return nextPropositions;
       });
     },
-    [setDailyChoices, correctAnswer],
+    [setDailyChoices, throwConfetti, correctAnswer],
   );
 
   return useMemo(

@@ -2,16 +2,14 @@ import './App.css';
 import 'react-toastify/dist/ReactToastify.css';
 
 import Button from '@mui/material/Button';
-import React from 'react';
+import { lazy,Suspense } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { Flip,ToastContainer } from 'react-toastify';
 import styled from 'styled-components';
 
 import angleIcon from './angle_favicon.svg';
 import { NextRoundLink } from './components/NextRoundLink';
-import { FirstBonusRoundRoute } from './routes/FirstBonusRoundRoute';
-import { MainGameRoute } from './routes/MainGameRoute';
-import { SecondBonusRoundRoute } from './routes/SecondBonusRoundRoute';
+import { MainGameRoute } from './routes/MainGameRoute/MainGameRoute';
 
 const CentreWrapper = styled.div`
   margin: 0;
@@ -80,6 +78,30 @@ const GamesContainer = styled.div`
   gap: 5px;
 `;
 
+const LazyFirstBonusRoundRoute = lazy(() =>
+  import(
+    /* webpackChunkName: "FirstBonusRoundRoute", webpackPreload: true */ './routes/FirstBonusRoundRoute'
+  ).then((module) => ({
+    default: module.FirstBonusRoundRoute,
+  })),
+);
+
+const LazySecondBonusRoundRoute = lazy(() =>
+  import(
+    /* webpackChunkName: "SecondBonusRoundRoute", webpackPreload: true */ './routes/SecondBonusRoundRoute'
+  ).then((module) => ({
+    default: module.SecondBonusRoundRoute,
+  })),
+);
+
+const LazyThirdBonusRoundRoute = lazy(() =>
+  import(
+    /* webpackChunkName: "ThirdBonusRoundRoute", webpackPreload: true */ './routes/ThirdBonusRoundRoute/ThirdBonusRoundRoute'
+  ).then((module) => ({
+    default: module.ThirdBonusRoundRoute,
+  })),
+);
+
 export default function App() {
   return (
     <div className="App">
@@ -90,23 +112,29 @@ export default function App() {
         autoClose={false}
       />
       <CentreWrapper>
-        <Switch>
-          <Route exact path="/">
-            <MainGameRoute />
-          </Route>
+        <Suspense fallback="loading next bonus round…">
+          <Switch>
+            <Route exact path="/">
+              <MainGameRoute />
+            </Route>
 
-          <Route exact path="/bonus-round/1">
-            <FirstBonusRoundRoute />
-          </Route>
+            <Route exact path="/bonus-round/1">
+              <LazyFirstBonusRoundRoute />
+            </Route>
 
-          <Route exact path="/bonus-round/2">
-            <SecondBonusRoundRoute />
-          </Route>
+            <Route exact path="/bonus-round/2">
+              <LazySecondBonusRoundRoute />
+            </Route>
 
-          <Route>
-            <NextRoundLink to="/">Home</NextRoundLink>
-          </Route>
-        </Switch>
+            <Route exact path="/bonus-round/3">
+              <LazyThirdBonusRoundRoute />
+            </Route>
+
+            <Route>
+              <NextRoundLink to="/">Home</NextRoundLink>
+            </Route>
+          </Switch>
+        </Suspense>
 
         <AdContainer>
           <div style={{ marginTop: '5px' }}>Our other games:</div>

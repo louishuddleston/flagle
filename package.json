@@ -19,6 +19,7 @@
     "@testing-library/react": "^12.1.3",
     "@testing-library/user-event": "^13.5.0",
     "@teuteuf/react-emoji-render": "^1.2.6",
+    "canvas-confetti": "^1.5.1",
     "geojson": "^0.5.0",
     "geolib": "^3.3.3",
     "luxon": "^2.3.0",

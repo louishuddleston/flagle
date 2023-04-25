@@ -1,6 +1,4 @@
 import { Twemoji } from '@teuteuf/react-emoji-render';
-import * as geolib from 'geolib';
-import type { GeolibInputCoordinates } from 'geolib/es/types';
 import { useMemo } from 'react';
 import styled from 'styled-components';
 
@@ -8,76 +6,16 @@ import { HowToModal } from '../components/HowToModal';
 import { NextRoundLink } from '../components/NextRoundLink';
 import { Title, TitleBar, TitleBarDiv } from '../components/Title';
 import countryData from '../data/countries';
-import { getBorderCountriesByCode } from '../domain/countries.borders';
-import { countries, Country } from '../domain/countries.position';
+import { useBorderCountryNames } from '../hooks/useBorderCountryCodes';
 import { useDailyCountryName } from '../hooks/useDailyCountryName';
 import { useDailySeed } from '../hooks/useDailySeed';
+import { useNearestCountryNames } from '../hooks/useNearestCountryNames';
 import { useRandomCountryNames } from '../hooks/useRandomCountryNames';
 import { ChoiceStatus, useRoundState } from '../hooks/useRoundState';
 import { shuffleWithSeed } from '../utils/shuffleWithSeed';
 
 const MAX_ATTEMPTS = 3;
 const CHOICES_COUNT = 8;
-
-const useBorderCountryNames = (country: { code: string }) => {
-  const borderCountryCodes = useMemo(
-    () => getBorderCountriesByCode(country.code),
-    [country.code],
-  );
-
-  return useMemo(
-    () =>
-      Object.keys(countryData).filter((name) =>
-        borderCountryCodes.includes(countryData[name].code),
-      ),
-    [borderCountryCodes],
-  );
-};
-
-const useNearestCountryNames = (refCountry: Country) => {
-  const distances = useMemo(() => {
-    const distances: {
-      distance: number;
-      targetCountry: GeolibInputCoordinates;
-      country: Country;
-      direction: ReturnType<(typeof geolib)['getCompassDirection']>;
-    }[] = [];
-    for (const currCountry of countries) {
-      const distance = geolib.getDistance(refCountry, currCountry);
-      distances.push({
-        distance: distance / 1000,
-        targetCountry: refCountry,
-        country: currCountry,
-        direction: geolib.getCompassDirection(
-          refCountry,
-          currCountry,
-          (origin, dest) =>
-            Math.round(geolib.getRhumbLineBearing(origin, dest) / 45) * 45,
-        ),
-      });
-    }
-    return distances;
-  }, [refCountry]);
-
-  return useMemo(
-    () =>
-      distances
-        .sort((a, b) => {
-          if (a.distance > b.distance) {
-            return 1;
-          }
-          if (a.distance < b.distance) {
-            return -1;
-          }
-          return 0;
-        })
-        .map((k) => {
-          return k.country;
-        })
-        .map(({ name }) => name),
-    [distances],
-  );
-};
 
 const useSecondBonusRound = ({
   roundSeed,
@@ -202,8 +140,8 @@ export function SecondBonusRoundRoute() {
 
       {isRoundComplete && (
         <>
-          <NextRoundLink to="/bonus-round/2">
-            Bonus Round - 3/3 - Population and Capital
+          <NextRoundLink to="/bonus-round/3">
+            Bonus Round - 3/3 - Population and Capital City
           </NextRoundLink>
 
           <a
@@ -254,7 +192,7 @@ const CountryFlag: React.FC<{
       disabled={disabled}
       className="rounded-md p-3 relative"
       style={{
-        border: '2px solid #CCC',
+        border: '4px solid #CCC',
         borderColor:
           choiceStatus === ChoiceStatus.CORRECT
             ? 'green'

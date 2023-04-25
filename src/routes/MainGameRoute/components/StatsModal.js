@@ -9,7 +9,7 @@ import Typography from '@mui/material/Typography';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-import { getStatsData } from '../utils/stats';
+import { getStatsData } from '../../../utils/stats';
 import { Share } from './Share';
 
 const StyledBox = styled(Box)`

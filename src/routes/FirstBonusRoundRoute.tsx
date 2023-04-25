@@ -174,7 +174,7 @@ const CountryShape: React.FC<{
       onClick={onSelect}
       disabled={disabled}
       style={{
-        border: '2px solid #CCC',
+        border: '4px solid #CCC',
         borderColor:
           choiceStatus === ChoiceStatus.CORRECT
             ? 'green'
