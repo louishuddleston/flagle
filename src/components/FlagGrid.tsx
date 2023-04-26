@@ -46,7 +46,7 @@ const TileBack = styled.div`
 
 const Tile = styled.div<{
   height: number;
-  rotate: boolean;
+  rotate: string;
 }>`
   transition: 1s;
   transform-style: preserve-3d;
@@ -54,7 +54,8 @@ const Tile = styled.div<{
   justify-content: center;
   padding: ${(props) => (props.height ? `${props.height / 2}px` : '2rem')} 2rem;
   position: relative;
-  transform: ${(props) => (props.rotate ? 'rotateY(180deg)' : 'rotateY(0deg)')};
+  transform: ${(props) =>
+    props.rotate === 'true' ? 'rotateY(180deg)' : 'rotateY(0deg)'};
 `;
 
 const FlagImage = styled.img<{
@@ -92,7 +93,7 @@ export function FlagGrid({
       {flippedArray.map((flipped, n) => (
         <Tile
           key={n}
-          rotate={flipped && flagLoad}
+          rotate={flipped && flagLoad ? 'true' : 'false'}
           height={(FLAG_SCALE * flagImg.height) / 2}
         >
           <TileFront></TileFront>

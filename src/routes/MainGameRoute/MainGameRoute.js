@@ -83,11 +83,11 @@ export function MainGameRoute() {
       setEnd(true);
       setFlippedArray([true, true, true, true, true, true]);
       if (guesses[guesses.length - 1].distance === 0) {
-        toast(`🎉 ${trueCountry} 🎉`);
+        toast(`🎉 ${trueCountry} 🎉`, { autoClose: 3000 });
         throwConfetti();
         setScore(guesses.lenght);
       } else {
-        toast(`🤔 ${trueCountry} 🤔`);
+        toast(`🤔 ${trueCountry} 🤔`, { autoClose: 3000 });
         setScore('DNF');
       }
     }

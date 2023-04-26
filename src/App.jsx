@@ -102,7 +102,7 @@ const LazyThirdBonusRoundRoute = lazy(() =>
   })),
 );
 
-export default function App() {
+export function App() {
   return (
     <div className="App">
       <ToastContainer
@@ -157,9 +157,6 @@ export default function App() {
               <span>Where Taken</span>
             </GameButton>
           </GamesContainer>
-          <a className="nn-cmp-show" href="#nogo">
-            Manage Cookie Settings
-          </a>
         </AdContainer>
       </CentreWrapper>
     </div>
