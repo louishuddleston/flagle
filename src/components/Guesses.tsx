@@ -1,3 +1,4 @@
+import { Twemoji } from '@teuteuf/react-emoji-render';
 import * as geolib from 'geolib';
 import styled from 'styled-components';
 
@@ -69,7 +70,12 @@ export const Guesses: React.FC<{
         <GuessLine key={index}>
           <CountryGuess>{guess.name}</CountryGuess>
           <DistanceBox>{formatDistance(guess.distance)} </DistanceBox>
-          <ArrowBox>{getDirectionEmoji(guess)}</ArrowBox>
+          <ArrowBox>
+            <Twemoji
+              text={getDirectionEmoji(guess)}
+              options={{ baseUrl: '//twemoji.maxcdn.com/' }}
+            />
+          </ArrowBox>
         </GuessLine>
       ))}
     </>
