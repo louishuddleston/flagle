@@ -12,6 +12,7 @@ import { useDailyCountryName } from '../../hooks/useDailyCountryName';
 import { useDailySeed } from '../../hooks/useDailySeed';
 import { ChoiceStatus } from '../../hooks/useRoundState';
 import { refreshCompleteAd } from '../../utils/ads';
+import { BonusRoundTitle } from '../../components/BonusRoundTitle';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { ReactComponent: CurrencyIcon } = require('./CurrencyIcon.svg');
@@ -92,9 +93,9 @@ export function ThirdBonusRoundRoute() {
         </Title>
       </TitleBar>
 
-      <p>
-        <b>Final Bonus Round - Population and Capital City</b>
-      </p>
+      <BonusRoundTitle>
+        Final Bonus Round - Population and Capital City
+      </BonusRoundTitle>
 
       <div className="flex flex-row flex-wrap w-full pb-4 gap-2 max-w-lg">
         <Question

@@ -3,6 +3,7 @@ import React, { useMemo } from 'react';
 import styled from 'styled-components';
 
 import { AdnginEndMobile0 } from '../components/AdnginEndMobile0';
+import { BonusRoundTitle } from '../components/BonusRoundTitle';
 import { HowToModal } from '../components/HowToModal';
 import { NextRoundLink } from '../components/NextRoundLink';
 import { Title, TitleBar, TitleBarDiv } from '../components/Title';
@@ -93,9 +94,7 @@ export const FirstBonusRoundRoute: React.FC = () => {
         </Title>
       </TitleBar>
 
-      <p>
-        <b>Pick the correct shape for this country</b>
-      </p>
+      <BonusRoundTitle>Pick the correct shape for this country</BonusRoundTitle>
 
       <div className="flex gap-2 mt-3">
         {dailyChoicesOrder.map((countryName, index) => (
@@ -171,13 +170,12 @@ const CountryShape: React.FC<{
   choiceStatus,
 }) => {
   return (
-    <button
+    <StyledButton
       key={countryName}
       data-country-name={countryName}
       onClick={onSelect}
       disabled={disabled}
       style={{
-        border: '4px solid #CCC',
         borderColor:
           choiceStatus === ChoiceStatus.CORRECT
             ? 'green'
@@ -185,23 +183,50 @@ const CountryShape: React.FC<{
             ? 'red'
             : '',
       }}
-      className="rounded-md p-3 relative"
     >
-      <div
-        className="font-bold absolute"
-        style={{ top: '4px', left: '8px', color: '#fff' }}
-      >
-        {index}.
-      </div>
-      <div className="font-bold absolute" style={{ top: '3px', left: '7px' }}>
-        {index}.
-      </div>
-      <img
+      <IndexShadow>{index}.</IndexShadow>
+      <Index>{index}.</Index>
+      <CountrySVG
         src={`/images/countries/${countryCode.toLowerCase()}/vector.svg`}
         width="70"
         height="70"
         alt=""
       />
-    </button>
+    </StyledButton>
   );
 };
+
+const StyledButton = styled('button')`
+  position: relative;
+  padding: 0.75rem;
+  border: 4px solid #ccc;
+  border-radius: 0.375rem;
+`;
+
+const Index = styled('div')`
+  position: absolute;
+  top: 3px;
+  left: 7px;
+  font-weight: bold;
+  color: #000;
+  @media (prefers-color-scheme: dark) {
+    color: #fff;
+  }
+`;
+
+const IndexShadow = styled('div')`
+  position: absolute;
+  top: 4px;
+  left: 8px;
+  font-weight: bold;
+  color: #fff;
+  @media (prefers-color-scheme: dark) {
+    color: #000;
+  }
+`;
+
+const CountrySVG = styled('img')`
+  @media (prefers-color-scheme: dark) {
+    filter: invert(1);
+  }
+`;

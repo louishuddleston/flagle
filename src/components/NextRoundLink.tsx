@@ -1,6 +1,7 @@
 import { Twemoji } from '@teuteuf/react-emoji-render';
 import React, { PropsWithChildren } from 'react';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
 export const NextRoundLink: React.FC<PropsWithChildren<{ to: string }>> = ({
   children,
@@ -12,9 +13,7 @@ export const NextRoundLink: React.FC<PropsWithChildren<{ to: string }>> = ({
         <div className="p-2 flex flex-col bg-slate-500 bg-opacity-10 dark:bg-white w-full text-black rounded-lg">
           <div className="w-full flex justify-center items-center mb-2 mt-1 font-bold gap-1">
             <Twemoji text="★" className="inline-block text-orange-700" />
-            <div className="inline-flex flex-row gap-1 justify-center items-center">
-              {children}
-            </div>
+            <Title>{children}</Title>
             <Twemoji text="★" className="inline-block text-orange-700" />
           </div>
           <Link
@@ -33,3 +32,15 @@ export const NextRoundLink: React.FC<PropsWithChildren<{ to: string }>> = ({
     </div>
   );
 };
+
+const Title = styled('div')`
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 0.25rem;
+
+  @media (prefers-color-scheme: dark) {
+    color: #fff;
+  }
+`;

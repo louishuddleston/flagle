@@ -14,6 +14,7 @@ import { useNearestCountryNames } from '../hooks/useNearestCountryNames';
 import { useRandomCountryNames } from '../hooks/useRandomCountryNames';
 import { ChoiceStatus, useRoundState } from '../hooks/useRoundState';
 import { shuffleWithSeed } from '../utils/shuffleWithSeed';
+import { BonusRoundTitle } from '../components/BonusRoundTitle';
 
 const MAX_ATTEMPTS = 3;
 const CHOICES_COUNT = 8;
@@ -110,9 +111,7 @@ export function SecondBonusRoundRoute() {
         </Title>
       </TitleBar>
 
-      <p>
-        <b>Pick the flag of a neighbouring country</b>
-      </p>
+      <BonusRoundTitle>Pick the flag of a neighbouring country</BonusRoundTitle>
 
       <div className="grid grid-cols-4 gap-2 mt-3">
         {dailyChoicesOrder.map((countryName, index) => (
