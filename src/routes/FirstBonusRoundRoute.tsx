@@ -14,7 +14,7 @@ import { ChoiceStatus, useRoundState } from '../hooks/useRoundState';
 import { refreshCompleteAd } from '../utils/ads';
 import { shuffleWithSeed } from '../utils/shuffleWithSeed';
 
-const MAX_ATTEMPTS = 3;
+const MAX_ATTEMPTS = 2;
 const CHOICES_COUNT = 4;
 
 const useFirstBonusRound = ({

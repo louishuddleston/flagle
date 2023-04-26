@@ -2,6 +2,7 @@ import './App.css';
 import 'react-toastify/dist/ReactToastify.css';
 
 import Button from '@mui/material/Button';
+import { Twemoji } from '@teuteuf/react-emoji-render';
 import { lazy, Suspense } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { Flip, ToastContainer } from 'react-toastify';
@@ -63,13 +64,14 @@ const AdContainer = styled.div`
 `;
 
 const Icon = styled.img`
-  width: 20px;
-  margin-right: 10px;
+  width: 10px;
+  margin-right: 7px;
 `;
 
 const GameButton = styled(Button)`
   span {
     font-weight: bold;
+    text-transform: none;
   }
 `;
 
@@ -155,7 +157,13 @@ export function App() {
                 window.open('https://wheretakenusa.teuteuf.fr');
               }}
             >
-              <span>Where Taken</span>
+              <Twemoji
+                text="🌍"
+                className="inline-block"
+                options={{ baseUrl: '//twemoji.maxcdn.com/' }}
+              />
+              &nbsp;
+              <span>WhereTaken</span>
             </GameButton>
           </GamesContainer>
         </AdContainer>
