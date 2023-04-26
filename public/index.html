@@ -15,7 +15,6 @@
   <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-V420SMFFK0"></script> -->
-  <script src="https://cdn.tailwindcss.com"></script>
   <script>
     /* Snigelweb ads */
     let breakpoint = "xsmall";
@@ -30,10 +29,8 @@
 
     switch (breakpoint.toLowerCase()) {
       case "xsmall": // Small Mobile
-        window.activeUnits = ["top_banner"]; // Mobile Ad Units
-        break;
       case "small": // Portrait Tablet / Large Mobile
-        window.activeUnits = ["top_banner"]; // Mobile Ad Units
+        window.activeUnits = ["top_banner", "end_mobile"]; // Mobile Ad Units
         break;
       default:
       case "medium":

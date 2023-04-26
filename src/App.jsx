@@ -168,7 +168,7 @@ export function App() {
           </GamesContainer>
         </AdContainer>
 
-        <AdWrapperWrapper>
+        <AdWrapperWrapper className="snigel-sidev">
           <AdWrapper>
             <div id="adngin-sidebar_left-0"></div>
           </AdWrapper>
@@ -181,19 +181,13 @@ export function App() {
 const AdWrapperWrapper = styled('div')`
   position: fixed;
   top: 0;
+  bottom: 0;
   left: 0;
-  transform: translateX(-100%);
-  justify-content: flex-start;
-  align-items: flex-end;
-  height: 100%;
   z-index: 200;
 `;
 
 const AdWrapper = styled('div')`
   position: sticky;
-  top: 0;
-  z-index: 10000;
-  height: auto;
   padding: 20px 40px 20px 20px;
   pointer-events: all;
 `;

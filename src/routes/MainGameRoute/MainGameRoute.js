@@ -1,8 +1,8 @@
 import { getCompassDirection, getDistance } from 'geolib';
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { MobileView } from 'react-device-detect';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { toast } from 'react-toastify';
 
+import { AdnginEndMobile0 } from '../../components/AdnginEndMobile0';
 import { FlagGrid } from '../../components/FlagGrid';
 import { Guesses } from '../../components/Guesses';
 import { HowToModal } from '../../components/HowToModal';
@@ -13,7 +13,6 @@ import { useAllCountryNames } from '../../hooks/useAllCountryNames';
 import { useConfettiThrower } from '../../hooks/useConfettiThrower';
 import { useDailyCountryName } from '../../hooks/useDailyCountryName';
 import { useGuesses } from '../../hooks/useGuesses';
-import { refreshCompleteAd } from '../../utils/ads';
 import { getDayString } from '../../utils/getDayString';
 import AnswerBox from './components/AnswerBox';
 import { Attempts } from './components/Attempts';
@@ -116,12 +115,6 @@ export function MainGameRoute() {
 
   const countryInfo = useMemo(() => countryData[trueCountry], [trueCountry]);
 
-  const adRef = useRef(null);
-
-  useEffect(() => {
-    refreshCompleteAd();
-  }, []);
-
   return (
     <>
       <TitleBar>
@@ -166,15 +159,7 @@ export function MainGameRoute() {
         </NextRoundLink>
       )}
 
-      <MobileView className="w-full flex flex-col">
-        <div
-          ref={adRef}
-          style={{ minHeight: 200, maxHeight: 250 }}
-          className="w-full flex justify-center items-center my-4"
-        >
-          <div id="adngin-end_mobile-0"></div>
-        </div>
-      </MobileView>
+      <AdnginEndMobile0 />
     </>
   );
 }

@@ -1,8 +1,8 @@
 import { Twemoji } from '@teuteuf/react-emoji-render';
-import { useEffect, useMemo, useRef } from 'react';
-import { MobileView } from 'react-device-detect';
+import { useMemo } from 'react';
 import styled from 'styled-components';
 
+import { AdnginEndMobile0 } from '../components/AdnginEndMobile0';
 import { HowToModal } from '../components/HowToModal';
 import { NextRoundLink } from '../components/NextRoundLink';
 import { Title, TitleBar, TitleBarDiv } from '../components/Title';
@@ -13,7 +13,6 @@ import { useDailySeed } from '../hooks/useDailySeed';
 import { useNearestCountryNames } from '../hooks/useNearestCountryNames';
 import { useRandomCountryNames } from '../hooks/useRandomCountryNames';
 import { ChoiceStatus, useRoundState } from '../hooks/useRoundState';
-import { refreshCompleteAd } from '../utils/ads';
 import { shuffleWithSeed } from '../utils/shuffleWithSeed';
 
 const MAX_ATTEMPTS = 3;
@@ -100,12 +99,6 @@ export function SecondBonusRoundRoute() {
     maxAttempts: MAX_ATTEMPTS,
   });
 
-  const adRef = useRef<HTMLDivElement | null>(null);
-
-  useEffect(() => {
-    refreshCompleteAd();
-  }, []);
-
   return (
     <>
       <TitleBar>
@@ -168,15 +161,7 @@ export function SecondBonusRoundRoute() {
         </>
       )}
 
-      <MobileView className="w-full flex flex-col">
-        <div
-          ref={adRef}
-          style={{ minHeight: 200, maxHeight: 250 }}
-          className="w-full flex justify-center items-center my-4"
-        >
-          <div id="adngin-end_mobile-0"></div>
-        </div>
-      </MobileView>
+      <AdnginEndMobile0 />
     </>
   );
 }
