@@ -168,25 +168,32 @@ export function App() {
           </GamesContainer>
         </AdContainer>
 
-        <div
-          className="absolute -translate-x-full left-0 top-0 h-full justify-start items-end snigel-sidev"
-          style={{
-            zIndex: 200,
-          }}
-        >
-          <div
-            className="sticky top-0 inline-flex "
-            style={{
-              zIndex: 10000,
-              height: 'auto',
-              padding: '20px 40px 20px 20px',
-              pointerEvents: 'all',
-            }}
-          >
-            <div id="adngin-sidebar_right-0"></div>
-          </div>
-        </div>
+        <AdWrapperWrapper>
+          <AdWrapper>
+            <div id="adngin-sidebar_left-0"></div>
+          </AdWrapper>
+        </AdWrapperWrapper>
       </CentreWrapper>
     </div>
   );
 }
+
+const AdWrapperWrapper = styled('div')`
+  position: fixed;
+  top: 0;
+  left: 0;
+  transform: translateX(-100%);
+  justify-content: flex-start;
+  align-items: flex-end;
+  height: 100%;
+  z-index: 200;
+`;
+
+const AdWrapper = styled('div')`
+  position: sticky;
+  top: 0;
+  z-index: 10000;
+  height: auto;
+  padding: 20px 40px 20px 20px;
+  pointer-events: all;
+`;

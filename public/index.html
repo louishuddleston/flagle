@@ -15,8 +15,8 @@
   <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-V420SMFFK0"></script> -->
- <script src="https://cdn.tailwindcss.com"></script>
- <script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
     /* Snigelweb ads */
     let breakpoint = "xsmall";
     const w = window.innerWidth;
@@ -50,9 +50,17 @@
       },
     };
   </script>
-  <script async data-cfasync="false" src="https://cdn.snigelweb.com/adengine/flagle.io/loader.js"
-    type="text/javascript">
-    </script>
+  <script>
+    window.googletag = window.googletag || { cmd: [] };
+
+    function snigelLoaded() {
+      window.googletag.cmd.push(() => {
+        window.googletag.pubads().set("page_url", 'flagle.io');
+      });
+    }
+  </script>
+  <script async data-cfasync="false" src="https://cdn.snigelweb.com/adengine/flagle.io/loader.js" id="snigel"
+    onload="snigelLoaded()" type="text/javascript"></script>
   <script>
     /* Google tracking */
     window.dataLayer = window.dataLayer || [];
