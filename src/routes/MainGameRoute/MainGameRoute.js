@@ -152,7 +152,7 @@ export function MainGameRoute() {
       <Attempts score={score} attempts={guesses.length} max={MAX_ATTEMPTS} />
       <Guesses guesses={guesses} />
 
-      {end && (
+      {false && end && (
         <NextRoundLink to="/bonus-round/1">
           Bonus Round - 1/3 - Pick the country shape
         </NextRoundLink>
