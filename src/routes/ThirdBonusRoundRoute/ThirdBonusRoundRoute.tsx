@@ -1,4 +1,5 @@
-import { ReactElement, useCallback, useMemo } from 'react';
+import { ReactElement, useCallback, useEffect, useMemo, useRef } from 'react';
+import { MobileView } from 'react-device-detect';
 import styled from 'styled-components';
 import { useLocalStorage } from 'usehooks-ts';
 
@@ -10,6 +11,7 @@ import { useConfettiThrower } from '../../hooks/useConfettiThrower';
 import { useDailyCountryName } from '../../hooks/useDailyCountryName';
 import { useDailySeed } from '../../hooks/useDailySeed';
 import { ChoiceStatus } from '../../hooks/useRoundState';
+import { refreshCompleteAd } from '../../utils/ads';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { ReactComponent: CurrencyIcon } = require('./CurrencyIcon.svg');
@@ -73,6 +75,12 @@ export function ThirdBonusRoundRoute() {
     [setRoundAnswsers, throwConfetti, currencyCorrectAnswer],
   );
 
+  const adRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    refreshCompleteAd();
+  }, []);
+
   return (
     <>
       <TitleBar>
@@ -130,6 +138,16 @@ export function ThirdBonusRoundRoute() {
           </>
         )}
       </div>
+
+      <MobileView className="w-full flex flex-col">
+        <div
+          ref={adRef}
+          style={{ minHeight: 200, maxHeight: 250 }}
+          className="w-full flex justify-center items-center my-4"
+        >
+          <div id="adngin-end_mobile-0"></div>
+        </div>
+      </MobileView>
     </>
   );
 }

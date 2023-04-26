@@ -2,9 +2,9 @@ import './App.css';
 import 'react-toastify/dist/ReactToastify.css';
 
 import Button from '@mui/material/Button';
-import { lazy,Suspense } from 'react';
+import { lazy, Suspense } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { Flip,ToastContainer } from 'react-toastify';
+import { Flip, ToastContainer } from 'react-toastify';
 import styled from 'styled-components';
 
 import angleIcon from './angle_favicon.svg';
@@ -50,6 +50,7 @@ const Footer = styled.div`
 const AdContainer = styled.div`
   width: 100%;
   margin-top: auto;
+  margin-bottom: 10px;
   bottom: 0px;
   display: flex;
   justify-content: center;
@@ -158,6 +159,25 @@ export function App() {
             </GameButton>
           </GamesContainer>
         </AdContainer>
+
+        <div
+          className="absolute -translate-x-full left-0 top-0 h-full justify-start items-end snigel-sidev"
+          style={{
+            zIndex: 200,
+          }}
+        >
+          <div
+            className="sticky top-0 inline-flex "
+            style={{
+              zIndex: 10000,
+              height: 'auto',
+              padding: '20px 40px 20px 20px',
+              pointerEvents: 'all',
+            }}
+          >
+            <div id="adngin-sidebar_right-0"></div>
+          </div>
+        </div>
       </CentreWrapper>
     </div>
   );
