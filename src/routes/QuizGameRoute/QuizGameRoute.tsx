@@ -5,6 +5,7 @@ import { useLocalStorage } from 'usehooks-ts';
 
 import { BonusRoundTitle } from '../../components/BonusRoundTitle';
 import { ShareButton } from '../../components/ShareButton';
+import { WikipediaAndMapsLinks } from '../../components/WikipediaAndGmapsLinks';
 import countryData from '../../data/countries';
 import { countriesCurrencyAndPopulation } from '../../domain/countries.currencyAndPopulation';
 import { useConfettiThrower } from '../../hooks/useConfettiThrower';
@@ -130,9 +131,14 @@ export function QuizGameRoute() {
         )}
 
         {selectedCurrency && (
-          <div className="w-full flex justify-center">
-            <ShareButton />
-          </div>
+          <>
+            <div className="w-full flex justify-center mt-3">
+              <ShareButton />
+            </div>
+            <div className="w-full">
+              <WikipediaAndMapsLinks />
+            </div>
+          </>
         )}
       </div>
 
@@ -234,5 +240,9 @@ const StyledButton = styled('button')<{
   &[disabled] {
     background-color: #ddd;
     color: #666;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    color: #fff;
   }
 `;

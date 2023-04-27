@@ -104,8 +104,8 @@ export function MainGameRoute() {
   const onGuess = useCallback(
     (guess) => {
       const tileNum = revealRandomTile();
-      const { code: guessCode, ...guessGeo } = countryData[guess];
-      const { code: answerCode, ...answerGeo } = countryData[trueCountry];
+      const { ...guessGeo } = countryData[guess];
+      const { ...answerGeo } = countryData[trueCountry];
       addGuess({
         name: guess,
         distance: getDistance(guessGeo, answerGeo),

@@ -68,7 +68,7 @@ export function HowToModal() {
   const exampleTarget = 'Chile';
   const { code: answerCode, ...answerGeo } = countryData[exampleTarget];
   const guesses = exampleGuesses.map((name) => {
-    const { code: guessCode, ...guessGeo } = countryData[name];
+    const { ...guessGeo } = countryData[name];
     return {
       name: name,
       distance: getDistance(guessGeo, answerGeo),

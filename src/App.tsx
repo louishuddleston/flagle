@@ -71,9 +71,9 @@ const LazyFirstBonusRoundRoute = lazy(() =>
 
 const LazySecondBonusRoundRoute = lazy(() =>
   import(
-    /* webpackChunkName: "SecondBonusRoundRoute", webpackPreload: true */ './routes/FlagGameRoute'
+    /* webpackChunkName: "SecondBonusRoundRoute", webpackPreload: true */ './routes/BorderFlagGameRoute'
   ).then((module) => ({
-    default: module.FlagGameRoute,
+    default: module.BorderFlagGameRoute,
   })),
 );
 
@@ -143,6 +143,20 @@ export function App() {
               <AngleIcon width="12" />
               &nbsp;
               <span>Angle</span>
+            </GameButton>
+            <GameButton
+              variant="outlined"
+              onClick={() => {
+                window.open('https://worldle.teuteuf.fr');
+              }}
+            >
+              <Twemoji
+                text="🌍"
+                className="inline-block"
+                options={{ baseUrl: '//twemoji.maxcdn.com/' }}
+              />
+              &nbsp;
+              <span>Worldle</span>
             </GameButton>
             <GameButton
               variant="outlined"

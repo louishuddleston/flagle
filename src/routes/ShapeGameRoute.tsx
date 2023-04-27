@@ -1,5 +1,5 @@
-import { Twemoji } from '@teuteuf/react-emoji-render';
 import React, { useEffect, useMemo } from 'react';
+import { toast } from 'react-toastify';
 import styled from 'styled-components';
 
 import { AdnginEndMobile0 } from '../components/AdnginEndMobile0';
@@ -12,7 +12,6 @@ import { useDailySeed } from '../hooks/useDailySeed';
 import { useRandomCountryNames } from '../hooks/useRandomCountryNames';
 import { ChoiceStatus, useRoundState } from '../hooks/useRoundState';
 import { shuffleWithSeed } from '../utils/shuffleWithSeed';
-import { toast } from 'react-toastify';
 
 const MAX_ATTEMPTS = 2;
 const CHOICES_COUNT = 4;
@@ -127,6 +126,21 @@ export const ShapeGameRoute: React.FC = () => {
         ))}
       </div>
 
+      <p style={{ marginTop: '10px' }}>
+        Sponsored by WORLD<span style={{ color: '#16A34A' }}>L</span>E
+      </p>
+      <p>
+        Like this round?&nbsp;
+        <a
+          className="underline"
+          href={`https://worldle.teuteuf.fr`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Try WORLD<span style={{ color: '#16A34A' }}>L</span>E
+        </a>
+      </p>
+
       {!isRoundComplete && (
         <AttemptsLeft>You have {attemptsLeft} guesses remaining</AttemptsLeft>
       )}
@@ -138,20 +152,6 @@ export const ShapeGameRoute: React.FC = () => {
           </NextRoundLink>
 
           <ShareButton />
-
-          <a
-            className="underline text-center block mt-4 whitespace-nowrap"
-            href={`https://en.wikipedia.org/wiki/${correctAnswer}`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Twemoji
-              text="📚"
-              className="inline-block"
-              options={{ baseUrl: '//twemoji.maxcdn.com/' }}
-            />{' '}
-            on Wikipedia
-          </a>
         </>
       )}
 
