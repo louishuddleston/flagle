@@ -141,24 +141,32 @@ export function HowToModal() {
           </CenterDiv>
           <br />
           <Typography id="modal-modal-title" variant="h5" component="h2">
-            Questions or Suggestions?
+            Frequently Asked Questions
           </Typography>
-          <Typography id="modal-modal-paragraph" component="p">
+          <Typography
+            id="modal-modal-paragraph"
+            component="p"
+            sx={{ textDecoration: 'underline' }}
+          >
+            <a href="/about.html" target="_blank" rel="noreferrer">
+              About Flagle and Teuteuf Games
+            </a>
+          </Typography>
+          <br />
+          <Typography id="modal-modal-title" variant="h5" component="h2">
+            Any Suggestion?
+          </Typography>
+          <Typography
+            id="modal-modal-paragraph"
+            component="p"
+            sx={{ textDecoration: 'underline' }}
+          >
             <a
               href="https://docs.google.com/forms/d/1rqb1jsmC_RMkX5CUY8pZQrjFrQaloC4zw9ZM5ZquAWw"
               target="_blank"
               rel="noreferrer"
             >
               Share your feedback!
-            </a>
-          </Typography>
-          <br />
-          <Typography id="modal-modal-title" variant="h5" component="h2">
-            About
-          </Typography>
-          <Typography id="modal-modal-paragraph" component="p">
-            <a href="/about.html" target="_blank" rel="noreferrer">
-              About Flagle and Teuteuf Games
             </a>
           </Typography>
         </StyledBox>

@@ -36,17 +36,14 @@ export const useRoundState = ({
     [dailyChoices],
   );
   const attemptsLeft = maxAttempts - nbAnswers;
-  const isRoundComplete = useMemo(() => {
-    if (Object.values(dailyChoices).includes(ChoiceStatus.CORRECT)) {
-      return true;
-    }
-
-    if (nbAnswers >= maxAttempts) {
-      return true;
-    }
-
-    return false;
-  }, [dailyChoices, nbAnswers, maxAttempts]);
+  const isRoundSuccess = useMemo(
+    () => Object.values(dailyChoices).includes(ChoiceStatus.CORRECT),
+    [dailyChoices],
+  );
+  const isRoundComplete = useMemo(
+    () => isRoundSuccess || nbAnswers >= maxAttempts,
+    [isRoundSuccess, nbAnswers, maxAttempts],
+  );
   const throwConfetti = useConfettiThrower();
   const onSelectCountry = useCallback(
     (e: React.MouseEvent<HTMLElement>) => {
@@ -81,6 +78,7 @@ export const useRoundState = ({
       dailyChoices,
       setDailyChoices,
       isRoundComplete,
+      isRoundSuccess,
       attemptsLeft,
       onSelectCountry,
     }),
@@ -88,6 +86,7 @@ export const useRoundState = ({
       dailyChoices,
       setDailyChoices,
       isRoundComplete,
+      isRoundSuccess,
       attemptsLeft,
       onSelectCountry,
     ],

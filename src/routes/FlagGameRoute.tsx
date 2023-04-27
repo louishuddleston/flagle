@@ -1,5 +1,5 @@
 import { Twemoji } from '@teuteuf/react-emoji-render';
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import styled from 'styled-components';
 
 import { AdnginEndMobile0 } from '../components/AdnginEndMobile0';
@@ -7,16 +7,18 @@ import { BonusRoundTitle } from '../components/BonusRoundTitle';
 import { NextRoundLink } from '../components/NextRoundLink';
 import { ShareButton } from '../components/ShareButton';
 import countryData from '../data/countries';
+import { useBorderCountryNames } from '../hooks/useBorderCountryCodes';
 import { useDailyCountryName } from '../hooks/useDailyCountryName';
 import { useDailySeed } from '../hooks/useDailySeed';
+import { useNearestCountryNames } from '../hooks/useNearestCountryNames';
 import { useRandomCountryNames } from '../hooks/useRandomCountryNames';
 import { ChoiceStatus, useRoundState } from '../hooks/useRoundState';
 import { shuffleWithSeed } from '../utils/shuffleWithSeed';
 
-const MAX_ATTEMPTS = 2;
-const CHOICES_COUNT = 4;
+const MAX_ATTEMPTS = 3;
+const CHOICES_COUNT = 8;
 
-const useFirstBonusRound = ({
+const useSecondBonusRound = ({
   roundSeed,
   choicesCount,
   maxAttempts,
@@ -26,7 +28,22 @@ const useFirstBonusRound = ({
   maxAttempts: number;
 }) => {
   const dailyCountryName = useDailyCountryName();
-  const blackList = useMemo(() => [dailyCountryName], [dailyCountryName]);
+  const borderCountryNames = useBorderCountryNames(
+    countryData[dailyCountryName],
+  );
+  const randomBorderCountry = useMemo(
+    () => shuffleWithSeed(borderCountryNames, roundSeed).pop(),
+    [borderCountryNames, roundSeed],
+  );
+  const nearestCountryName = useNearestCountryNames({
+    name: dailyCountryName,
+    ...countryData[dailyCountryName],
+  })[1];
+  const correctAnswer = randomBorderCountry || nearestCountryName;
+  const blackList = useMemo(
+    () => [dailyCountryName, correctAnswer].filter(Boolean),
+    [dailyCountryName, correctAnswer],
+  );
   const randomCountryNames = useRandomCountryNames({
     seed: roundSeed,
     blackList,
@@ -34,17 +51,17 @@ const useFirstBonusRound = ({
   const dailyChoicesOrder = useMemo(
     () =>
       shuffleWithSeed(
-        [...randomCountryNames.slice(0, choicesCount - 1), dailyCountryName],
+        [...randomCountryNames.slice(0, choicesCount - 1), correctAnswer],
         roundSeed,
       ),
-    [randomCountryNames, dailyCountryName, roundSeed, choicesCount],
+    [randomCountryNames, choicesCount, correctAnswer, roundSeed],
   );
   const { dailyChoices, isRoundComplete, onSelectCountry, attemptsLeft } =
     useRoundState({
       seed: roundSeed,
       dailyChoicesOrder,
       maxAttempts,
-      correctAnswer: dailyCountryName,
+      correctAnswer,
     });
 
   return useMemo(
@@ -54,7 +71,7 @@ const useFirstBonusRound = ({
       onSelectCountry,
       isRoundComplete,
       attemptsLeft,
-      correctAnswer: dailyCountryName,
+      correctAnswer,
     }),
     [
       dailyChoicesOrder,
@@ -62,13 +79,13 @@ const useFirstBonusRound = ({
       onSelectCountry,
       isRoundComplete,
       attemptsLeft,
-      dailyCountryName,
+      correctAnswer,
     ],
   );
 };
 
-export const FirstBonusRoundRoute: React.FC = () => {
-  const roundSeed = useDailySeed('first-bonus-round');
+export function FlagGameRoute() {
+  const roundSeed = useDailySeed('second-bonus-round');
   const {
     dailyChoicesOrder,
     dailyChoices,
@@ -76,7 +93,7 @@ export const FirstBonusRoundRoute: React.FC = () => {
     isRoundComplete,
     attemptsLeft,
     correctAnswer,
-  } = useFirstBonusRound({
+  } = useSecondBonusRound({
     roundSeed,
     choicesCount: CHOICES_COUNT,
     maxAttempts: MAX_ATTEMPTS,
@@ -84,11 +101,11 @@ export const FirstBonusRoundRoute: React.FC = () => {
 
   return (
     <>
-      <BonusRoundTitle>Pick the correct shape for this country</BonusRoundTitle>
+      <BonusRoundTitle>Pick the flag of a neighbouring country</BonusRoundTitle>
 
-      <div className="flex gap-2 mt-3">
+      <div className="grid grid-cols-4 gap-2 mt-3">
         {dailyChoicesOrder.map((countryName, index) => (
-          <CountryShape
+          <CountryFlag
             key={countryName}
             countryName={countryName}
             countryCode={countryData[countryName].code}
@@ -113,8 +130,8 @@ export const FirstBonusRoundRoute: React.FC = () => {
 
       {isRoundComplete && (
         <>
-          <NextRoundLink to="/bonus-round/2">
-            Bonus Round - 2/3 - Pick the flag of a neighbouring country
+          <NextRoundLink to="/bonus-round/3">
+            Bonus Round - 3/3 - Population and Capital City
           </NextRoundLink>
 
           <ShareButton />
@@ -138,7 +155,7 @@ export const FirstBonusRoundRoute: React.FC = () => {
       <AdnginEndMobile0 />
     </>
   );
-};
+}
 
 const AttemptsLeft = styled('div')`
   padding-top: 0.75rem;
@@ -146,7 +163,7 @@ const AttemptsLeft = styled('div')`
   color: #888;
 `;
 
-const CountryShape: React.FC<{
+const CountryFlag: React.FC<{
   countryName: string;
   countryCode: string;
   index: number;
@@ -162,63 +179,40 @@ const CountryShape: React.FC<{
   choiceStatus,
 }) => {
   return (
-    <StyledButton
+    <button
       key={countryName}
       data-country-name={countryName}
       onClick={onSelect}
       disabled={disabled}
+      className="rounded-md p-3 relative"
       style={{
+        border: '4px solid #CCC',
         borderColor:
           choiceStatus === ChoiceStatus.CORRECT
             ? 'green'
             : choiceStatus === ChoiceStatus.INCORRECT
             ? 'red'
             : '',
+        paddingTop: '24px',
+        paddingBottom: '24px',
       }}
     >
-      <IndexShadow>{index}.</IndexShadow>
-      <Index>{index}.</Index>
-      <CountrySVG
-        src={`/images/countries/${countryCode.toLowerCase()}/vector.svg`}
+      <div
+        className="font-bold absolute"
+        style={{ top: '4px', left: '8px', color: '#fff' }}
+      >
+        {index}.
+      </div>
+      <div className="font-bold absolute" style={{ top: '3px', left: '7px' }}>
+        {index}.
+      </div>
+      <img
+        src={`https://flagcdn.com/w320/${countryCode.toLowerCase()}.png`}
         width="70"
         height="70"
         alt=""
+        style={{ border: '1px solid #CCC' }}
       />
-    </StyledButton>
+    </button>
   );
 };
-
-const StyledButton = styled('button')`
-  position: relative;
-  padding: 0.75rem;
-  border: 4px solid #ccc;
-  border-radius: 0.375rem;
-`;
-
-const Index = styled('div')`
-  position: absolute;
-  top: 3px;
-  left: 7px;
-  font-weight: bold;
-  color: #000;
-  @media (prefers-color-scheme: dark) {
-    color: #fff;
-  }
-`;
-
-const IndexShadow = styled('div')`
-  position: absolute;
-  top: 4px;
-  left: 8px;
-  font-weight: bold;
-  color: #fff;
-  @media (prefers-color-scheme: dark) {
-    color: #000;
-  }
-`;
-
-const CountrySVG = styled('img')`
-  @media (prefers-color-scheme: dark) {
-    filter: invert(1);
-  }
-`;

@@ -63,25 +63,25 @@ const GamesContainer = styled.div`
 
 const LazyFirstBonusRoundRoute = lazy(() =>
   import(
-    /* webpackChunkName: "FirstBonusRoundRoute", webpackPreload: true */ './routes/FirstBonusRoundRoute'
+    /* webpackChunkName: "FirstBonusRoundRoute", webpackPreload: true */ './routes/ShapeGameRoute'
   ).then((module) => ({
-    default: module.FirstBonusRoundRoute,
+    default: module.ShapeGameRoute,
   })),
 );
 
 const LazySecondBonusRoundRoute = lazy(() =>
   import(
-    /* webpackChunkName: "SecondBonusRoundRoute", webpackPreload: true */ './routes/SecondBonusRoundRoute'
+    /* webpackChunkName: "SecondBonusRoundRoute", webpackPreload: true */ './routes/FlagGameRoute'
   ).then((module) => ({
-    default: module.SecondBonusRoundRoute,
+    default: module.FlagGameRoute,
   })),
 );
 
 const LazyThirdBonusRoundRoute = lazy(() =>
   import(
-    /* webpackChunkName: "ThirdBonusRoundRoute", webpackPreload: true */ './routes/ThirdBonusRoundRoute/ThirdBonusRoundRoute'
+    /* webpackChunkName: "ThirdBonusRoundRoute", webpackPreload: true */ './routes/QuizGameRoute/QuizGameRoute'
   ).then((module) => ({
-    default: module.ThirdBonusRoundRoute,
+    default: module.QuizGameRoute,
   })),
 );
 

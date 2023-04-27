@@ -18,7 +18,7 @@ const { ReactComponent: CurrencyIcon } = require('./CurrencyIcon.svg');
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { ReactComponent: PopulationIcon } = require('./PopulationIcon.svg');
 
-export function ThirdBonusRoundRoute() {
+export function QuizGameRoute() {
   const dailyCountryName = useDailyCountryName();
   const roundSeed = useDailySeed('third-bonus-round');
   const {
