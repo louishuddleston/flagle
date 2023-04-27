@@ -1,7 +1,7 @@
 import { Twemoji } from '@teuteuf/react-emoji-render';
-import * as geolib from 'geolib';
 import styled from 'styled-components';
 
+import { Guess } from '../hooks/useGuessHistory';
 import { formatDistance, getDirectionEmoji } from '../utils/geography';
 
 const GuessLine = styled.div`
@@ -57,12 +57,8 @@ const ArrowBox = styled.div`
   }
 `;
 
-export const Guesses: React.FC<{
-  guesses: {
-    name: string;
-    distance: number;
-    direction: ReturnType<(typeof geolib)['getCompassDirection']>;
-  }[];
+export const GuessList: React.FC<{
+  guesses: Guess[];
 }> = ({ guesses }) => {
   return (
     <>

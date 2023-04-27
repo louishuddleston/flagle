@@ -13,14 +13,13 @@ const StyledSelect = styled(Select)`
   }
 `;
 
-const AnswerBox = ({
+export const AnswerBox = ({
   answer,
   onCorrect,
   onIncorrect,
   disabled,
   countries,
   onGuess,
-  ...props
 }) => {
   const handleSubmit = (guess) => {
     normalise(guess.value) === normalise(answer) ? onCorrect() : onIncorrect();
@@ -41,5 +40,3 @@ const AnswerBox = ({
     />
   );
 };
-
-export default AnswerBox;

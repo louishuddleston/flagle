@@ -3,8 +3,8 @@ import { MobileView } from 'react-device-detect';
 import styled from 'styled-components';
 import { useLocalStorage } from 'usehooks-ts';
 
-import { HowToModal } from '../../components/HowToModal';
-import { Title, TitleBar, TitleBarDiv } from '../../components/Title';
+import { BonusRoundTitle } from '../../components/BonusRoundTitle';
+import { ShareButton } from '../../components/ShareButton';
 import countryData from '../../data/countries';
 import { countriesCurrencyAndPopulation } from '../../domain/countries.currencyAndPopulation';
 import { useConfettiThrower } from '../../hooks/useConfettiThrower';
@@ -12,7 +12,6 @@ import { useDailyCountryName } from '../../hooks/useDailyCountryName';
 import { useDailySeed } from '../../hooks/useDailySeed';
 import { ChoiceStatus } from '../../hooks/useRoundState';
 import { refreshCompleteAd } from '../../utils/ads';
-import { BonusRoundTitle } from '../../components/BonusRoundTitle';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { ReactComponent: CurrencyIcon } = require('./CurrencyIcon.svg');
@@ -84,15 +83,6 @@ export function ThirdBonusRoundRoute() {
 
   return (
     <>
-      <TitleBar>
-        <TitleBarDiv justify="flex-end">
-          <HowToModal />
-        </TitleBarDiv>
-        <Title>
-          FLAG<span>LE</span>
-        </Title>
-      </TitleBar>
-
       <BonusRoundTitle>
         Final Bonus Round - Population and Capital City
       </BonusRoundTitle>
@@ -137,6 +127,12 @@ export function ThirdBonusRoundRoute() {
               </p>
             )}
           </>
+        )}
+
+        {selectedCurrency && (
+          <div className="w-full flex justify-center">
+            <ShareButton />
+          </div>
         )}
       </div>
 

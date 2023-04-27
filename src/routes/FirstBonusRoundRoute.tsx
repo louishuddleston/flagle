@@ -4,9 +4,8 @@ import styled from 'styled-components';
 
 import { AdnginEndMobile0 } from '../components/AdnginEndMobile0';
 import { BonusRoundTitle } from '../components/BonusRoundTitle';
-import { HowToModal } from '../components/HowToModal';
 import { NextRoundLink } from '../components/NextRoundLink';
-import { Title, TitleBar, TitleBarDiv } from '../components/Title';
+import { ShareButton } from '../components/ShareButton';
 import countryData from '../data/countries';
 import { useDailyCountryName } from '../hooks/useDailyCountryName';
 import { useDailySeed } from '../hooks/useDailySeed';
@@ -85,15 +84,6 @@ export const FirstBonusRoundRoute: React.FC = () => {
 
   return (
     <>
-      <TitleBar>
-        <TitleBarDiv justify="flex-end">
-          <HowToModal />
-        </TitleBarDiv>
-        <Title>
-          FLAG<span>LE</span>
-        </Title>
-      </TitleBar>
-
       <BonusRoundTitle>Pick the correct shape for this country</BonusRoundTitle>
 
       <div className="flex gap-2 mt-3">
@@ -126,6 +116,8 @@ export const FirstBonusRoundRoute: React.FC = () => {
           <NextRoundLink to="/bonus-round/2">
             Bonus Round - 2/3 - Pick the flag of a neighbouring country
           </NextRoundLink>
+
+          <ShareButton />
 
           <a
             className="underline text-center block mt-4 whitespace-nowrap"

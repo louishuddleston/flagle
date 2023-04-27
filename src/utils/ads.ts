@@ -5,11 +5,11 @@ declare global {
     adngin?: {
       adnginLoaderReady?: boolean;
       cmd: {
-        startAuction: (any: any) => void;
+        startAuction: (ads: string[]) => void;
       };
       queue?: CommandArray;
     };
-    destroyRefreshTopAd?: any;
+    destroyRefreshTopAd?: (state: boolean) => void;
   }
 }
 

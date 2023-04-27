@@ -8,9 +8,14 @@ import { Route, Switch } from 'react-router-dom';
 import { Flip, ToastContainer } from 'react-toastify';
 import styled from 'styled-components';
 
-import angleIcon from './angle_favicon.svg';
+import { HowToModal } from './components/HowToModal';
 import { NextRoundLink } from './components/NextRoundLink';
+import { StatsModal } from './components/StatsModal';
+import { Title, TitleBar, TitleBarDiv } from './components/Title';
 import { MainGameRoute } from './routes/MainGameRoute/MainGameRoute';
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { ReactComponent: AngleIcon } = require('./angle_favicon.svg');
 
 const CentreWrapper = styled.div`
   margin: 0;
@@ -28,26 +33,6 @@ const CentreWrapper = styled.div`
   }
 `;
 
-const Footer = styled.div`
-  display: block;
-  font-size: 1rem;
-  margin-top: auto;
-  margin-bottom: 0.5rem;
-  span {
-    color: #1a76d2;
-  }
-  p {
-    margin-bottom: 0;
-    margin-top: 0.25rem;
-  }
-  @media (prefers-color-scheme: dark) {
-    color: #fff;
-    a {
-      color: #fff;
-    }
-  }
-`;
-
 const AdContainer = styled.div`
   width: 100%;
   margin-top: auto;
@@ -61,11 +46,6 @@ const AdContainer = styled.div`
   @media (prefers-color-scheme: dark) {
     color: #fff;
   }
-`;
-
-const Icon = styled.img`
-  width: 10px;
-  margin-right: 7px;
 `;
 
 const GameButton = styled(Button)`
@@ -115,6 +95,18 @@ export function App() {
         autoClose={false}
       />
       <CentreWrapper>
+        <TitleBar>
+          <TitleBarDiv justify="flex-end">
+            <HowToModal />
+          </TitleBarDiv>
+          <Title>
+            FLAG<span>LE</span>
+          </Title>
+          <TitleBarDiv>
+            <StatsModal />
+          </TitleBarDiv>
+        </TitleBar>
+
         <Suspense fallback="loading next bonus round…">
           <Switch>
             <Route exact path="/">
@@ -148,7 +140,8 @@ export function App() {
                 window.open('https://angle.wtf');
               }}
             >
-              <Icon src={angleIcon} />
+              <AngleIcon width="12" />
+              &nbsp;
               <span>Angle</span>
             </GameButton>
             <GameButton

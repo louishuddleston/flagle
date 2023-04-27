@@ -6,11 +6,10 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import Modal from '@mui/material/Modal';
 import Typography from '@mui/material/Typography';
-import { useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 import styled from 'styled-components';
 
-import { getStatsData } from '../../../utils/stats';
-import { Share } from './Share';
+import { useStats } from '../hooks/useStats';
 
 const StyledBox = styled(Box)`
   position: absolute;
@@ -45,7 +44,7 @@ const StyledTile = styled(Box)`
   flex-direction: column;
   justify-content: center;
 `;
-const StatsTile = ({ stat, text }) => (
+const StatsTile = ({ stat, text }: { stat: number; text: string }) => (
   <StyledTile>
     <StatNumber>{stat}</StatNumber>
     <StatText>{text}</StatText>
@@ -73,7 +72,7 @@ const StyledModal = styled(Modal)`
   }
 `;
 
-const DistBar = styled.div`
+const DistBar = styled.div<{ count: number; maxDistribution: number }>`
   flex: 0 1
     ${(props) => Math.round((props.count / props.maxDistribution) * 100)}%;
   background-color: #ddd;
@@ -97,25 +96,14 @@ const Type = styled(Typography)`
   margin-top: 5px !important;
 `;
 
-export function StatsModal({
-  end,
-  score,
-  guesses,
-  maxAttempts,
-  dayString,
-  countryInfo,
-  trueCountry,
-}) {
-  const [open, setOpen] = useState(end);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+export function StatsModal() {
+  const [open, setOpen] = useState(false);
+  const handleOpen = useCallback(() => setOpen(true), [setOpen]);
+  const handleClose = useCallback(() => setOpen(false), [setOpen]);
 
   const { played, winRatio, currentStreak, maxStreak, guessDistribution } =
-    getStatsData();
-
+    useStats();
   const maxDistribution = Math.max(...Object.values(guessDistribution));
-
-  // useEffect(() => setTimeout(() => setOpen(end), 1500), [end]);
 
   return (
     <div>
@@ -143,7 +131,7 @@ export function StatsModal({
               <CloseIcon />
             </IconButton>
           </Box>
-          <Type id="modal-modal-title" variant="h5" component="h2">
+          <Type id="modal-modal-title" variant="h5">
             Statistics
           </Type>
           <Grid>
@@ -152,7 +140,7 @@ export function StatsModal({
             <StatsTile stat={currentStreak} text="Streak" />
             <StatsTile stat={maxStreak} text="Max Streak" />
           </Grid>
-          <Type id="modal-modal-title" variant="h6" component="h3">
+          <Type id="modal-modal-title" variant="h6">
             Guess Distribution:
           </Type>
           <List>
@@ -165,15 +153,6 @@ export function StatsModal({
               </ListItem>
             ))}
           </List>
-          <Type id="modal-modal-description" sx={{ mt: 2 }}>
-            <Share
-              score={score}
-              guesses={guesses}
-              attempts={maxAttempts}
-              end={end}
-              dayString={dayString}
-            ></Share>
-          </Type>
           <Type id="modal-modal-description" sx={{ mt: 2 }}>
             <Button
               variant="contained"

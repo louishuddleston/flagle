@@ -17,7 +17,8 @@ export const NextRoundLink: React.FC<PropsWithChildren<{ to: string }>> = ({
             <Twemoji text="★" className="inline-block text-orange-700" />
           </div>
           <Link
-            className="rounded-md bg-green-600 text-md text-white font-bold p-1 text-lg flex w-full gap-2 items-center justify-center uppercase my-0.5 translate"
+            className="rounded-md text-md text-white font-bold p-1 text-lg flex w-full gap-2 items-center justify-center uppercase my-0.5 translate"
+            style={{ backgroundColor: '#1a76d2' }}
             to={to}
           >
             <Twemoji

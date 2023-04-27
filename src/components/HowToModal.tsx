@@ -10,7 +10,7 @@ import styled from 'styled-components';
 
 import countryData from '../data/countries';
 import { FlagGrid } from './FlagGrid';
-import { Guesses } from './Guesses';
+import { GuessList } from './GuessList';
 
 const StyledBox = styled(Box)`
   position: absolute;
@@ -73,6 +73,7 @@ export function HowToModal() {
       name: name,
       distance: getDistance(guessGeo, answerGeo),
       direction: getCompassDirection(guessGeo, answerGeo),
+      tile: 0,
     };
   });
 
@@ -124,7 +125,7 @@ export function HowToModal() {
             ></FlagGrid>
           </CenterDiv>
           <CenterDiv display="grid">
-            <Guesses guesses={guesses.slice(0, -1)} />
+            <GuessList guesses={guesses.slice(0, -1)} />
           </CenterDiv>
           <br />
           <Typography id="modal-modal-paragraph" component="p">
@@ -136,7 +137,7 @@ export function HowToModal() {
           </Typography>
           <br />
           <CenterDiv display="grid">
-            <Guesses guesses={guesses.slice(-1)} />
+            <GuessList guesses={guesses.slice(-1)} />
           </CenterDiv>
           <br />
           <Typography id="modal-modal-title" variant="h5" component="h2">

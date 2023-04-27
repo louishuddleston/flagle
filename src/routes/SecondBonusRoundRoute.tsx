@@ -3,9 +3,9 @@ import { useMemo } from 'react';
 import styled from 'styled-components';
 
 import { AdnginEndMobile0 } from '../components/AdnginEndMobile0';
-import { HowToModal } from '../components/HowToModal';
+import { BonusRoundTitle } from '../components/BonusRoundTitle';
 import { NextRoundLink } from '../components/NextRoundLink';
-import { Title, TitleBar, TitleBarDiv } from '../components/Title';
+import { ShareButton } from '../components/ShareButton';
 import countryData from '../data/countries';
 import { useBorderCountryNames } from '../hooks/useBorderCountryCodes';
 import { useDailyCountryName } from '../hooks/useDailyCountryName';
@@ -14,7 +14,6 @@ import { useNearestCountryNames } from '../hooks/useNearestCountryNames';
 import { useRandomCountryNames } from '../hooks/useRandomCountryNames';
 import { ChoiceStatus, useRoundState } from '../hooks/useRoundState';
 import { shuffleWithSeed } from '../utils/shuffleWithSeed';
-import { BonusRoundTitle } from '../components/BonusRoundTitle';
 
 const MAX_ATTEMPTS = 3;
 const CHOICES_COUNT = 8;
@@ -102,15 +101,6 @@ export function SecondBonusRoundRoute() {
 
   return (
     <>
-      <TitleBar>
-        <TitleBarDiv justify="flex-end">
-          <HowToModal />
-        </TitleBarDiv>
-        <Title>
-          FLAG<span>LE</span>
-        </Title>
-      </TitleBar>
-
       <BonusRoundTitle>Pick the flag of a neighbouring country</BonusRoundTitle>
 
       <div className="grid grid-cols-4 gap-2 mt-3">
@@ -143,6 +133,8 @@ export function SecondBonusRoundRoute() {
           <NextRoundLink to="/bonus-round/3">
             Bonus Round - 3/3 - Population and Capital City
           </NextRoundLink>
+
+          <ShareButton />
 
           <a
             className="underline text-center block mt-4 whitespace-nowrap"

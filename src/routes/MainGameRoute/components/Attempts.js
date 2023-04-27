@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Attempts = styled(({ score, attempts, max, ...props }) => (
+export const Attempts = styled(({ attempts, max, ...props }) => (
   <div {...props}>
     Attempts:{' '}
     <span>

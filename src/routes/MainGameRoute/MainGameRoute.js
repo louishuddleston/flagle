@@ -4,19 +4,17 @@ import { toast } from 'react-toastify';
 
 import { AdnginEndMobile0 } from '../../components/AdnginEndMobile0';
 import { FlagGrid } from '../../components/FlagGrid';
-import { Guesses } from '../../components/Guesses';
-import { HowToModal } from '../../components/HowToModal';
+import { GuessList } from '../../components/GuessList';
 import { NextRoundLink } from '../../components/NextRoundLink';
-import { Title, TitleBar, TitleBarDiv } from '../../components/Title';
+import { ShareButton } from '../../components/ShareButton';
 import countryData from '../../data/countries';
 import { useAllCountryNames } from '../../hooks/useAllCountryNames';
 import { useConfettiThrower } from '../../hooks/useConfettiThrower';
 import { useDailyCountryName } from '../../hooks/useDailyCountryName';
-import { useGuesses } from '../../hooks/useGuesses';
-import { getDayString } from '../../utils/getDayString';
-import AnswerBox from './components/AnswerBox';
+import { useDailySeed } from '../../hooks/useDailySeed';
+import { useGuessHistory } from '../../hooks/useGuessHistory';
+import { AnswerBox } from './components/AnswerBox';
 import { Attempts } from './components/Attempts';
-import { StatsModal } from './components/StatsModal';
 
 const MAX_ATTEMPTS = 6;
 
@@ -31,8 +29,13 @@ export function MainGameRoute() {
     shuffle([0, 1, 2, 3, 4, 5]),
   );
   const [end, setEnd] = useState(false);
-  const dayString = useMemo(getDayString, []);
-  const [guesses, addGuess] = useGuesses(dayString);
+  const dayString = useDailySeed();
+  const [guessHistory, addGuess] = useGuessHistory();
+  const guesses = useMemo(
+    () => guessHistory[dayString] || [],
+    [guessHistory, dayString],
+  );
+
   const trueCountry = useDailyCountryName();
   const allCountryNames = useAllCountryNames();
 
@@ -86,7 +89,7 @@ export function MainGameRoute() {
       if (guesses[guesses.length - 1].distance === 0) {
         toast(`🎉 ${trueCountry} 🎉`, { autoClose: 3000 });
         throwConfetti();
-        setScore(guesses.lenght);
+        setScore(guesses.length);
       } else {
         toast(`🤔 ${trueCountry} 🤔`, { autoClose: 3000 });
         setScore('DNF');
@@ -117,26 +120,6 @@ export function MainGameRoute() {
 
   return (
     <>
-      <TitleBar>
-        <TitleBarDiv justify="flex-end">
-          <HowToModal />
-        </TitleBarDiv>
-        <Title>
-          FLAG<span>LE</span>
-        </Title>
-        <TitleBarDiv>
-          <StatsModal
-            end={end}
-            score={score}
-            guesses={guesses}
-            maxAttempts={MAX_ATTEMPTS}
-            dayString={dayString}
-            countryInfo={countryInfo}
-            trueCountry={trueCountry}
-          />
-        </TitleBarDiv>
-      </TitleBar>
-
       <FlagGrid
         end={end}
         countryInfo={countryInfo}
@@ -151,12 +134,16 @@ export function MainGameRoute() {
         onGuess={onGuess}
       />
       <Attempts score={score} attempts={guesses.length} max={MAX_ATTEMPTS} />
-      <Guesses guesses={guesses} />
+      <GuessList guesses={guesses} />
 
       {end && (
-        <NextRoundLink to="/bonus-round/1">
-          Bonus Round - 1/3 - Pick the country shape
-        </NextRoundLink>
+        <>
+          <NextRoundLink to="/bonus-round/1">
+            Bonus Round - 1/3 - Pick the country shape
+          </NextRoundLink>
+
+          <ShareButton />
+        </>
       )}
 
       <AdnginEndMobile0 />

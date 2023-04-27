@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
-export const TitleBarDiv = styled.div<{ justify: string }>`
+export const TitleBarDiv = styled.div<{ justify?: string }>`
   display: flex;
   align-items: center;
-  justify-content: ${(props) => props.justify};
+  justify-content: ${({ justify = 'initial' }) => justify};
 `;
 
 export const TitleBar = styled.div`
