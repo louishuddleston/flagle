@@ -23,9 +23,9 @@ export function QuizGameRoute() {
   const dailyCountryName = useDailyCountryName();
   const roundSeed = useDailySeed('third-bonus-round');
   const {
-    currency_choices: currencyChoices,
-    currency_name: currencyCorrectAnswer,
-    currency_code,
+    // currency_choices: currencyChoices,
+    // currency_name: currencyCorrectAnswer,
+    // currency_code,
     population_choices: populationChoices,
     population_answer: populationCorrectAnswer,
   } = useMemo(
@@ -59,22 +59,22 @@ export function QuizGameRoute() {
     },
     [setRoundAnswsers, throwConfetti, populationCorrectAnswer],
   );
-  const selectCurrency = useCallback(
-    (e) => {
-      const selectedCurrency =
-        e.currentTarget.closest('button')?.dataset?.value;
+  // const selectCurrency = useCallback(
+  //   (e) => {
+  //     const selectedCurrency =
+  //       e.currentTarget.closest('button')?.dataset?.value;
 
-      if (selectedCurrency === currencyCorrectAnswer) {
-        throwConfetti();
-      }
+  //     if (selectedCurrency === currencyCorrectAnswer) {
+  //       throwConfetti();
+  //     }
 
-      setRoundAnswsers((roundAnswers) => ({
-        ...roundAnswers,
-        selectedCurrency,
-      }));
-    },
-    [setRoundAnswsers, throwConfetti, currencyCorrectAnswer],
-  );
+  //     setRoundAnswsers((roundAnswers) => ({
+  //       ...roundAnswers,
+  //       selectedCurrency,
+  //     }));
+  //   },
+  //   [setRoundAnswsers, throwConfetti, currencyCorrectAnswer],
+  // );
 
   const adRef = useRef<HTMLDivElement | null>(null);
 
