@@ -103,7 +103,7 @@ export function QuizGameRoute() {
           correctAnswer={populationCorrectAnswer}
           onSelectAnswer={selectPopulation}
         />
-        {selectedPopulation && (
+        {/* {selectedPopulation && (
           <p className="my-0 text-base text-center w-full">
             Population:{' '}
             <span className="font-bold text-xl">{populationCorrectAnswer}</span>
@@ -128,9 +128,9 @@ export function QuizGameRoute() {
               </p>
             )}
           </>
-        )}
+        )} */}
 
-        {selectedCurrency && (
+        {selectedPopulation && (
           <>
             <div className="w-full flex justify-center mt-3">
               <ShareButton />
