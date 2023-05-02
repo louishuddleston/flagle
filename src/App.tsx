@@ -3,7 +3,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import Button from '@mui/material/Button';
 import { Twemoji } from '@teuteuf/react-emoji-render';
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { Flip, ToastContainer } from 'react-toastify';
 import styled from 'styled-components';
@@ -12,6 +12,7 @@ import { HowToModal } from './components/HowToModal';
 import { NextRoundLink } from './components/NextRoundLink';
 import { StatsModal } from './components/StatsModal';
 import { Title, TitleBar, TitleBarDiv } from './components/Title';
+import { getDayString } from './hooks/useDailySeed';
 import { MainGameRoute } from './routes/MainGameRoute/MainGameRoute';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -85,7 +86,34 @@ const LazyThirdBonusRoundRoute = lazy(() =>
   })),
 );
 
+/**** MJD - ADDED THIS TO SUPPORT BONUS ROUND FIX *****/
+
+const startDate = getDayString();
+
+window &&
+  window.setInterval(() => {
+    const currentDate = getDayString();
+    if (startDate !== currentDate) {
+      window.dispatchEvent(new CustomEvent('date-changed'));
+    }
+  }, 1000);
+
+const refreshPage = () => {
+  window && (window.location.href = '/');
+};
+
+/**** MJD - ADDED THIS TO SUPPORT BONUS ROUND FIX END  *****/
+
 export function App() {
+  /**** MJD - ADDED THIS TO SUPPORT BONUS ROUND FIX *****/
+  useEffect(() => {
+    window.addEventListener('date-changed', refreshPage);
+    return () => {
+      window.removeEventListener('date-changed', refreshPage);
+    };
+  }, []);
+  /**** MJD - ADDED THIS TO SUPPORT BONUS ROUND FIX END *****/
+
   return (
     <div className="App">
       <ToastContainer
