@@ -214,15 +214,14 @@ export function App() {
 }
 
 const AdWrapperWrapper = styled('div')`
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
+  position: absolute;
   z-index: 200;
 `;
 
 const AdWrapper = styled('div')`
-  position: sticky;
-  padding: 20px 40px 20px 20px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transform: translateX(-100%);
   pointer-events: all;
 `;
