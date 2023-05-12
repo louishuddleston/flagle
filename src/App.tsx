@@ -193,7 +193,7 @@ export function App() {
               }}
             >
               <Twemoji
-                text="🌍"
+                text="📷"
                 className="inline-block"
                 options={{ baseUrl: '//twemoji.maxcdn.com/' }}
               />

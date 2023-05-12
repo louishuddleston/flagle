@@ -19,6 +19,7 @@ export const TitleBar = styled.div`
 export const Title = styled.div`
   display: block;
   font-size: 4rem;
+  padding-inline: 1rem;
   span {
     color: #1a76d2;
   }
