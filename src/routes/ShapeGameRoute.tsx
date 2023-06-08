@@ -210,7 +210,7 @@ const CountryShape: React.FC<{
 
 const StyledButton = styled('button')`
   position: relative;
-  padding: 1.25rem;
+  padding: 0.75rem;
   border: 4px solid #ccc;
   border-radius: 0.375rem;
 `;
