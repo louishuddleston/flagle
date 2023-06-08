@@ -51,6 +51,16 @@
     function snigelLoaded() {
       window.googletag.cmd.push(() => {
         window.googletag.pubads().set("page_url", 'flagle.io');
+        window.googletag.pubads().addEventListener('slotRenderEnded', function(event) {
+          const slot_id = event.slot.getSlotElementId();
+          if (slot_id === 'adngin-top_banner-0') {
+              document.documentElement.classList.add('snigel-top-loaded');
+              document.documentElement.classList.add('snigel-'+breakpoint.toLowerCase());
+          }
+          /*if (event.slot.getSlotElementId() === "div-gpt-ad-123456789-0") {
+            var containsAd = !event.isEmpty;
+          }*/
+        });
       });
     }
   </script>
@@ -77,9 +87,10 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
   <title>Flagle</title>
+
 </head>
 
-<body>
+<body >
   <noscript>You need to enable JavaScript to run this app.</noscript>
 
   <div id="root"></div>

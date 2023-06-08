@@ -2,7 +2,23 @@
   text-align: center;
   flex: 1 0 auto;
 }
+.App-Center {
+  transition: all;
+  transition-duration: 250ms;
+  transition-timing-function: ease-in-out;
+  padding-bottom: 0 !important;
+}
+@media screen and (min-width:768px) {
+  .snigel-top-loaded .App-Center {
+    padding-bottom: 120px !important;
+  }
+}
 
+@media screen and (max-width:600px) {
+  .snigel-top-loaded .App-Center {
+    padding-bottom: 80px !important;
+  }
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;

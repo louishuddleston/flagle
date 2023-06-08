@@ -122,7 +122,7 @@ export function App() {
         transition={Flip}
         autoClose={false}
       />
-      <CentreWrapper>
+      <CentreWrapper className="App-Center">
         <TitleBar>
           <TitleBarDiv justify="flex-end">
             <HowToModal />
