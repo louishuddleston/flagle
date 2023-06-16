@@ -152,6 +152,15 @@ export function HowToModal() {
               About Flagle and Teuteuf Games
             </a>
           </Typography>
+          <Typography
+            id="modal-modal-paragraph"
+            component="p"
+            sx={{ textDecoration: 'underline' }}
+          >
+            <a href="/privacy-policy/" target="_blank" rel="noreferrer">
+              Privacy Policy
+            </a>
+          </Typography>
           <br />
           <Typography id="modal-modal-title" variant="h5" component="h2">
             Any Suggestion?
