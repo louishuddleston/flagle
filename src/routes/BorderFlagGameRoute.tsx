@@ -93,6 +93,7 @@ const useSecondBonusRound = ({
 
 export function BorderFlagGameRoute() {
   const roundSeed = useDailySeed('second-bonus-round');
+
   const {
     dailyChoicesOrder,
     dailyChoices,
@@ -118,16 +119,19 @@ export function BorderFlagGameRoute() {
     );
   }, [isRoundComplete, isRoundSuccess, correctAnswer]);
 
+
   return (
     <>
       <BonusRoundTitle>Pick the flag of a neighbouring country</BonusRoundTitle>
 
       <div className="grid grid-cols-4 gap-2 mt-3">
-        {dailyChoicesOrder.map((countryName, index) => (
+        {dailyChoicesOrder.map((countryName, index) => {
+          if (countryData[countryName]) {
+          return (
           <CountryFlag
             key={countryName}
             countryName={countryName}
-            countryCode={countryData[countryName].code}
+            countryCode={countryData[countryName].code.toUpperCase()}
             index={index + 1}
             choiceStatus={
               dailyChoices[countryName] ||
@@ -140,7 +144,9 @@ export function BorderFlagGameRoute() {
             }
             onSelect={onSelectCountry}
           />
-        ))}
+        )} else {
+            console.error(countryName);
+          }})}
       </div>
 
       {!isRoundComplete && (

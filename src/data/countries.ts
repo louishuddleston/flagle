@@ -701,6 +701,11 @@ const countryData: {
     latitude: 41.608635,
     longitude: 21.745275,
   },
+  "North Macedonia": {
+    code: "mk",
+    latitude: 41.608635,
+    longitude: 21.745275,
+  },
   Mali: {
     code: "ml",
     latitude: 17.570692,
