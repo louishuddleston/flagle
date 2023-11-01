@@ -80,6 +80,7 @@ export function MainGameRoute() {
   const throwConfetti = useConfettiThrower();
 
   useEffect(() => {
+    if (end) return;
     revealTiles();
     getRemainingTiles();
     const lastGuess = guesses[guesses.length - 1];
@@ -95,7 +96,7 @@ export function MainGameRoute() {
         setScore('DNF');
       }
     }
-  }, [guesses, trueCountry, getRemainingTiles, revealTiles, throwConfetti]);
+  }, [guesses, trueCountry, getRemainingTiles, revealTiles, throwConfetti, end]);
 
   const onIncorrect = useCallback(() => {
     revealRandomTile();
