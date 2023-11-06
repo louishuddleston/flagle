@@ -103,7 +103,7 @@ export function StatsModal() {
 
   const { played, winRatio, currentStreak, maxStreak, guessDistribution } =
     useStats();
-  const maxDistribution = Math.max(...Object.values(guessDistribution));
+  const maxDistribution = Math.max(...guessDistribution);
 
   return (
     <div>
@@ -144,9 +144,9 @@ export function StatsModal() {
             Guess Distribution:
           </Type>
           <List>
-            {Object.entries(guessDistribution).map(([index, count]) => (
+            {guessDistribution.map((count, index) => (
               <ListItem sx={{ paddingBottom: 0 }} key={index}>
-                <div>{index}</div>
+                <div>{index + 1}</div>
                 <DistBar count={count} maxDistribution={maxDistribution}>
                   {count}
                 </DistBar>

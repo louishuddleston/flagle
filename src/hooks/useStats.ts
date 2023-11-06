@@ -12,7 +12,7 @@ export function useStats() {
     const allGuessesEntries = Object.entries(guessHistory);
     const played = allGuessesEntries.length;
 
-    const guessDistribution = Array(MAX_ATTEMPTS).fill(0);
+    const guessDistribution: Array<number> = Array(MAX_ATTEMPTS).fill(0);
 
     let currentStreak = 0;
     let maxStreak = 0;
@@ -23,8 +23,7 @@ export function useStats() {
       const winIndex = guesses.findIndex((guess) => guess.distance === 0);
       const won = winIndex >= 0;
       if (won) {
-        const tryCount = winIndex + 1;
-        guessDistribution[tryCount]++;
+        guessDistribution[winIndex]++;
 
         if (
           previousDate == null ||
