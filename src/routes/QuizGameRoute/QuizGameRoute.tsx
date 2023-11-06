@@ -84,9 +84,7 @@ export function QuizGameRoute() {
 
   return (
     <>
-      <BonusRoundTitle>
-        Final Bonus Round - Population and Capital City
-      </BonusRoundTitle>
+      <BonusRoundTitle>Final Bonus Round - Population</BonusRoundTitle>
 
       <div className="flex flex-row flex-wrap w-full pb-4 gap-2 max-w-lg">
         <Question

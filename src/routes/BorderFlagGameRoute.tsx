@@ -156,7 +156,7 @@ export function BorderFlagGameRoute() {
       {isRoundComplete && (
         <>
           <NextRoundLink to="/bonus-round/3">
-            Bonus Round - 3/3 - Population and Capital City
+            Bonus Round - 3/3 - Population
           </NextRoundLink>
 
           <ShareButton />
