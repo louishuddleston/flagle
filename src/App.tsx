@@ -167,7 +167,15 @@ export function App() {
         </Suspense>
 
         <AdContainer>
-          <div style={{ marginTop: '5px' }}>Our other games:</div>
+          <a
+            href="https://docs.google.com/forms/d/1rqb1jsmC_RMkX5CUY8pZQrjFrQaloC4zw9ZM5ZquAWw"
+            target="_blank"
+            rel="noreferrer"
+            style={{ marginTop: '15px', textDecoration: 'underline' }}
+          >
+            Submit Feedback
+          </a>
+          <div>Our other games:</div>
           <GamesContainer>
             <GameButton
               variant="outlined"
