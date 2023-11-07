@@ -10,10 +10,12 @@ import styled from 'styled-components';
 
 import { HowToModal } from './components/HowToModal';
 import { NextRoundLink } from './components/NextRoundLink';
+import { SettingsLinkIcon } from './components/SettingsLinkIcon';
 import { StatsModal } from './components/StatsModal';
 import { Title, TitleBar, TitleBarDiv } from './components/Title';
 import { getDayString } from './hooks/useDailySeed';
 import { MainGameRoute } from './routes/MainGameRoute/MainGameRoute';
+import { SettingsRoute } from './routes/SettingsRoute';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { ReactComponent: AngleIcon } = require('./angle_favicon.svg');
@@ -132,6 +134,7 @@ export function App() {
           </Title>
           <TitleBarDiv>
             <StatsModal />
+            <SettingsLinkIcon />
           </TitleBarDiv>
         </TitleBar>
 
@@ -151,6 +154,10 @@ export function App() {
 
             <Route exact path="/bonus-round/3">
               <LazyThirdBonusRoundRoute />
+            </Route>
+
+            <Route exact path="/settings">
+              <SettingsRoute />
             </Route>
 
             <Route>

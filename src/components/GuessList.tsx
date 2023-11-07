@@ -1,8 +1,9 @@
 import { Twemoji } from '@teuteuf/react-emoji-render';
 import styled from 'styled-components';
 
+import { useDistanceInUserUnit } from '../hooks/useDistanceInUserUnit';
 import { Guess } from '../hooks/useGuessHistory';
-import { formatDistance, getDirectionEmoji } from '../utils/geography';
+import { getDirectionEmoji } from '../utils/geography';
 
 const GuessLine = styled.div`
   display: grid;
@@ -15,7 +16,7 @@ const CountryGuess = styled.div`
   position: relative;
   background-color: #dddddd;
   border-radius: 3px;
-  grid-column: 1 / span 6;
+  grid-column: 1 / span 5;
   margin-right: 2px;
   text-overflow: ellipsis;
   align-items: center;
@@ -31,7 +32,7 @@ const DistanceBox = styled.div`
   position: relative;
   background-color: #dddddd;
   border-radius: 3px;
-  grid-column: 7 / span 2;
+  grid-column: 6 / span 3;
   font-weight: bold;
   margin-right: 2px;
   align-items: center;
@@ -60,6 +61,8 @@ const ArrowBox = styled.div`
 export const GuessList: React.FC<{
   guesses: Guess[];
 }> = ({ guesses }) => {
+  const { formatDistance } = useDistanceInUserUnit();
+
   return (
     <>
       {guesses.map((guess, index) => (
