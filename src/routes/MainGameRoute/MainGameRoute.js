@@ -15,6 +15,7 @@ import { useDailySeed } from '../../hooks/useDailySeed';
 import { useGuessHistory } from '../../hooks/useGuessHistory';
 import { AnswerBox } from './components/AnswerBox';
 import { Attempts } from './components/Attempts';
+import { CorrectAnswers } from '../../components/CorrectAnswers';
 
 const MAX_ATTEMPTS = 6;
 
@@ -139,6 +140,7 @@ export function MainGameRoute() {
 
       {end && (
         <>
+          <CorrectAnswers answers={[trueCountry]} />
           <NextRoundLink to="/bonus-round/1">
             Bonus Round - 1/3 - Pick the country shape
           </NextRoundLink>

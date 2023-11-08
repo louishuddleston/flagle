@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 import { AdnginEndMobile0 } from '../components/AdnginEndMobile0';
 import { BonusRoundTitle } from '../components/BonusRoundTitle';
+import { CorrectAnswers } from '../components/CorrectAnswers';
 import { NextRoundLink } from '../components/NextRoundLink';
 import { ShareButton } from '../components/ShareButton';
 import countryData from '../data/countries';
@@ -119,7 +120,6 @@ export function BorderFlagGameRoute() {
     );
   }, [isRoundComplete, isRoundSuccess, correctAnswer]);
 
-
   return (
     <>
       <BonusRoundTitle>Pick the flag of a neighbouring country</BonusRoundTitle>
@@ -127,26 +127,28 @@ export function BorderFlagGameRoute() {
       <div className="grid grid-cols-4 gap-2 mt-3">
         {dailyChoicesOrder.map((countryName, index) => {
           if (countryData[countryName]) {
-          return (
-          <CountryFlag
-            key={countryName}
-            countryName={countryName}
-            countryCode={countryData[countryName].code.toUpperCase()}
-            index={index + 1}
-            choiceStatus={
-              dailyChoices[countryName] ||
-              (isRoundComplete && countryName === correctAnswer
-                ? ChoiceStatus.CORRECT
-                : undefined)
-            }
-            disabled={
-              isRoundComplete || dailyChoices[countryName] !== undefined
-            }
-            onSelect={onSelectCountry}
-          />
-        )} else {
+            return (
+              <CountryFlag
+                key={countryName}
+                countryName={countryName}
+                countryCode={countryData[countryName].code.toUpperCase()}
+                index={index + 1}
+                choiceStatus={
+                  dailyChoices[countryName] ||
+                  (isRoundComplete && countryName === correctAnswer
+                    ? ChoiceStatus.CORRECT
+                    : undefined)
+                }
+                disabled={
+                  isRoundComplete || dailyChoices[countryName] !== undefined
+                }
+                onSelect={onSelectCountry}
+              />
+            );
+          } else {
             console.error(countryName);
-          }})}
+          }
+        })}
       </div>
 
       {!isRoundComplete && (
@@ -155,6 +157,7 @@ export function BorderFlagGameRoute() {
 
       {isRoundComplete && (
         <>
+          <CorrectAnswers answers={[correctAnswer]} />
           <NextRoundLink to="/bonus-round/3">
             Bonus Round - 3/3 - Population
           </NextRoundLink>
