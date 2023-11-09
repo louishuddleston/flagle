@@ -3,6 +3,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { toast } from 'react-toastify';
 
 import { AdnginEndMobile0 } from '../../components/AdnginEndMobile0';
+import { CorrectAnswers } from '../../components/CorrectAnswers';
 import { FlagGrid } from '../../components/FlagGrid';
 import { GuessList } from '../../components/GuessList';
 import { NextRoundLink } from '../../components/NextRoundLink';
@@ -15,7 +16,6 @@ import { useDailySeed } from '../../hooks/useDailySeed';
 import { useGuessHistory } from '../../hooks/useGuessHistory';
 import { AnswerBox } from './components/AnswerBox';
 import { Attempts } from './components/Attempts';
-import { CorrectAnswers } from '../../components/CorrectAnswers';
 
 const MAX_ATTEMPTS = 6;
 
