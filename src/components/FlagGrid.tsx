@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react';
 import styled from 'styled-components';
 
 const DELAY_TIME = 0.5;
-const FLAG_WIDTH = 240;
+const FLAG_WIDTH = 270;
 const FLAG_SCALE = FLAG_WIDTH / 320;
 
 const Grid = styled.div<{ end?: boolean }>`
@@ -52,9 +52,7 @@ const Tile = styled.div<{
   display: flex;
   justify-content: center;
   padding: ${(props) =>
-    `${
-      props.height ? `${Math.floor(props.height / 2)}px` : '2rem'
-    } ${Math.floor(FLAG_WIDTH / 6)}px`};
+    `${props.height ? `${props.height / 2}px` : '2rem'} ${FLAG_WIDTH / 6}px`};
   position: relative;
   transform: ${(props) =>
     props.rotate === 'true' ? 'rotateY(180deg)' : 'rotateY(0deg)'};
