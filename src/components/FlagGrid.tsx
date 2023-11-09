@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const DELAY_TIME = 0.5;
 const FLAG_WIDTH = 270;
-const FLAG_SCALE = FLAG_WIDTH / 320;
+const FLAG_SCALE = FLAG_WIDTH / 640;
 
 const Grid = styled.div<{ end?: boolean }>`
   transition: 1s;
@@ -92,7 +92,7 @@ export function FlagGrid({
   const flagImg = useMemo(() => {
     const img = new Image();
     img.onload = () => setFlagLoad(true);
-    img.src = `https://flagcdn.com/w320/${countryInfo.code}.png`;
+    img.src = `https://flagcdn.com/w640/${countryInfo.code}.png`;
     return img;
   }, [countryInfo]);
 
