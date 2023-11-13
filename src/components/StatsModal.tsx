@@ -1,33 +1,13 @@
-import CloseIcon from '@mui/icons-material/Close';
 import LeaderboardIcon from '@mui/icons-material/Leaderboard';
 import { List, ListItem } from '@mui/material';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import Modal from '@mui/material/Modal';
 import Typography from '@mui/material/Typography';
 import { useCallback, useState } from 'react';
 import styled from 'styled-components';
 
 import { useStats } from '../hooks/useStats';
-
-const StyledBox = styled(Box)`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: auto;
-  max-width: 350px;
-  background-color: #fff;
-  border: 2px solid #000;
-  box-shadow: 24rem;
-  padding: 2em;
-  justify-content: flex-start;
-  @media (prefers-color-scheme: dark) {
-    background-color: #121212;
-    color: white;
-  }
-`;
+import { BaseModal } from './BaseModal';
 
 const StatNumber = styled.div`
   font-weight: bold;
@@ -64,12 +44,6 @@ const StatsButton = styled.button`
   cursor: pointer;
   margin-top: 0.6rem;
   padding: 1px 10px;
-`;
-
-const StyledModal = styled(Modal)`
-  @media (prefers-color-scheme: dark) {
-    color: #000;
-  }
 `;
 
 const DistBar = styled.div<{ count: number; maxDistribution: number }>`
@@ -110,61 +84,37 @@ export function StatsModal() {
       <StatsButton onClick={handleOpen}>
         <LeaderboardIconStyled />
       </StatsButton>
-      <StyledModal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-        sx={{ zIndex: 10000 }}
-      >
-        <StyledBox>
-          <Box>
-            <IconButton
-              onClick={handleClose}
-              sx={{
-                position: 'absolute',
-                right: 8,
-                top: 8,
-                color: (theme) => theme.palette.grey[500],
-              }}
-            >
-              <CloseIcon />
-            </IconButton>
-          </Box>
-          <Type id="modal-modal-title" variant="h5">
-            Statistics
-          </Type>
-          <Grid>
-            <StatsTile stat={Math.round(winRatio * 100)} text="Win %" />
-            <StatsTile stat={played} text="Played" />
-            <StatsTile stat={currentStreak} text="Streak" />
-            <StatsTile stat={maxStreak} text="Max Streak" />
-          </Grid>
-          <Type id="modal-modal-title" variant="h6">
-            Guess Distribution:
-          </Type>
-          <List>
-            {guessDistribution.map((count, index) => (
-              <ListItem sx={{ paddingBottom: 0 }} key={index}>
-                <div>{index + 1}</div>
-                <DistBar count={count} maxDistribution={maxDistribution}>
-                  {count}
-                </DistBar>
-              </ListItem>
-            ))}
-          </List>
-          <Type id="modal-modal-description" sx={{ mt: 2 }}>
-            <Button
-              variant="contained"
-              onClick={() => {
-                window.open('https://crisisrelief.un.org/t/ukraine');
-              }}
-            >
-              🇺🇦 Donate to Ukraine ❤️
-            </Button>
-          </Type>
-        </StyledBox>
-      </StyledModal>
+      <BaseModal open={open} onClose={handleClose} title="Statistics">
+        <Grid>
+          <StatsTile stat={Math.round(winRatio * 100)} text="Win %" />
+          <StatsTile stat={played} text="Played" />
+          <StatsTile stat={currentStreak} text="Streak" />
+          <StatsTile stat={maxStreak} text="Max Streak" />
+        </Grid>
+        <Type id="modal-modal-title" variant="h6">
+          Guess Distribution:
+        </Type>
+        <List>
+          {guessDistribution.map((count, index) => (
+            <ListItem sx={{ paddingBottom: 0 }} key={index}>
+              <div>{index + 1}</div>
+              <DistBar count={count} maxDistribution={maxDistribution}>
+                {count}
+              </DistBar>
+            </ListItem>
+          ))}
+        </List>
+        <Type id="modal-modal-description" sx={{ mt: 2 }}>
+          <Button
+            variant="contained"
+            onClick={() => {
+              window.open('https://crisisrelief.un.org/t/ukraine');
+            }}
+          >
+            🇺🇦 Donate to Ukraine ❤️
+          </Button>
+        </Type>
+      </BaseModal>
     </div>
   );
 }
