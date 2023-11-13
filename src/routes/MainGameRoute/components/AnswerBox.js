@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import Select from 'react-select';
 import styled from 'styled-components';
 
@@ -26,9 +26,12 @@ export const AnswerBox = ({
   countries,
   onGuess,
 }) => {
+  const [selectedOption, setSelectedOption] = useState(null);
+
   const handleSubmit = (guess) => {
     normalise(guess.value) === normalise(answer) ? onCorrect() : onIncorrect();
     onGuess(guess.value);
+    setSelectedOption(null);
   };
 
   const sortedCountries = useMemo(
@@ -39,6 +42,7 @@ export const AnswerBox = ({
   return (
     <Container>
       <StyledSelect
+        value={selectedOption}
         options={sortedCountries}
         onChange={handleSubmit}
         placeholder="Guess the flag!"
