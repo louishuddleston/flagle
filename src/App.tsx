@@ -126,6 +126,7 @@ export function App() {
       />
       <CentreWrapper className="App-Center">
         <TitleBar>
+          <TitleBarDiv />
           <TitleBarDiv justify="flex-end">
             <HowToModal />
           </TitleBarDiv>
@@ -134,6 +135,8 @@ export function App() {
           </Title>
           <TitleBarDiv>
             <StatsModal />
+          </TitleBarDiv>
+          <TitleBarDiv>
             <SettingsLinkIcon />
           </TitleBarDiv>
         </TitleBar>

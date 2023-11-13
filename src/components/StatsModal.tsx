@@ -42,8 +42,6 @@ const StatsButton = styled.button`
   border: none;
   font-size: 1.6rem;
   cursor: pointer;
-  margin-top: 0.6rem;
-  padding: 1px 10px;
 `;
 
 const DistBar = styled.div<{ count: number; maxDistribution: number }>`
@@ -60,6 +58,7 @@ const DistBar = styled.div<{ count: number; maxDistribution: number }>`
 
 const LeaderboardIconStyled = styled(LeaderboardIcon)`
   color: black;
+  margin: 3px;
   @media (prefers-color-scheme: dark) {
     color: white;
   }

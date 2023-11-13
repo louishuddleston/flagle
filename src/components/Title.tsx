@@ -3,14 +3,15 @@ import styled from 'styled-components';
 export const TitleBarDiv = styled.div<{ justify?: string }>`
   display: flex;
   align-items: center;
-  justify-content: ${({ justify = 'initial' }) => justify};
+  justify-content: ${({ justify = 'center' }) => justify};
 `;
 
 export const TitleBar = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  max-width: 376px;
+  grid-template-columns: 30px 30px 1fr 30px 30px;
   grid-template-rows: auto 1fr;
-  margin-bottom: 1rem;
+  grid-gap: 0.6rem;
   @media (prefers-color-scheme: dark) {
     color: #fff;
   }

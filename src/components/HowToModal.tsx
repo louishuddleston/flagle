@@ -14,7 +14,6 @@ const Button = styled.button`
   border: none;
   font-size: 1.6rem;
   cursor: pointer;
-  margin-top: 0.6rem;
 `;
 
 const CenterDiv = styled.div<{ display: string }>`
@@ -24,6 +23,7 @@ const CenterDiv = styled.div<{ display: string }>`
 
 const HelpIcon = styled(HelpOutlineIcon)`
   color: black;
+  margin: 3px;
   @media (prefers-color-scheme: dark) {
     color: white;
   }
