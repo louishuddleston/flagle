@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react';
 import styled from 'styled-components';
 
 const DELAY_TIME = 0.5;
-const FLAG_WIDTH = 270;
+const FLAG_WIDTH = 300;
 const FLAG_SCALE = FLAG_WIDTH / 640;
 
 const Grid = styled.div<{ end?: boolean }>`
