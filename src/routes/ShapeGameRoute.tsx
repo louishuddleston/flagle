@@ -105,7 +105,7 @@ export const ShapeGameRoute: React.FC = () => {
     <>
       <BonusRoundTitle>Pick the correct shape for this country</BonusRoundTitle>
 
-      <div className="flex gap-2 mt-3">
+      <OutlineGrid>
         {dailyChoicesOrder.map((countryName, index) => (
           <CountryShape
             key={countryName}
@@ -124,7 +124,7 @@ export const ShapeGameRoute: React.FC = () => {
             onSelect={onSelectCountry}
           />
         ))}
-      </div>
+      </OutlineGrid>
 
       <p style={{ marginTop: '10px' }}>
         Sponsored by WORLD<span style={{ color: '#16A34A' }}>L</span>E
@@ -200,8 +200,8 @@ const CountryShape: React.FC<{
       <Index>{index}.</Index>
       <CountrySVG
         src={`/images/countries/${countryCode.toLowerCase()}/vector.svg`}
-        width="70"
-        height="70"
+        width="120"
+        height="120"
         alt=""
       />
     </StyledButton>
@@ -241,4 +241,11 @@ const CountrySVG = styled('img')`
   @media (prefers-color-scheme: dark) {
     filter: invert(1);
   }
+`;
+
+const OutlineGrid = styled.div`
+  display: grid;
+  gap: 0.8rem;
+  grid-template-columns: repeat(2, 1fr);
+  margin: 1rem;
 `;
