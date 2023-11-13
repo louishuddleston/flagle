@@ -3,6 +3,7 @@ import { MobileView } from 'react-device-detect';
 import styled from 'styled-components';
 import { useLocalStorage } from 'usehooks-ts';
 
+import { BackButton } from '../../components/BackButton';
 import { BonusRoundTitle } from '../../components/BonusRoundTitle';
 import { ShareButton } from '../../components/ShareButton';
 import { WikipediaAndMapsLinks } from '../../components/WikipediaAndGmapsLinks';
@@ -84,6 +85,9 @@ export function QuizGameRoute() {
 
   return (
     <>
+      <BackButtonContainer>
+        <BackButton />
+      </BackButtonContainer>
       <BonusRoundTitle>Final Bonus Round - Population</BonusRoundTitle>
 
       <div className="flex flex-row flex-wrap w-full pb-4 gap-2 max-w-lg">
@@ -243,4 +247,12 @@ const StyledButton = styled('button')<{
   @media (prefers-color-scheme: dark) {
     color: #fff;
   }
+`;
+
+const BackButtonContainer = styled.div`
+  display: flex;
+  max-width: 512px;
+  padding: 0.4rem;
+  margin-bottom: 1rem;
+  width: 100%;
 `;

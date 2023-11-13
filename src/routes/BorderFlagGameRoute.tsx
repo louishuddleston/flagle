@@ -3,6 +3,7 @@ import { toast } from 'react-toastify';
 import styled from 'styled-components';
 
 import { AdnginEndMobile0 } from '../components/AdnginEndMobile0';
+import { BackButton } from '../components/BackButton';
 import { BonusRoundTitle } from '../components/BonusRoundTitle';
 import { CorrectAnswers } from '../components/CorrectAnswers';
 import { NextRoundLink } from '../components/NextRoundLink';
@@ -122,6 +123,9 @@ export function BorderFlagGameRoute() {
 
   return (
     <>
+      <BackButtonContainer>
+        <BackButton />
+      </BackButtonContainer>
       <BonusRoundTitle>Pick the flag of a neighbouring country</BonusRoundTitle>
 
       <div className="grid grid-cols-4 gap-2 mt-3">
@@ -175,6 +179,14 @@ const AttemptsLeft = styled('div')`
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
   color: #888;
+`;
+
+const BackButtonContainer = styled.div`
+  display: flex;
+  max-width: 376px;
+  padding: 0.4rem;
+  margin-bottom: 1rem;
+  width: 100%;
 `;
 
 const CountryFlag: React.FC<{

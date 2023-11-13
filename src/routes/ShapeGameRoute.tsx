@@ -3,6 +3,7 @@ import { toast } from 'react-toastify';
 import styled from 'styled-components';
 
 import { AdnginEndMobile0 } from '../components/AdnginEndMobile0';
+import { BackButton } from '../components/BackButton';
 import { BonusRoundTitle } from '../components/BonusRoundTitle';
 import { NextRoundLink } from '../components/NextRoundLink';
 import { ShareButton } from '../components/ShareButton';
@@ -103,6 +104,9 @@ export const ShapeGameRoute: React.FC = () => {
 
   return (
     <>
+      <BackButtonContainer>
+        <BackButton />
+      </BackButtonContainer>
       <BonusRoundTitle>Pick the correct shape for this country</BonusRoundTitle>
 
       <OutlineGrid>
@@ -248,4 +252,12 @@ const OutlineGrid = styled.div`
   gap: 0.8rem;
   grid-template-columns: repeat(2, 1fr);
   margin: 1rem;
+`;
+
+const BackButtonContainer = styled.div`
+  display: flex;
+  max-width: 376px;
+  padding: 0.4rem;
+  margin-bottom: 1rem;
+  width: 100%;
 `;
