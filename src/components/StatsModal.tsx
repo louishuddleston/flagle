@@ -40,7 +40,6 @@ const Grid = styled.div`
 const StatsButton = styled.button`
   background: none;
   border: none;
-  font-size: 1.6rem;
   cursor: pointer;
 `;
 

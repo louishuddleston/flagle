@@ -12,7 +12,6 @@ import { GuessList } from './GuessList';
 const Button = styled.button`
   background: none;
   border: none;
-  font-size: 1.6rem;
   cursor: pointer;
 `;
 
