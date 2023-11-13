@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import styled from 'styled-components';
 
 const DELAY_TIME = 0.5;
@@ -52,7 +52,7 @@ const Tile = styled.div<{
   display: flex;
   justify-content: center;
   padding: ${(props) =>
-    `${props.height ? `${props.height / 2}px` : '2rem'} ${Math.round(
+    `${props.height ? `${props.height / 2}px` : '2rem'} ${Math.floor(
       FLAG_WIDTH / 6,
     )}px`};
   position: relative;
@@ -64,6 +64,7 @@ const FlagImage = styled.img<{
   flag: string;
   left: number;
   top: number;
+  height: number;
 }>`
   content: url(${(props) => props.flag});
   position: relative;
@@ -71,6 +72,7 @@ const FlagImage = styled.img<{
   left: ${(props) => `${props.left}px`};
   top: ${(props) => `${props.top}px`};
   max-width: unset;
+  height: ${(props) => `${props.height}px`};
 `;
 
 const FlagContainer = styled.div`
@@ -91,12 +93,17 @@ export function FlagGrid({
   flippedArray: boolean[];
 }) {
   const [flagLoad, setFlagLoad] = useState(false);
+  const [scaledFlagHeight, setScaledFlagHeight] = useState(0);
   const flagImg = useMemo(() => {
     const img = new Image();
     img.onload = () => setFlagLoad(true);
     img.src = `https://flagcdn.com/w640/${countryInfo.code}.png`;
     return img;
   }, [countryInfo]);
+
+  useEffect(() => {
+    setScaledFlagHeight(Math.floor(FLAG_SCALE * flagImg.height));
+  }, [flagImg, flagLoad]);
 
   return (
     <FlagContainer>
@@ -106,14 +113,15 @@ export function FlagGrid({
             <Tile
               key={n}
               rotate={flipped && flagLoad ? 'true' : 'false'}
-              height={(FLAG_SCALE * flagImg.height) / 2}
+              height={scaledFlagHeight / 2}
             >
               <TileFront></TileFront>
               <TileBack>
                 <FlagImage
                   flag={flagImg.src}
                   left={-Math.floor((n % 3) * (FLAG_WIDTH / 3))}
-                  top={-(Math.floor(n / 3) * FLAG_SCALE * flagImg.height) / 2}
+                  top={-((Math.floor(n / 3) * scaledFlagHeight) / 2)}
+                  height={scaledFlagHeight}
                 ></FlagImage>
               </TileBack>
             </Tile>
