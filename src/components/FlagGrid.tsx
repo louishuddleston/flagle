@@ -52,7 +52,9 @@ const Tile = styled.div<{
   display: flex;
   justify-content: center;
   padding: ${(props) =>
-    `${props.height ? `${props.height / 2}px` : '2rem'} ${FLAG_WIDTH / 6}px`};
+    `${props.height ? `${props.height / 2}px` : '2rem'} ${Math.round(
+      FLAG_WIDTH / 6,
+    )}px`};
   position: relative;
   transform: ${(props) =>
     props.rotate === 'true' ? 'rotateY(180deg)' : 'rotateY(0deg)'};
