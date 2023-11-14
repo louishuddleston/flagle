@@ -1,8 +1,9 @@
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { toast } from 'react-toastify';
 import styled from 'styled-components';
 
 import { AdnginEndMobile0 } from '../components/AdnginEndMobile0';
+import { AnimatedAnswerSquare } from '../components/AnimatedAnswerSquare';
 import { BonusRoundTitle } from '../components/BonusRoundTitle';
 import { NextRoundLink } from '../components/NextRoundLink';
 import { ShareButton } from '../components/ShareButton';
@@ -67,6 +68,7 @@ const useSecondBonusRound = ({
     dailyChoicesOrder,
     maxAttempts,
     correctAnswer,
+    delayAnswerMs: 1000,
   });
 
   return useMemo(
@@ -124,7 +126,7 @@ export function BorderFlagGameRoute() {
     <>
       <BonusRoundTitle>Pick the flag of a neighbouring country</BonusRoundTitle>
 
-      <div className="grid grid-cols-4 gap-2 mt-3">
+      <div className="grid grid-cols-4 gap-2 mt-3 grid-rows-2">
         {dailyChoicesOrder.map((countryName, index) => {
           if (countryData[countryName]) {
           return (
@@ -189,24 +191,19 @@ const CountryFlag: React.FC<{
   disabled = false,
   choiceStatus,
 }) => {
+  const [selected, setSelected] = useState(false);
+
   return (
-    <button
+    <AnimatedAnswerSquare
       key={countryName}
       data-country-name={countryName}
-      onClick={onSelect}
-      disabled={disabled}
-      className="rounded-md p-3 relative"
-      style={{
-        border: '4px solid #CCC',
-        borderColor:
-          choiceStatus === ChoiceStatus.CORRECT
-            ? 'green'
-            : choiceStatus === ChoiceStatus.INCORRECT
-            ? 'red'
-            : '',
-        paddingTop: '24px',
-        paddingBottom: '24px',
+      onClick={(e) => {
+        onSelect(e);
+        setSelected(true);
       }}
+      selected={choiceStatus !== undefined || selected}
+      disabled={disabled}
+      choiceStatus={choiceStatus}
     >
       <div
         className="font-bold absolute"
@@ -219,11 +216,11 @@ const CountryFlag: React.FC<{
       </div>
       <img
         src={`https://flagcdn.com/w320/${countryCode.toLowerCase()}.png`}
-        width="70"
-        height="70"
+        width="90"
+        height="90"
         alt=""
-        style={{ border: '1px solid #CCC' }}
+        style={{ border: '1px solid #CCC', margin: '8px' }}
       />
-    </button>
+    </AnimatedAnswerSquare>
   );
 };

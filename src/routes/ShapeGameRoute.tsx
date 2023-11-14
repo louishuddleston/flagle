@@ -1,8 +1,9 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { toast } from 'react-toastify';
 import styled from 'styled-components';
 
 import { AdnginEndMobile0 } from '../components/AdnginEndMobile0';
+import { AnimatedAnswerSquare } from '../components/AnimatedAnswerSquare';
 import { BonusRoundTitle } from '../components/BonusRoundTitle';
 import { NextRoundLink } from '../components/NextRoundLink';
 import { ShareButton } from '../components/ShareButton';
@@ -50,6 +51,7 @@ const useFirstBonusRound = ({
     dailyChoicesOrder,
     maxAttempts,
     correctAnswer: dailyCountryName,
+    delayAnswerMs: 1000,
   });
 
   return useMemo(
@@ -181,20 +183,18 @@ const CountryShape: React.FC<{
   disabled = false,
   choiceStatus,
 }) => {
+  const [selected, setSelected] = useState(false);
   return (
-    <StyledButton
+    <AnimatedAnswerSquare
       key={countryName}
       data-country-name={countryName}
-      onClick={onSelect}
-      disabled={disabled}
-      style={{
-        borderColor:
-          choiceStatus === ChoiceStatus.CORRECT
-            ? 'green'
-            : choiceStatus === ChoiceStatus.INCORRECT
-            ? 'red'
-            : '',
+      onClick={(e) => {
+        onSelect(e);
+        setSelected(true);
       }}
+      disabled={disabled}
+      choiceStatus={choiceStatus}
+      selected={choiceStatus !== undefined || selected}
     >
       <IndexShadow>{index}.</IndexShadow>
       <Index>{index}.</Index>
@@ -204,16 +204,9 @@ const CountryShape: React.FC<{
         height="70"
         alt=""
       />
-    </StyledButton>
+    </AnimatedAnswerSquare>
   );
 };
-
-const StyledButton = styled('button')`
-  position: relative;
-  padding: 0.75rem;
-  border: 4px solid #ccc;
-  border-radius: 0.375rem;
-`;
 
 const Index = styled('div')`
   position: absolute;

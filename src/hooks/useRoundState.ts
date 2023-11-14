@@ -13,11 +13,13 @@ export const useRoundState = ({
   dailyChoicesOrder,
   maxAttempts,
   correctAnswer,
+  delayAnswerMs = 0,
 }: {
   seed: string;
   dailyChoicesOrder: string[];
   maxAttempts: number;
   correctAnswer: string;
+  delayAnswerMs?: number;
 }) => {
   const initialState = useMemo(
     () =>
@@ -54,23 +56,25 @@ export const useRoundState = ({
         return;
       }
 
-      if (countryName === correctAnswer) {
-        throwConfetti();
-      }
+      setTimeout(() => {
+        if (countryName === correctAnswer) {
+          throwConfetti();
+        }
 
-      setDailyChoices((propositions) => {
-        const nextPropositions = {
-          ...propositions,
-          [countryName]:
-            countryName === correctAnswer
-              ? ChoiceStatus.CORRECT
-              : ChoiceStatus.INCORRECT,
-        };
+        setDailyChoices((propositions) => {
+          const nextPropositions = {
+            ...propositions,
+            [countryName]:
+              countryName === correctAnswer
+                ? ChoiceStatus.CORRECT
+                : ChoiceStatus.INCORRECT,
+          };
 
-        return nextPropositions;
-      });
+          return nextPropositions;
+        });
+      }, delayAnswerMs);
     },
-    [setDailyChoices, throwConfetti, correctAnswer],
+    [setDailyChoices, throwConfetti, correctAnswer, delayAnswerMs],
   );
 
   return useMemo(
