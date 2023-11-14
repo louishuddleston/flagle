@@ -2,7 +2,6 @@ import { useMemo, useState } from 'react';
 import Select from 'react-select';
 import styled from 'styled-components';
 
-const normalise = (value) => value.toUpperCase();
 const StyledSelect = styled(Select)`
   font-family: Courier, monospace;
   margin-bottom: 1rem;
@@ -19,9 +18,6 @@ const Container = styled.div`
 `;
 
 export const AnswerBox = ({
-  answer,
-  onCorrect,
-  onIncorrect,
   disabled,
   countries,
   onGuess,
@@ -29,7 +25,6 @@ export const AnswerBox = ({
   const [selectedOption, setSelectedOption] = useState(null);
 
   const handleSubmit = (guess) => {
-    normalise(guess.value) === normalise(answer) ? onCorrect() : onIncorrect();
     onGuess(guess.value);
     setSelectedOption(null);
   };

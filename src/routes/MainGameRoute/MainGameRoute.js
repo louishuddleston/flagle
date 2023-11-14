@@ -99,12 +99,11 @@ export function MainGameRoute() {
     }
   }, [guesses, trueCountry, getRemainingTiles, revealTiles, throwConfetti, end]);
 
-  const onIncorrect = useCallback(() => {
-    revealRandomTile();
-  }, [revealRandomTile]);
-
   const onGuess = useCallback(
     (guess) => {
+      if (guesses.findIndex((g) => g.name === guess) !== -1) {
+        return toast(`You have already guessed ${guess}`, { autoClose: 3000 });
+      }
       const tileNum = revealRandomTile();
       const { ...guessGeo } = countryData[guess];
       const { ...answerGeo } = countryData[trueCountry];
@@ -115,7 +114,7 @@ export function MainGameRoute() {
         tile: tileNum,
       });
     },
-    [addGuess, revealRandomTile, trueCountry],
+    [addGuess, revealRandomTile, trueCountry, guesses],
   );
 
   const countryInfo = useMemo(() => countryData[trueCountry], [trueCountry]);
@@ -128,9 +127,6 @@ export function MainGameRoute() {
         flippedArray={flippedArray}
       ></FlagGrid>
       <AnswerBox
-        answer={trueCountry}
-        onCorrect={() => void 0}
-        onIncorrect={onIncorrect}
         disabled={end}
         countries={allCountryNames}
         onGuess={onGuess}
