@@ -77,6 +77,7 @@ const useFirstBonusRound = ({
 
 export const ShapeGameRoute: React.FC = () => {
   const roundSeed = useDailySeed('first-bonus-round');
+  const dailyCountryName = useDailyCountryName();
   const {
     dailyChoicesOrder,
     dailyChoices,
@@ -107,7 +108,7 @@ export const ShapeGameRoute: React.FC = () => {
       <BackButtonContainer>
         <BackButton />
       </BackButtonContainer>
-      <BonusRoundTitle>Pick the correct shape for this country</BonusRoundTitle>
+      <BonusRoundTitle>What's the shape of {dailyCountryName}?</BonusRoundTitle>
 
       <OutlineGrid>
         {dailyChoicesOrder.map((countryName, index) => (

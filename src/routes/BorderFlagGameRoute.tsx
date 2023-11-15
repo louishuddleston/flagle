@@ -95,6 +95,7 @@ const useSecondBonusRound = ({
 
 export function BorderFlagGameRoute() {
   const roundSeed = useDailySeed('second-bonus-round');
+  const dailyCountryName = useDailyCountryName();
 
   const {
     dailyChoicesOrder,
@@ -126,7 +127,9 @@ export function BorderFlagGameRoute() {
       <BackButtonContainer>
         <BackButton />
       </BackButtonContainer>
-      <BonusRoundTitle>Pick the flag of a neighbouring country</BonusRoundTitle>
+      <BonusRoundTitle>
+        Pick the flag of a country that neighbours {dailyCountryName}
+      </BonusRoundTitle>
 
       <div className="grid grid-cols-4 gap-2 mt-3">
         {dailyChoicesOrder.map((countryName, index) => {
