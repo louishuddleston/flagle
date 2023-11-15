@@ -3,7 +3,6 @@ import Select from 'react-select';
 import styled from 'styled-components';
 
 const StyledSelect = styled(Select)`
-  font-family: Courier, monospace;
   margin-bottom: 1rem;
   color: #000;
   :hover {
