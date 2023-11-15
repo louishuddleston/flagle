@@ -18,6 +18,7 @@ import { shuffleWithSeed } from '../utils/shuffleWithSeed';
 
 const MAX_ATTEMPTS = 3;
 const CHOICES_COUNT = 8;
+const ANSWER_DELAY_MS = 800;
 
 const useSecondBonusRound = ({
   roundSeed,
@@ -68,7 +69,7 @@ const useSecondBonusRound = ({
     dailyChoicesOrder,
     maxAttempts,
     correctAnswer,
-    delayAnswerMs: 1000,
+    delayAnswerMs: ANSWER_DELAY_MS,
   });
 
   return useMemo(
@@ -121,7 +122,6 @@ export function BorderFlagGameRoute() {
     );
   }, [isRoundComplete, isRoundSuccess, correctAnswer]);
 
-
   return (
     <>
       <BonusRoundTitle>Pick the flag of a neighbouring country</BonusRoundTitle>
@@ -129,26 +129,28 @@ export function BorderFlagGameRoute() {
       <div className="grid grid-cols-4 gap-2 mt-3 grid-rows-2">
         {dailyChoicesOrder.map((countryName, index) => {
           if (countryData[countryName]) {
-          return (
-          <CountryFlag
-            key={countryName}
-            countryName={countryName}
-            countryCode={countryData[countryName].code.toUpperCase()}
-            index={index + 1}
-            choiceStatus={
-              dailyChoices[countryName] ||
-              (isRoundComplete && countryName === correctAnswer
-                ? ChoiceStatus.CORRECT
-                : undefined)
-            }
-            disabled={
-              isRoundComplete || dailyChoices[countryName] !== undefined
-            }
-            onSelect={onSelectCountry}
-          />
-        )} else {
+            return (
+              <CountryFlag
+                key={countryName}
+                countryName={countryName}
+                countryCode={countryData[countryName].code.toUpperCase()}
+                index={index + 1}
+                choiceStatus={
+                  dailyChoices[countryName] ||
+                  (isRoundComplete && countryName === correctAnswer
+                    ? ChoiceStatus.CORRECT
+                    : undefined)
+                }
+                disabled={
+                  isRoundComplete || dailyChoices[countryName] !== undefined
+                }
+                onSelect={onSelectCountry}
+              />
+            );
+          } else {
             console.error(countryName);
-          }})}
+          }
+        })}
       </div>
 
       {!isRoundComplete && (
@@ -204,6 +206,7 @@ const CountryFlag: React.FC<{
       selected={choiceStatus !== undefined || selected}
       disabled={disabled}
       choiceStatus={choiceStatus}
+      animationDuration={ANSWER_DELAY_MS}
     >
       <div
         className="font-bold absolute"

@@ -16,6 +16,7 @@ import { shuffleWithSeed } from '../utils/shuffleWithSeed';
 
 const MAX_ATTEMPTS = 2;
 const CHOICES_COUNT = 4;
+const ANSWER_DELAY_MS = 800;
 
 const useFirstBonusRound = ({
   roundSeed,
@@ -51,7 +52,7 @@ const useFirstBonusRound = ({
     dailyChoicesOrder,
     maxAttempts,
     correctAnswer: dailyCountryName,
-    delayAnswerMs: 1000,
+    delayAnswerMs: ANSWER_DELAY_MS,
   });
 
   return useMemo(
@@ -195,6 +196,7 @@ const CountryShape: React.FC<{
       disabled={disabled}
       choiceStatus={choiceStatus}
       selected={choiceStatus !== undefined || selected}
+      animationDuration={ANSWER_DELAY_MS}
     >
       <IndexShadow>{index}.</IndexShadow>
       <Index>{index}.</Index>

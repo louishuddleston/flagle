@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 import { ChoiceStatus } from '../hooks/useRoundState';
 
 export const AnimatedAnswerSquare = styled.button<{
+  animationDuration: number;
   choiceStatus?: ChoiceStatus;
   selected?: boolean;
 }>`
@@ -17,7 +18,7 @@ export const AnimatedAnswerSquare = styled.button<{
   ${(props) =>
     props.selected &&
     css`
-      animation: vibrate 1s 1;
+      animation: vibrate ${props.animationDuration}ms 1;
       animation-direction: alternate;
       animation-timing-function: ease-in;
     `}
@@ -27,8 +28,10 @@ export const AnimatedAnswerSquare = styled.button<{
     css`
       &::after {
         content: '';
-        animation: scale 1s 1;
-        animation-delay: 0.9s;
+        animation: scale ${props.animationDuration}ms 1;
+        // 90% of the way through the animation
+        animation-delay: ${props.animationDuration -
+        (props.animationDuration * 10) / 100}ms;
         width: 100%;
         transform: scale(0);
         animation-fill-mode: forwards;
