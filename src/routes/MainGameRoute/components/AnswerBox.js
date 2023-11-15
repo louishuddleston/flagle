@@ -1,9 +1,8 @@
 import { useMemo, useState } from 'react';
 import Select from 'react-select';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const StyledSelect = styled(Select)`
-  margin-bottom: 1rem;
   color: #000;
   :hover {
     border-color: #123456;
@@ -12,8 +11,16 @@ const StyledSelect = styled(Select)`
 
 const Container = styled.div`
   width: 100%;
+  height: 38px;
   padding: 0 8px;
+  margin-bottom: 1rem;
   max-width: 376px;
+  transition: transform 0.4s ease-in-out, height 0.5s ease-in-out;
+
+  ${props => props.disabled && css`
+    transform: scale(0);
+    height: 0;
+  `}
 `;
 
 export const AnswerBox = ({
@@ -34,7 +41,7 @@ export const AnswerBox = ({
   );
 
   return (
-    <Container>
+    <Container disabled={disabled}>
       <StyledSelect
         value={selectedOption}
         options={sortedCountries}
