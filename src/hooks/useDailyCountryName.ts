@@ -1,8 +1,8 @@
-import { useMemo } from "react";
-import seedrandom from "seedrandom";
+import { useMemo } from 'react';
+import seedrandom from 'seedrandom';
 
-import { useAllCountryNames } from "./useAllCountryNames";
-import { useDailySeed } from "./useDailySeed";
+import { useAllCountryNames } from './useAllCountryNames';
+import { useDailySeed } from './useDailySeed';
 
 export function useDailyCountryName(): string {
   const dailySeed = useDailySeed();
@@ -14,8 +14,8 @@ export function useDailyCountryName(): string {
         Math.floor(seedrandom.alea(dailySeed)() * countryNames.length)
       ];
 
-    if (todaysCountry === "Russia") {
-      return "Ukraine";
+    if (todaysCountry === 'Russia') {
+      return 'Ukraine';
     }
 
     return todaysCountry;

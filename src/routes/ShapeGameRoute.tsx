@@ -3,6 +3,7 @@ import { toast } from 'react-toastify';
 import styled from 'styled-components';
 
 import { AdnginEndMobile0 } from '../components/AdnginEndMobile0';
+import { BackButton } from '../components/BackButton';
 import { BonusRoundTitle } from '../components/BonusRoundTitle';
 import { NextRoundLink } from '../components/NextRoundLink';
 import { ShareButton } from '../components/ShareButton';
@@ -76,6 +77,7 @@ const useFirstBonusRound = ({
 
 export const ShapeGameRoute: React.FC = () => {
   const roundSeed = useDailySeed('first-bonus-round');
+  const dailyCountryName = useDailyCountryName();
   const {
     dailyChoicesOrder,
     dailyChoices,
@@ -103,9 +105,12 @@ export const ShapeGameRoute: React.FC = () => {
 
   return (
     <>
-      <BonusRoundTitle>Pick the correct shape for this country</BonusRoundTitle>
+      <BackButtonContainer>
+        <BackButton />
+      </BackButtonContainer>
+      <BonusRoundTitle>What's the shape of {dailyCountryName}?</BonusRoundTitle>
 
-      <div className="flex gap-2 mt-3">
+      <OutlineGrid>
         {dailyChoicesOrder.map((countryName, index) => (
           <CountryShape
             key={countryName}
@@ -124,7 +129,7 @@ export const ShapeGameRoute: React.FC = () => {
             onSelect={onSelectCountry}
           />
         ))}
-      </div>
+      </OutlineGrid>
 
       <p style={{ marginTop: '10px' }}>
         Sponsored by WORLD<span style={{ color: '#16A34A' }}>L</span>E
@@ -200,8 +205,8 @@ const CountryShape: React.FC<{
       <Index>{index}.</Index>
       <CountrySVG
         src={`/images/countries/${countryCode.toLowerCase()}/vector.svg`}
-        width="70"
-        height="70"
+        width="120"
+        height="120"
         alt=""
       />
     </StyledButton>
@@ -241,4 +246,19 @@ const CountrySVG = styled('img')`
   @media (prefers-color-scheme: dark) {
     filter: invert(1);
   }
+`;
+
+const OutlineGrid = styled.div`
+  display: grid;
+  gap: 0.8rem;
+  grid-template-columns: repeat(2, 1fr);
+  margin: 1rem;
+`;
+
+const BackButtonContainer = styled.div`
+  display: flex;
+  max-width: 376px;
+  padding: 0.4rem;
+  margin-bottom: 1rem;
+  width: 100%;
 `;

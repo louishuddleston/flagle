@@ -1,9 +1,9 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import styled from 'styled-components';
 
 const DELAY_TIME = 0.5;
-const FLAG_WIDTH = 192;
-const FLAG_SCALE = FLAG_WIDTH / 320;
+const FLAG_WIDTH = 300;
+const FLAG_SCALE = FLAG_WIDTH / 640;
 
 const Grid = styled.div<{ end?: boolean }>`
   transition: 1s;
@@ -11,7 +11,6 @@ const Grid = styled.div<{ end?: boolean }>`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: auto 1fr;
-  margin-bottom: 1rem;
   grid-gap: ${(props) => (props.end ? '0px' : '2px')};
   z-index: ${(props) => (props.end ? 2 : 1)};
   width: fit-content;
@@ -48,11 +47,14 @@ const Tile = styled.div<{
   height: number;
   rotate: string;
 }>`
-  transition: 1s;
+  transition: transform 1s;
   transform-style: preserve-3d;
   display: flex;
   justify-content: center;
-  padding: ${(props) => (props.height ? `${props.height / 2}px` : '2rem')} 2rem;
+  padding: ${(props) =>
+    `${props.height ? `${props.height / 2}px` : '2rem'} ${Math.floor(
+      FLAG_WIDTH / 6,
+    )}px`};
   position: relative;
   transform: ${(props) =>
     props.rotate === 'true' ? 'rotateY(180deg)' : 'rotateY(0deg)'};
@@ -62,6 +64,7 @@ const FlagImage = styled.img<{
   flag: string;
   left: number;
   top: number;
+  height: number;
 }>`
   content: url(${(props) => props.flag});
   position: relative;
@@ -69,6 +72,15 @@ const FlagImage = styled.img<{
   left: ${(props) => `${props.left}px`};
   top: ${(props) => `${props.top}px`};
   max-width: unset;
+  height: ${(props) => `${props.height}px`};
+`;
+
+const FlagContainer = styled.div`
+  display: flex;
+  align-items: center;
+  width: ${FLAG_WIDTH}px;
+  min-height: ${(FLAG_WIDTH * 2) / 3}px; // 3:2 aspect ratio
+  margin-bottom: 1rem;
 `;
 
 export function FlagGrid({
@@ -81,31 +93,41 @@ export function FlagGrid({
   flippedArray: boolean[];
 }) {
   const [flagLoad, setFlagLoad] = useState(false);
+  const [scaledFlagHeight, setScaledFlagHeight] = useState(0);
   const flagImg = useMemo(() => {
     const img = new Image();
     img.onload = () => setFlagLoad(true);
-    img.src = `https://flagcdn.com/w320/${countryInfo.code}.png`;
+    img.src = `https://flagcdn.com/w640/${countryInfo.code}.png`;
     return img;
   }, [countryInfo]);
 
+  useEffect(() => {
+    setScaledFlagHeight(Math.floor(FLAG_SCALE * flagImg.height));
+  }, [flagImg, flagLoad]);
+
   return (
-    <Grid end={end}>
-      {flippedArray.map((flipped, n) => (
-        <Tile
-          key={n}
-          rotate={flipped && flagLoad ? 'true' : 'false'}
-          height={(FLAG_SCALE * flagImg.height) / 2}
-        >
-          <TileFront></TileFront>
-          <TileBack>
-            <FlagImage
-              flag={flagImg.src}
-              left={-(n % 3) * 64}
-              top={-(Math.floor(n / 3) * FLAG_SCALE * flagImg.height) / 2}
-            ></FlagImage>
-          </TileBack>
-        </Tile>
-      ))}
-    </Grid>
+    <FlagContainer>
+      {flagLoad ? (
+        <Grid end={end}>
+          {flippedArray.map((flipped, n) => (
+            <Tile
+              key={n}
+              rotate={flipped && flagLoad ? 'true' : 'false'}
+              height={scaledFlagHeight / 2}
+            >
+              <TileFront></TileFront>
+              <TileBack>
+                <FlagImage
+                  flag={flagImg.src}
+                  left={-Math.floor((n % 3) * (FLAG_WIDTH / 3))}
+                  top={-((Math.floor(n / 3) * scaledFlagHeight) / 2)}
+                  height={scaledFlagHeight}
+                ></FlagImage>
+              </TileBack>
+            </Tile>
+          ))}
+        </Grid>
+      ) : null}
+    </FlagContainer>
   );
 }

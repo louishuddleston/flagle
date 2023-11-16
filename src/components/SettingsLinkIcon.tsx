@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 const StyledSettingsIcon = styled(SettingsIcon)`
   color: black;
-  margin-top: 0.8rem;
+  margin: 3px;
   @media (prefers-color-scheme: dark) {
     color: white;
   }

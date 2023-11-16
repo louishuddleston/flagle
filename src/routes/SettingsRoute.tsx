@@ -1,6 +1,6 @@
-import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
+import { BackButton } from '../components/BackButton';
 import { useSettings } from '../hooks/useSettings';
 
 const Container = styled.div`
@@ -19,10 +19,6 @@ const Top = styled.div`
 
 const Title = styled.h1`
   font-size: 1.8rem;
-`;
-
-const BackButton = styled.button`
-  color: #1a76d2;
 `;
 
 const Select = styled.select`
@@ -45,7 +41,6 @@ const SettingLine = styled.div`
 `;
 
 export function SettingsRoute() {
-  const history = useHistory();
   const [settings, changeSetting] = useSettings();
 
   const handleUnitChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -55,7 +50,7 @@ export function SettingsRoute() {
   return (
     <Container>
       <Top>
-        <BackButton onClick={history.goBack}>← Back</BackButton>
+        <BackButton />
         <Title>Settings</Title>
       </Top>
       <SettingLine>
