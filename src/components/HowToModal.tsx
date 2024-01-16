@@ -117,7 +117,7 @@ export function HowToModal() {
           sx={{ textDecoration: 'underline' }}
         >
           <a
-            href="https://docs.google.com/forms/d/1rqb1jsmC_RMkX5CUY8pZQrjFrQaloC4zw9ZM5ZquAWw"
+            href="https://docs.google.com/forms/d/e/1FAIpQLSe-UDln8IMcm53NHYPt2m_a0XDyW1b6SCt8d-wxEmqYcMxYqw/viewform"
             target="_blank"
             rel="noreferrer"
           >
