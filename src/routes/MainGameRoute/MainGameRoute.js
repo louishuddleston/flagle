@@ -14,23 +14,22 @@ import { useConfettiThrower } from '../../hooks/useConfettiThrower';
 import { useDailyCountryName } from '../../hooks/useDailyCountryName';
 import { useDailySeed } from '../../hooks/useDailySeed';
 import { useGuessHistory } from '../../hooks/useGuessHistory';
+import { shuffleWithSeed } from '../../utils/shuffleWithSeed';
 import { AnswerBox } from './components/AnswerBox';
 import { Attempts } from './components/Attempts';
 
 const MAX_ATTEMPTS = 6;
-
-const shuffle = (arr) => [...arr].sort(() => 0.5 - Math.random());
 
 export function MainGameRoute() {
   const [score, setScore] = useState('DNF');
   const [flippedArray, setFlippedArray] = useState(
     useMemo(() => [false, false, false, false, false, false], []),
   );
+  const dayString = useDailySeed();
   const [randomOrder, setRandomOrder] = useState(() =>
-    shuffle([0, 1, 2, 3, 4, 5]),
+    shuffleWithSeed([0, 1, 2, 3, 4, 5], dayString)
   );
   const [end, setEnd] = useState(false);
-  const dayString = useDailySeed();
   const [guessHistory, addGuess] = useGuessHistory();
   const guesses = useMemo(
     () => guessHistory[dayString] || [],
@@ -45,7 +44,7 @@ export function MainGameRoute() {
     setRandomOrder(
       randomOrder.length > 1
         ? randomOrder.slice(1)
-        : shuffle([0, 1, 2, 3, 4, 5]),
+        : shuffleWithSeed([0, 1, 2, 3, 4, 5], dayString)
     );
     setFlippedArray((currArray) => {
       const newFlipped = [...currArray];
@@ -53,7 +52,7 @@ export function MainGameRoute() {
       return newFlipped;
     });
     return tile;
-  }, [setFlippedArray, randomOrder]);
+  }, [setFlippedArray, randomOrder, dayString]);
 
   const getRemainingTiles = useCallback(() => {
     const remainingTiles = [];
@@ -63,7 +62,6 @@ export function MainGameRoute() {
         remainingTiles.push(i);
       }
     }
-    setRandomOrder(shuffle(remainingTiles));
     return remainingTiles;
   }, [guesses]);
 
