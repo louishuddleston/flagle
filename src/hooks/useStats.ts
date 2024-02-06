@@ -3,7 +3,7 @@ import { useMemo } from 'react';
 
 import { useGuessHistory } from './useGuessHistory';
 
-const MAX_ATTEMPTS = 6;
+const MAX_ATTEMPTS = 5;
 
 export function useStats() {
   const [guessHistory] = useGuessHistory();
@@ -20,9 +20,11 @@ export function useStats() {
     for (const [dayString, guesses] of allGuessesEntries) {
       const trueDayString = dayString.substring(0, dayString.length - 2);
       const currentDate = DateTime.fromFormat(trueDayString, 'yyyy-MM-dd');
-      const winIndex = guesses.findIndex((guess) => guess.distance === 0);
+      let winIndex = guesses.findIndex((guess) => guess.distance === 0);
       const won = winIndex >= 0;
       if (won) {
+        // combine old guesses outside of the current max with guesses of the current max
+        if (winIndex >= MAX_ATTEMPTS) winIndex = MAX_ATTEMPTS - 1;
         guessDistribution[winIndex]++;
 
         if (

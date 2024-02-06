@@ -12,7 +12,7 @@ const FIRST_DAY_OF_FLAGLE = DateTime.fromFormat(
   'LLLL dd yyyy',
 );
 
-const MAX_ATTEMPTS = 6;
+const MAX_ATTEMPTS = 5;
 
 const generateShareSquares = ({
   score,

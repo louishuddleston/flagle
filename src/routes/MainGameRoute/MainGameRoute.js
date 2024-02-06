@@ -18,16 +18,17 @@ import { shuffleWithSeed } from '../../utils/shuffleWithSeed';
 import { AnswerBox } from './components/AnswerBox';
 import { Attempts } from './components/Attempts';
 
-const MAX_ATTEMPTS = 6;
+const MAX_ATTEMPTS = 5;
+const TILE_INDICES = [0, 1, 2, 3, 4, 5];
 
 export function MainGameRoute() {
   const [score, setScore] = useState('DNF');
   const [flippedArray, setFlippedArray] = useState(
-    useMemo(() => [false, false, false, false, false, false], []),
+    useMemo(() => Array(6).fill(false), []),
   );
   const dayString = useDailySeed();
   const [randomOrder, setRandomOrder] = useState(() =>
-    shuffleWithSeed([0, 1, 2, 3, 4, 5], dayString)
+    shuffleWithSeed(TILE_INDICES, dayString),
   );
   const [end, setEnd] = useState(false);
   const [guessHistory, addGuess] = useGuessHistory();
@@ -44,7 +45,7 @@ export function MainGameRoute() {
     setRandomOrder(
       randomOrder.length > 1
         ? randomOrder.slice(1)
-        : shuffleWithSeed([0, 1, 2, 3, 4, 5], dayString)
+        : shuffleWithSeed(TILE_INDICES, dayString),
     );
     setFlippedArray((currArray) => {
       const newFlipped = [...currArray];
@@ -57,7 +58,7 @@ export function MainGameRoute() {
   const getRemainingTiles = useCallback(() => {
     const remainingTiles = [];
     const usedTiles = guesses.map((guess) => guess.tile);
-    for (const i of [0, 1, 2, 3, 4, 5]) {
+    for (const i of TILE_INDICES) {
       if (!usedTiles.includes(i)) {
         remainingTiles.push(i);
       }
@@ -68,13 +69,17 @@ export function MainGameRoute() {
   const revealTiles = useCallback(() => {
     setFlippedArray((currFlipped) => {
       const newFlipped = [...currFlipped];
+
+      // reveal the first tile
+      newFlipped[randomOrder[0]] = true;
+
       for (const guess of guesses) {
         newFlipped[guess.tile] = true;
       }
 
       return newFlipped;
     });
-  }, [setFlippedArray, guesses]);
+  }, [setFlippedArray, guesses, randomOrder]);
 
   const throwConfetti = useConfettiThrower();
 
@@ -85,7 +90,7 @@ export function MainGameRoute() {
     const lastGuess = guesses[guesses.length - 1];
     if (guesses.length >= MAX_ATTEMPTS || lastGuess?.distance === 0) {
       setEnd(true);
-      setFlippedArray([true, true, true, true, true, true]);
+      setFlippedArray(Array(6).fill(true));
       if (guesses[guesses.length - 1].distance === 0) {
         toast(`🎉 ${trueCountry} 🎉`, { autoClose: 3000 });
         throwConfetti();
@@ -95,7 +100,14 @@ export function MainGameRoute() {
         setScore('DNF');
       }
     }
-  }, [guesses, trueCountry, getRemainingTiles, revealTiles, throwConfetti, end]);
+  }, [
+    guesses,
+    trueCountry,
+    getRemainingTiles,
+    revealTiles,
+    throwConfetti,
+    end,
+  ]);
 
   const onGuess = useCallback(
     (guess) => {
@@ -124,11 +136,7 @@ export function MainGameRoute() {
         countryInfo={countryInfo}
         flippedArray={flippedArray}
       ></FlagGrid>
-      <AnswerBox
-        disabled={end}
-        countries={allCountryNames}
-        onGuess={onGuess}
-      />
+      <AnswerBox disabled={end} countries={allCountryNames} onGuess={onGuess} />
       <Attempts score={score} attempts={guesses.length} max={MAX_ATTEMPTS} />
       <GuessList guesses={guesses} />
 

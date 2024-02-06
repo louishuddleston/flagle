@@ -53,7 +53,7 @@ export function HowToModal() {
       </Button>
       <BaseModal open={open} onClose={handleClose} title="How to play!">
         <Typography id="modal-modal-paragraph" component="p">
-          Guess the flag in 6 guesses or less!
+          Guess the flag in 5 guesses or less!
         </Typography>
         <Typography id="modal-modal-paragraph" component="p">
           Each time you make a guess it will reveal another portion of the flag
