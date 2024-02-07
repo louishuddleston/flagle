@@ -13,6 +13,7 @@ const FIRST_DAY_OF_FLAGLE = DateTime.fromFormat(
 );
 
 const MAX_ATTEMPTS = 5;
+const SQUARE_COUNT = 6;
 
 const generateShareSquares = ({
   score,
@@ -25,12 +26,12 @@ const generateShareSquares = ({
     return '🟥🟥🟥\n🟥🟥🟥\n';
   }
 
-  const squares = Array(MAX_ATTEMPTS).fill('🟩');
+  const squares = Array(SQUARE_COUNT).fill('🟩');
   for (let i = 0; i < guesses.length - 1; i++) {
     squares[guesses[i].tile] = '🟥';
   }
 
-  for (let i = 0; i < MAX_ATTEMPTS; i++) {
+  for (let i = 0; i < SQUARE_COUNT; i++) {
     if ((i + 1) % 3 === 0) {
       squares[i] += '\n';
     }

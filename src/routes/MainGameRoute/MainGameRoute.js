@@ -23,9 +23,7 @@ const TILE_INDICES = [0, 1, 2, 3, 4, 5];
 
 export function MainGameRoute() {
   const [score, setScore] = useState('DNF');
-  const [flippedArray, setFlippedArray] = useState(
-    useMemo(() => Array(6).fill(false), []),
-  );
+  const [flippedArray, setFlippedArray] = useState(Array(6).fill(false));
   const dayString = useDailySeed();
   const [randomOrder, setRandomOrder] = useState(() =>
     shuffleWithSeed(TILE_INDICES, dayString),
@@ -70,16 +68,13 @@ export function MainGameRoute() {
     setFlippedArray((currFlipped) => {
       const newFlipped = [...currFlipped];
 
-      // reveal the first tile
-      newFlipped[randomOrder[0]] = true;
-
       for (const guess of guesses) {
         newFlipped[guess.tile] = true;
       }
 
       return newFlipped;
     });
-  }, [setFlippedArray, guesses, randomOrder]);
+  }, [setFlippedArray, guesses]);
 
   const throwConfetti = useConfettiThrower();
 
@@ -108,6 +103,19 @@ export function MainGameRoute() {
     throwConfetti,
     end,
   ]);
+
+  // reveal the first tile when the game starts
+  useEffect(() => {
+    if (randomOrder.length < 6) return;
+
+    setFlippedArray((prev) => {
+      const newFlippedArray = [...prev];
+      newFlippedArray[randomOrder[0]] = true;
+      return newFlippedArray;
+    });
+
+    setRandomOrder((randomOrder) => randomOrder.slice(1));
+  }, [setFlippedArray, setRandomOrder, randomOrder]);
 
   const onGuess = useCallback(
     (guess) => {
