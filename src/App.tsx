@@ -4,7 +4,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Button from '@mui/material/Button';
 import { Twemoji } from '@teuteuf/react-emoji-render';
 import { lazy, Suspense, useEffect } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import { Flip, ToastContainer } from 'react-toastify';
 import styled from 'styled-components';
 
@@ -14,6 +14,7 @@ import { SettingsLinkIcon } from './components/SettingsLinkIcon';
 import { StatsModal } from './components/StatsModal';
 import { Title, TitleBar, TitleBarDiv } from './components/Title';
 import { getDayString } from './hooks/useDailySeed';
+import { useMainGameCompleted } from './hooks/useMainGameCompleted';
 import { MainGameRoute } from './routes/MainGameRoute/MainGameRoute';
 import { SettingsRoute } from './routes/SettingsRoute';
 
@@ -107,6 +108,7 @@ const refreshPage = () => {
 /**** MJD - ADDED THIS TO SUPPORT BONUS ROUND FIX END  *****/
 
 export function App() {
+  const mainGameCompleted = useMainGameCompleted();
   /**** MJD - ADDED THIS TO SUPPORT BONUS ROUND FIX *****/
   useEffect(() => {
     window.addEventListener('date-changed', refreshPage);
@@ -148,15 +150,27 @@ export function App() {
             </Route>
 
             <Route exact path="/bonus-round/1">
-              <LazyFirstBonusRoundRoute />
+              {mainGameCompleted ? (
+                <LazyFirstBonusRoundRoute />
+              ) : (
+                <Redirect to="/" />
+              )}
             </Route>
 
             <Route exact path="/bonus-round/2">
-              <LazySecondBonusRoundRoute />
+              {mainGameCompleted ? (
+                <LazySecondBonusRoundRoute />
+              ) : (
+                <Redirect to="/" />
+              )}
             </Route>
 
             <Route exact path="/bonus-round/3">
-              <LazyThirdBonusRoundRoute />
+              {mainGameCompleted ? (
+                <LazyThirdBonusRoundRoute />
+              ) : (
+                <Redirect to="/" />
+              )}
             </Route>
 
             <Route exact path="/settings">
