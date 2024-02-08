@@ -8,6 +8,11 @@ import { FlagGrid } from '../../components/FlagGrid';
 import { GuessList } from '../../components/GuessList';
 import { NextRoundLink } from '../../components/NextRoundLink';
 import { ShareButton } from '../../components/ShareButton';
+import {
+  MAX_ATTEMPTS,
+  TILE_COUNT,
+  TILES_REVEALED_AT_START,
+} from '../../constants';
 import countryData from '../../data/countries';
 import { useAllCountryNames } from '../../hooks/useAllCountryNames';
 import { useConfettiThrower } from '../../hooks/useConfettiThrower';
@@ -18,8 +23,7 @@ import { shuffleWithSeed } from '../../utils/shuffleWithSeed';
 import { AnswerBox } from './components/AnswerBox';
 import { Attempts } from './components/Attempts';
 
-const MAX_ATTEMPTS = 5;
-const TILE_INDICES = [0, 1, 2, 3, 4, 5];
+const TILE_INDICES = Array.from({ length: TILE_COUNT }, (_, i) => i);
 
 export function MainGameRoute() {
   const [score, setScore] = useState('DNF');
@@ -106,11 +110,13 @@ export function MainGameRoute() {
 
   // reveal the first tile when the game starts
   useEffect(() => {
-    if (randomOrder.length < 6) return;
+    if (randomOrder.length < 6 || !TILES_REVEALED_AT_START) return;
 
     setFlippedArray((prev) => {
       const newFlippedArray = [...prev];
-      newFlippedArray[randomOrder[0]] = true;
+      for (let i = 0; i < TILES_REVEALED_AT_START; i++) {
+        newFlippedArray[randomOrder[i]] = true;
+      }
       return newFlippedArray;
     });
 
@@ -144,6 +150,13 @@ export function MainGameRoute() {
         countryInfo={countryInfo}
         flippedArray={flippedArray}
       ></FlagGrid>
+      <p className="mb-2 text-sm">
+        {TILES_REVEALED_AT_START > 0 || guesses?.length > 0 ? (
+          <br />
+        ) : (
+          `Make a guess to reveal the first tile`
+        )}
+      </p>
       <AnswerBox disabled={end} countries={allCountryNames} onGuess={onGuess} />
       <Attempts score={score} attempts={guesses.length} max={MAX_ATTEMPTS} />
       <GuessList guesses={guesses} />

@@ -80,7 +80,6 @@ const FlagContainer = styled.div`
   align-items: center;
   width: ${FLAG_WIDTH}px;
   min-height: ${(FLAG_WIDTH * 2) / 3}px; // 3:2 aspect ratio
-  margin-bottom: 1rem;
 `;
 
 export function FlagGrid({

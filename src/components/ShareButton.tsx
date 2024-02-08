@@ -4,6 +4,7 @@ import { useMemo } from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import { toast } from 'react-toastify';
 
+import { MAX_ATTEMPTS, TILE_COUNT } from '../constants';
 import { useDailySeed } from '../hooks/useDailySeed';
 import { Guess, useGuessHistory } from '../hooks/useGuessHistory';
 
@@ -11,9 +12,6 @@ const FIRST_DAY_OF_FLAGLE = DateTime.fromFormat(
   'February 21 2022',
   'LLLL dd yyyy',
 );
-
-const MAX_ATTEMPTS = 5;
-const SQUARE_COUNT = 6;
 
 const generateShareSquares = ({
   score,
@@ -26,12 +24,12 @@ const generateShareSquares = ({
     return '🟥🟥🟥\n🟥🟥🟥\n';
   }
 
-  const squares = Array(SQUARE_COUNT).fill('🟩');
+  const squares = Array(TILE_COUNT).fill('🟩');
   for (let i = 0; i < guesses.length - 1; i++) {
     squares[guesses[i].tile] = '🟥';
   }
 
-  for (let i = 0; i < SQUARE_COUNT; i++) {
+  for (let i = 0; i < TILE_COUNT; i++) {
     if ((i + 1) % 3 === 0) {
       squares[i] += '\n';
     }

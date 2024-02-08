@@ -1,9 +1,8 @@
 import { useMemo } from 'react';
 
+import { MAX_ATTEMPTS } from '../constants';
 import { useDailySeed } from './useDailySeed';
 import { useGuessHistory } from './useGuessHistory';
-
-const MAX_ATTEMPTS = 5;
 
 /**
  *

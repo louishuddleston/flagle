@@ -1,9 +1,8 @@
 import { DateTime } from 'luxon';
 import { useMemo } from 'react';
 
+import { MAX_ATTEMPTS } from '../constants';
 import { useGuessHistory } from './useGuessHistory';
-
-const MAX_ATTEMPTS = 5;
 
 export function useStats() {
   const [guessHistory] = useGuessHistory();
