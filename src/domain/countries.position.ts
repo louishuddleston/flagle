@@ -50,12 +50,6 @@ export const countries: Readonly<Country[]> = [
     name: 'Armenia',
   },
   {
-    code: 'AN',
-    latitude: 12.226079,
-    longitude: -69.060087,
-    name: 'Netherlands Antilles',
-  },
-  {
     code: 'AO',
     latitude: -11.202692,
     longitude: 17.873887,
