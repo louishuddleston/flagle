@@ -1,5 +1,6 @@
+import { InputForm } from '@louishuddleston/input-form';
 import { getCompassDirection, getDistance } from 'geolib';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { createRef, useCallback, useEffect, useMemo, useState } from 'react';
 import { toast } from 'react-toastify';
 
 import { AdnginEndMobile0 } from '../../components/AdnginEndMobile0';
@@ -143,6 +144,23 @@ export function MainGameRoute() {
 
   const countryInfo = useMemo(() => countryData[trueCountry], [trueCountry]);
 
+  const [currentGuess, setCurrentGuess] = useState('');
+  const ref = createRef();
+
+  const handleSumbit = (e) => {
+    e.preventDefault();
+    if (currentGuess === '') return;
+
+    // capitalize the first letter of each word
+    let word = currentGuess.toLowerCase().split(' ');
+    for (let i = 0; i < word.length; i++) {
+      word[i] = word[i].charAt(0).toUpperCase() + word[i].slice(1);
+    }
+    word = word.join(' ');
+    onGuess(word);
+    setCurrentGuess('');
+  };
+
   return (
     <>
       <FlagGrid
@@ -157,7 +175,21 @@ export function MainGameRoute() {
           `Make a guess to reveal the first tile`
         )}
       </p>
-      <AnswerBox disabled={end} countries={allCountryNames} onGuess={onGuess} />
+      <div>
+        <InputForm
+          autosuggestValues={allCountryNames}
+          currentGuess={currentGuess}
+          setCurrentGuess={setCurrentGuess}
+          handleSubmit={handleSumbit}
+          inputRef={ref}
+          placeholderText="Type your guess here"
+          disabled={end}
+          emojiButtonProps={{
+            label: 'guess',
+            emoji: '🌍',
+          }}
+        />
+      </div>
       <Attempts score={score} attempts={guesses.length} max={MAX_ATTEMPTS} />
       <GuessList guesses={guesses} />
 

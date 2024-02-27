@@ -1,4 +1,5 @@
-import { useEffect, useMemo } from 'react';
+import { ImageQuiz } from '@louishuddleston/image-quiz';
+import { useEffect, useMemo, useState } from 'react';
 import { toast } from 'react-toastify';
 import styled from 'styled-components';
 
@@ -101,8 +102,8 @@ export function BorderFlagGameRoute() {
     dailyChoicesOrder,
     dailyChoices,
     onSelectCountry,
-    isRoundComplete,
     isRoundSuccess,
+    isRoundComplete,
     attemptsLeft,
     correctAnswer,
   } = useSecondBonusRound({
@@ -122,6 +123,38 @@ export function BorderFlagGameRoute() {
     );
   }, [isRoundComplete, isRoundSuccess, correctAnswer]);
 
+  const answerOptions = useMemo(() => {
+    return dailyChoicesOrder
+      .map((countryName, index) => {
+        if (countryData[countryName]) {
+          return {
+            name: countryName,
+            image: `https://flagcdn.com/w320/${countryData[
+              countryName
+            ].code.toLowerCase()}.png`,
+          };
+        } else return null;
+      })
+      .filter(
+        (country): country is { name: string; image: string } =>
+          country !== null,
+      );
+  }, [dailyChoicesOrder]);
+
+  const startingGuesses = useMemo(
+    () =>
+      Object.entries(dailyChoices)
+        .map(([k, v]) => {
+          return typeof v !== 'undefined' ? k : null;
+        })
+        .filter((g) => g) as string[],
+    [dailyChoices],
+  );
+
+  const handleGuess = ({ guess }: { guess: string }) => {
+    onSelectCountry({} as any, guess);
+  };
+
   return (
     <>
       <BackButtonContainer>
@@ -131,31 +164,14 @@ export function BorderFlagGameRoute() {
         Pick the flag of a country that neighbours {dailyCountryName}
       </BonusRoundTitle>
 
-      <div className="grid grid-cols-4 gap-2 mt-3">
-        {dailyChoicesOrder.map((countryName, index) => {
-          if (countryData[countryName]) {
-            return (
-              <CountryFlag
-                key={countryName}
-                countryName={countryName}
-                countryCode={countryData[countryName].code.toUpperCase()}
-                index={index + 1}
-                choiceStatus={
-                  dailyChoices[countryName] ||
-                  (isRoundComplete && countryName === correctAnswer
-                    ? ChoiceStatus.CORRECT
-                    : undefined)
-                }
-                disabled={
-                  isRoundComplete || dailyChoices[countryName] !== undefined
-                }
-                onSelect={onSelectCountry}
-              />
-            );
-          } else {
-            console.error(countryName);
-          }
-        })}
+      <div className="max-w-lg">
+        <ImageQuiz
+          answerOptions={answerOptions}
+          correctAnswer={correctAnswer}
+          maxTryCount={MAX_ATTEMPTS}
+          onGuess={handleGuess}
+          startingGuesses={startingGuesses}
+        />
       </div>
 
       {!isRoundComplete && (
@@ -191,57 +207,3 @@ const BackButtonContainer = styled.div`
   margin-bottom: 1rem;
   width: 100%;
 `;
-
-const CountryFlag: React.FC<{
-  countryName: string;
-  countryCode: string;
-  index: number;
-  onSelect: (e: React.MouseEvent<HTMLElement>) => void;
-  disabled: boolean;
-  choiceStatus: ChoiceStatus | undefined;
-}> = ({
-  countryName,
-  countryCode = '',
-  index = 0,
-  onSelect,
-  disabled = false,
-  choiceStatus,
-}) => {
-  return (
-    <button
-      key={countryName}
-      data-country-name={countryName}
-      onClick={onSelect}
-      disabled={disabled}
-      className="rounded-md p-3 relative"
-      style={{
-        border: '4px solid #CCC',
-        borderColor:
-          choiceStatus === ChoiceStatus.CORRECT
-            ? 'green'
-            : choiceStatus === ChoiceStatus.INCORRECT
-            ? 'red'
-            : '',
-        paddingTop: '24px',
-        paddingBottom: '24px',
-      }}
-    >
-      <div
-        className="font-bold absolute"
-        style={{ top: '4px', left: '8px', color: '#fff' }}
-      >
-        {index}.
-      </div>
-      <div className="font-bold absolute" style={{ top: '3px', left: '7px' }}>
-        {index}.
-      </div>
-      <img
-        src={`https://flagcdn.com/w320/${countryCode.toLowerCase()}.png`}
-        width="70"
-        height="70"
-        alt=""
-        style={{ border: '1px solid #CCC' }}
-      />
-    </button>
-  );
-};
