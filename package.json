@@ -41,6 +41,7 @@
     "web-vitals": "^2.1.4"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@types/geojson": "^7946.0.10",
     "@types/jest": "^29.5.1",
     "@types/luxon": "^3.3.0",
