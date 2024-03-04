@@ -13,8 +13,8 @@
   "dependencies": {
     "@emotion/react": "^11.8.1",
     "@emotion/styled": "^11.8.1",
-    "@louishuddleston/image-quiz": "^1.0.12",
-    "@louishuddleston/input-form": "^1.0.3",
+    "@louishuddleston/image-quiz": "^1.0.14",
+    "@louishuddleston/input-form": "^1.0.5",
     "@mui/icons-material": "^5.4.4",
     "@mui/material": "^5.4.3",
     "@testing-library/jest-dom": "^5.16.2",
