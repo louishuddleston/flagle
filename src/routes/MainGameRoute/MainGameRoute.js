@@ -21,7 +21,6 @@ import { useDailyCountryName } from '../../hooks/useDailyCountryName';
 import { useDailySeed } from '../../hooks/useDailySeed';
 import { useGuessHistory } from '../../hooks/useGuessHistory';
 import { shuffleWithSeed } from '../../utils/shuffleWithSeed';
-import { AnswerBox } from './components/AnswerBox';
 import { Attempts } from './components/Attempts';
 
 const TILE_INDICES = Array.from({ length: TILE_COUNT }, (_, i) => i);

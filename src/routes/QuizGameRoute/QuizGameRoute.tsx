@@ -16,8 +16,6 @@ import { ChoiceStatus } from '../../hooks/useRoundState';
 import { refreshCompleteAd } from '../../utils/ads';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const { ReactComponent: CurrencyIcon } = require('./CurrencyIcon.svg');
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 const { ReactComponent: PopulationIcon } = require('./PopulationIcon.svg');
 
 export function QuizGameRoute() {
@@ -37,15 +35,18 @@ export function QuizGameRoute() {
     [dailyCountryName],
   );
 
-  const [{ selectedPopulation, selectedCurrency }, setRoundAnswsers] =
-    useLocalStorage(roundSeed, {
+  const [{ selectedPopulation }, setRoundAnswsers] = useLocalStorage(
+    roundSeed,
+    {
       selectedPopulation: undefined,
       selectedCurrency: undefined,
-    });
+    },
+  );
 
   const throwConfetti = useConfettiThrower();
   const selectPopulation = useCallback(
-    (e) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (e: any) => {
       const selectedPopulation =
         e.currentTarget.closest('button')?.dataset?.value;
 
@@ -197,8 +198,8 @@ export const Question: React.FC<{
                   selectedAnswer && choice === correctAnswer
                     ? ChoiceStatus.CORRECT
                     : selectedAnswer === choice
-                    ? ChoiceStatus.INCORRECT
-                    : undefined
+                      ? ChoiceStatus.INCORRECT
+                      : undefined
                 }
                 disabled={Boolean(selectedAnswer)}
                 onClick={onSelectAnswer}
@@ -227,8 +228,8 @@ const StyledButton = styled('button')<{
     choiceStatus === ChoiceStatus.CORRECT
       ? 'green !important'
       : choiceStatus === ChoiceStatus.INCORRECT
-      ? 'red !important'
-      : 'none'};
+        ? 'red !important'
+        : 'none'};
   color: ${({ choiceStatus }) =>
     choiceStatus === ChoiceStatus.CORRECT ? '#fff !important' : '#000'};
 

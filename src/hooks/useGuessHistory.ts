@@ -18,7 +18,8 @@ export function useGuessHistory() {
   const [guesses, setGuesses] = useLocalStorage<GuessHistory>('guesses', {});
 
   const addGuess = useCallback(
-    (newGuess) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (newGuess: any) => {
       setGuesses((currGuesses) => ({
         ...currGuesses,
         [dailySeed]: [...(currGuesses[dailySeed] || []), newGuess],

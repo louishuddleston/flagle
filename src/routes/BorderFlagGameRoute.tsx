@@ -1,5 +1,5 @@
 import { ImageQuiz } from '@louishuddleston/image-quiz';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo } from 'react';
 import { toast } from 'react-toastify';
 import styled from 'styled-components';
 
@@ -15,7 +15,7 @@ import { useDailyCountryName } from '../hooks/useDailyCountryName';
 import { useDailySeed } from '../hooks/useDailySeed';
 import { useNearestCountryNames } from '../hooks/useNearestCountryNames';
 import { useRandomCountryNames } from '../hooks/useRandomCountryNames';
-import { ChoiceStatus, useRoundState } from '../hooks/useRoundState';
+import { useRoundState } from '../hooks/useRoundState';
 import { shuffleWithSeed } from '../utils/shuffleWithSeed';
 
 const MAX_ATTEMPTS = 3;
@@ -125,7 +125,7 @@ export function BorderFlagGameRoute() {
 
   const answerOptions = useMemo(() => {
     return dailyChoicesOrder
-      .map((countryName, index) => {
+      .map((countryName) => {
         if (countryData[countryName]) {
           return {
             name: countryName,
@@ -152,7 +152,7 @@ export function BorderFlagGameRoute() {
   );
 
   const handleGuess = ({ guess }: { guess: string }) => {
-    onSelectCountry({} as any, guess);
+    onSelectCountry({} as never, guess);
   };
 
   return (
